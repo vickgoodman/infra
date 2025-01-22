@@ -1,5 +1,7 @@
-import subprocess
+#!/usr/bin/python3
+# SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
+import subprocess
 
 def run_command(command, return_stdout=False, cwd=None):
     """

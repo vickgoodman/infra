@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
-from .run import run_command
+from .terminal import run_command
 import markdown
 import os
 import re

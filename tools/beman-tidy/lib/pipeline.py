@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
-from .beman_standard_checks import *
+from .checks.system.git import *
 
 
 def get_all_implemented_checks():
@@ -39,7 +39,7 @@ def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, coverage=F
         print(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
-        if bs_check.check():
+        if bs_check.base_check() and bs_check.check():
             print(f"\tcheck [{bs_check.type}][{bs_check.name}] ... PASSED\n")
         else:
             print(f"\tcheck [{bs_check.type}][{bs_check.name}] ... FAILED\n")

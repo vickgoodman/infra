@@ -43,14 +43,9 @@ class BSCheck(object):
         self.top_level_cmakelists_path = os.path.join(
             self.repo_path, 'CMakeLists.txt')
 
-    def check(self, log_enabled=True):
+    def base_check(self, log_enabled=True):
         """
-        Checks if the Beman Standard check/rule is already applied.
-        - If the standard is applied, the check should return True.
-        - If the standard is not applied, the check should return False and self.fix() should be able to fix the issue.
-
-        Base check method that should be overridden by subclasses.
-        But it should be called directly on first line of the subclass check method.
+        Checks if this rule is properly initialized.
         """
         self.log_enabled = log_enabled
 
@@ -67,6 +62,17 @@ class BSCheck(object):
             return False
 
         return True
+
+    def check(self, log_enabled=True):
+        """
+        Checks if the Beman Standard check/rule is already applied.
+        - If the standard is applied, the check should return True.
+        - If the standard is not applied, the check should return False and self.fix() should be able to fix the issue.
+
+        Base check method that should be overridden by subclasses.
+        But it should be called directly on first line of the subclass check method.
+        """
+        return self.base_check(log_enabled)
 
     def fix(self):
         """
@@ -85,27 +91,3 @@ class BSCheck(object):
 
         if enabled:
             print(f'[{self.log_level:<15}][{self.name:<25}]: {message}')
-
-
-class BSCheckFixInplaceIncompatibleWithUnstagedChanges(BSCheck):
-    """
-    Check if the fix can be applied inplace.
-    """
-
-    def __init__(self, repo_info, beman_standard):
-        super().__init__(repo_info, beman_standard,
-                         'FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES')
-
-    def check(self):
-        """
-        Check already applied if no unstaged changes are present.
-        """
-        return super().check() and len(self.repo_info["unstaged_changes"]) == 0
-
-    def fix(self):
-        """
-        Fix the issue if the fix can be applied inplace, so unstaged changes are not present!
-        """
-        self.log(
-            "The fix cannot be applied inplace. Please commit or stash your changes. STOP.")
-        sys.exit(1)

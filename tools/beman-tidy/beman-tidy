@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
 import argparse
-from utils.git import get_repo_info, download_beman_standard
-from utils.checks_pipeline import run_checks_pipeline
+from lib.utils.git import get_repo_info, download_beman_standard
+from lib.pipeline import run_checks_pipeline
 
 def parse_args():
     """
