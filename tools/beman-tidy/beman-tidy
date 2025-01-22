@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+# SPDX-License-Identifier: 2.0 license with LLVM exceptions
+
+def main():
+    """
+    beman-tidy is a tool to check the coding standard of The Beman Project.
+    Check https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md.
+    """
+    print("beman-tidy is a tool to check the coding standard of The Beman Project.")
+    pass
+
+if __name__ == "__main__":
+    main()
