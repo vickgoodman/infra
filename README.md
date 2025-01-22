@@ -4,7 +4,8 @@
 SPDX-License-Identifier: 2.0 license with LLVM exceptions
 -->
 
-This repository contains the infrastructure for The Beman Project. This is not a library repository, so it does not respect the usual structure of a Beman library repository.
+This repository contains the infrastructure for The Beman Project. This is not a library repository, so it does not
+respect the usual structure of a Beman library repository.
 
 ## Description
 

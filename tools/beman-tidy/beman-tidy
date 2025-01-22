@@ -1,13 +1,37 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
+import argparse
+from utils.git import get_repo_info
+from utils.checks_pipeline import run_checks_pipeline
+
+def parse_args():
+    """
+    Parse the command line arguments.
+    """
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo_path", help="path to the repository to check",
+                        required=True)
+    parser.add_argument("--fix", help="try to automatically fix found issues",
+                        action=argparse.BooleanOptionalAction, default=False)
+    args = parser.parse_args()
+
+    # Get repository information
+    repo_info = get_repo_info(args.repo_path)
+    args.prepo_pathath = None
+    args.repo_info = repo_info
+
+    return args
+
+
 def main():
     """
-    beman-tidy is a tool to check the coding standard of The Beman Project.
-    Check https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md.
+    beman-tidy main entry point.
     """
-    print("beman-tidy is a tool to check the coding standard of The Beman Project.")
-    pass
+    args = parse_args()
+
+    run_checks_pipeline(args.fix, args.repo_info)
 
 if __name__ == "__main__":
     main()
