@@ -2,7 +2,10 @@
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
 from .run import run_command
+import markdown
 import os
+import re
+import requests
 import sys
 
 from git import Repo, InvalidGitRepositoryError
@@ -56,4 +59,57 @@ def get_repo_info(path):
     except Exception as e:
         print(
             f"An error occurred while getting repository information. Check {path}.")
+        sys.exit(1)
+
+
+def parse_beman_standard(beman_standard_md_content):
+    """
+    Parse the Markdown content to extract checks from The Beman Standard
+
+    Args:
+        markdown_content (str): The raw Markdown content.
+
+    Returns:
+        [(check_name, check_type, check_body)]: A list of check tuples.
+    """
+    # Regex pattern to match checks
+    pattern = r"\*\*\[([A-Z._]+)\]\*\* (REQUIREMENT|RECOMMENDATION):\s*(.*?)(?=\*\*\[|$)"
+    matches = re.finditer(pattern, beman_standard_md_content, re.DOTALL)
+
+    bs_checks = []
+    for match in matches:
+        check_name = match.group(1)
+        check_type = match.group(2)
+        check_body = match.group(3).strip()
+
+        bs_checks.append((check_name, check_type, check_body))
+
+    return bs_checks
+
+
+def download_beman_standard():
+    """
+    Download and parse The Beman Standard content from the GitHub repository.
+
+    Returns:
+        str: Rendered Markdown content as a string.
+    """
+    # Raw GitHub URL for the Markdown file
+    raw_url = "https://raw.githubusercontent.com/bemanproject/beman/main/docs/BEMAN_STANDARD.md"
+
+    try:
+        # Fetch the content
+        response = requests.get(raw_url)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+
+        # Get the Markdown content
+        beman_standard_md_content = response.text
+
+        # Get the actual checks
+        bs_checks = parse_beman_standard(beman_standard_md_content)
+
+        return bs_checks
+    except requests.RequestException as e:
+        print(
+            f"An error occurred while The Beman Standard from ${raw_url}: {e}.\nSTOP.")
         sys.exit(1)

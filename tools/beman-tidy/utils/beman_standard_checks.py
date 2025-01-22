@@ -10,22 +10,32 @@ class BSCheck(object):
     Base class for all Beman Standard checks.
     """
 
-    def __init__(self, repo_info, check_type, check_name):
+    def __init__(self, repo_info, beman_standard, check_name):
         """
         Initialize the check.
         """
+        # check name e.g. "LIBRARY.NAMES"
         self.name = check_name
-        # TODO: Automatically pull BEMAN_STANDARD.md and check if the check_name is in the list.
-        self.type = check_type
+
+        # unique entry in the list - [(check_name, check_type, check_full_text_body)]
+        beman_standard_check = [
+            entry for entry in beman_standard if entry[0] == check_name]
+        assert len(beman_standard_check) <= 1
+
+        # set type and full_text_body
+        if len(beman_standard_check) == 1:
+            (check_name, check_type, check_body) = beman_standard_check[0]
+
+            self.type = check_type
+            self.full_text_body = check_body
+        else:
+            self.type = "REQUIREMENT"
+            self.full_text_body = "beman-tidy internal check."
         assert self.type in ['REQUIREMENT', 'RECOMMANDATION']
 
-        # TODO: Automatically pull BEMAN_STANDARD.md and populated descrittion
-        # self.description = ...
-
-        self.log_level = 'ERROR' if check_type == 'REQUIREMENT' else 'WARNING'
+        self.log_level = 'ERROR' if self.type == 'REQUIREMENT' else 'WARNING'
         self.log_enabled = True
 
-        # TODO
         self.repo_info = repo_info
         # Shortcuts for repo info
         self.repo_name = repo_info["name"]
@@ -82,8 +92,8 @@ class BSCheckFixInplaceIncompatibleWithUnstagedChanges(BSCheck):
     Check if the fix can be applied inplace.
     """
 
-    def __init__(self, repo_info):
-        super().__init__(repo_info, 'REQUIREMENT',
+    def __init__(self, repo_info, beman_standard):
+        super().__init__(repo_info, beman_standard,
                          'FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES')
 
     def check(self):

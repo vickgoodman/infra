@@ -20,13 +20,13 @@ TODO: Add a usage section.
 
 ```shell
 $ ./tools/beman-tidy/beman-tidy --help
-usage: beman-tidy [-h] --repo_path REPO_PATH [--fix | --no-fix]
-
-optional arguments:
   -h, --help            show this help message and exit
   --repo_path REPO_PATH
                         path to the repository to check
-  --fix, --no-fix       try to automatically fix found issues (default: False)
+  --fix_inplace, --no-fix_inplace
+                        try to automatically fix found issues (default: False)
+  --coverage, --no-coverage
+                        show coverage of the checks (default: False)
 
 # no errors found example
 $ ./tools/beman-tidy/beman-tidy --repo_path ../exemplar
@@ -60,4 +60,16 @@ Running check [REQUIREMENT][FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES] ...
  check [REQUIREMENT][FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES] ... FAILED
 
 [ERROR          ][FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES]: The fix cannot be applied inplace. Please commit or stash your changes. STOP.
+
+# coverage example
+$ ./tools/beman-tidy/beman-tidy --repo_path ../exemplar --coverage
+Checks pipeline started ...
+
+Running check [REQUIREMENT][FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES] ... 
+	check [REQUIREMENT][FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES] ... PASSED
+
+
+Checks pipeline completed.
+repo coverage over The Beman Standard: 0.0% (0/43 checks passed).
+clang-tidy coverage over The Beman Standard: 0.0% (0/43 checks implemented).
 ```
