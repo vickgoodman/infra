@@ -37,11 +37,14 @@ class BSCheck(object):
         self.log_enabled = True
 
         self.repo_info = repo_info
-        # Shortcuts for repo info
+
+        assert "name" in repo_info
         self.repo_name = repo_info["name"]
+        assert "top_level" in repo_info
         self.repo_path = repo_info["top_level"]
-        self.top_level_cmakelists_path = os.path.join(
-            self.repo_path, 'CMakeLists.txt')
+
+        self.library_name = f"beman.{self.repo_name}"
+        assert self.library_name is not None
 
     def base_check(self, log_enabled=True):
         """
@@ -72,6 +75,8 @@ class BSCheck(object):
         Base check method that should be overridden by subclasses.
         But it should be called directly on first line of the subclass check method.
         """
+        self.log_enabled = log_enabled
+
         return self.base_check(log_enabled)
 
     def fix(self):
@@ -80,6 +85,7 @@ class BSCheck(object):
         - If the standard is applied, the check should return True. NOP here.
         - - Otherwise, the check should be applied inplace. If the check cannot be applied inplace, the check should return False.
         """
+        self.log_enabled = False
         return False
 
     def log(self, message, enabled=True):

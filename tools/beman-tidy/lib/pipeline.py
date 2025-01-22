@@ -2,6 +2,15 @@
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
 from .checks.system.git import *
+from .checks.beman_standard.changelog import *
+from .checks.beman_standard.cmake import *
+from .checks.beman_standard.cpp import *
+from .checks.beman_standard.directory import *
+from .checks.beman_standard.file import *
+from .checks.beman_standard.general import *
+from .checks.beman_standard.license import *
+from .checks.beman_standard.readme import *
+from .checks.beman_standard.toplevel import *
 
 
 def get_all_implemented_checks():
@@ -15,7 +24,11 @@ def get_all_implemented_checks():
         # Validate CLI arguments
         BSCheckFixInplaceIncompatibleWithUnstagedChanges,
 
-        # Validate ...
+        # TOPLEVEL
+        BSTopLevelChangelogCheck,
+        BSTopLevelCMakeListsCheck,
+        BSTopLevelLicenseCheck,
+        BSTopLevelREADMECheck,
     ]
 
 
@@ -52,6 +65,7 @@ def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, coverage=F
                         f"\tcheck '{bs_check.name}' ... FAILED TO FIX INPLACE. Please manually fix it!")
 
     print("\nChecks pipeline completed.")
+    sys.stdout.flush()
 
     if coverage:
         print_coverage(repo_info, beman_standard)
@@ -64,17 +78,16 @@ def print_coverage(repo_info, beman_standard):
     # Actual implemented checks.
     all_implemented_checks = [generic_check(
         repo_info, beman_standard) for generic_check in get_all_implemented_checks()]
-    bs_implemented_checks = [generic_check for generic_check in all_implemented_checks if get_beman_standard_check(
+    all_bs_implemented_checks = [generic_check for generic_check in all_implemented_checks if get_beman_standard_check(
         beman_standard, generic_check.name)]
     passed_bs_checks = [
-        bs_check for bs_check in bs_implemented_checks if bs_check.check()]
+        bs_check for bs_check in all_bs_implemented_checks if bs_check.check(log_enabled=False)]
 
     # Stats about the clang-tidy checks coverage over The Beman Standard.
-    total_bs_hecks = len(beman_standard)
-    total_implemented_bs_checks = len([generic_check for generic_check in get_all_implemented_checks(
-    ) if get_beman_standard_check(beman_standard, generic_check(repo_info, beman_standard))])
+    total_bs_checks = len(beman_standard)
+    total_implemented_bs_checks = len(all_bs_implemented_checks)
 
     print(
-        f"repo coverage over The Beman Standard: {len(passed_bs_checks) / total_bs_hecks * 100}% ({len(passed_bs_checks)}/{total_bs_hecks} checks passed).")
+        f"repo coverage over The Beman Standard: {len(passed_bs_checks) / total_bs_checks * 100}% ({len(passed_bs_checks)}/{total_bs_checks} checks passed).")
     print(
-        f"clang-tidy coverage over The Beman Standard: {total_implemented_bs_checks / total_bs_hecks * 100}% ({total_implemented_bs_checks}/{total_bs_hecks} checks implemented).")
+        f"clang-tidy coverage over The Beman Standard: {total_implemented_bs_checks / total_bs_checks * 100}% ({total_implemented_bs_checks}/{total_bs_checks} checks implemented).")

@@ -87,29 +87,38 @@ def parse_beman_standard(beman_standard_md_content):
     return bs_checks
 
 
+def download_file(url):
+    """
+    Download a file from the given URL.
+    """
+    try:
+        # Fetch the content
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        return response.text
+    except requests.RequestException as e:
+        print(
+            f"An error occurred while downloading from ${raw_url}: {e}.\nSTOP.")
+        sys.exit(1)
+
+
+#
+
 def download_beman_standard():
     """
     Download and parse The Beman Standard content from the GitHub repository.
-
-    Returns:
-        str: Rendered Markdown content as a string.
     """
     # Raw GitHub URL for the Markdown file
     raw_url = "https://raw.githubusercontent.com/bemanproject/beman/main/docs/BEMAN_STANDARD.md"
+    beman_standard_md_content = download_file(raw_url)
+    bs_checks = parse_beman_standard(beman_standard_md_content)
+    return bs_checks
 
-    try:
-        # Fetch the content
-        response = requests.get(raw_url)
-        response.raise_for_status()  # Raise an exception for HTTP errors
 
-        # Get the Markdown content
-        beman_standard_md_content = response.text
-
-        # Get the actual checks
-        bs_checks = parse_beman_standard(beman_standard_md_content)
-
-        return bs_checks
-    except requests.RequestException as e:
-        print(
-            f"An error occurred while The Beman Standard from ${raw_url}: {e}.\nSTOP.")
-        sys.exit(1)
+def download_beman_default_license():
+    """
+    Download and parse the default Beman LICENSE content from the GitHub repository.
+    """
+    raw_url = "https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/LICENSE"
+    licent_content = download_file(raw_url)
+    return licent_content

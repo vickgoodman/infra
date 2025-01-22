@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
+from .git import download_beman_default_license
+
+
 def is_snake_case(name):
     return re.match("(^[a-z0-9]+$)|(^[a-z0-9][a-z0-9_.]+[a-z0-9]$)", name)
+
 
 def is_beman_snake_case(name):
     """

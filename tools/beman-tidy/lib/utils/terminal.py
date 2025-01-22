@@ -3,6 +3,7 @@
 
 import subprocess
 
+
 def run_command(command, return_stdout=False, cwd=None):
     """
     Run a command in the shell and return the return code.
