@@ -31,7 +31,9 @@ class BSCheck(object):
         else:
             self.type = "REQUIREMENT"
             self.full_text_body = "beman-tidy internal check."
-        assert self.type in ['REQUIREMENT', 'RECOMMANDATION']
+        assert self.type in [
+            'REQUIREMENT', 'RECOMMENDATION'], f"Invalid check type: {self.type} for check = {self.name}."
+        assert self.full_text_body is not None
 
         self.log_level = 'ERROR' if self.type == 'REQUIREMENT' else 'WARNING'
         self.log_enabled = True

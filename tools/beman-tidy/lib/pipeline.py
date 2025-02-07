@@ -29,6 +29,13 @@ def get_all_implemented_checks():
         BSTopLevelCMakeListsCheck,
         BSTopLevelLicenseCheck,
         BSTopLevelREADMECheck,
+
+        # README
+        BSReadmeTitleCheck,
+        BSReadmeBadgesCheck,
+        # PURPOSE
+        BSReadmeImplementsCheck,
+        BSReadmeLibraryStatusCheck,
     ]
 
 

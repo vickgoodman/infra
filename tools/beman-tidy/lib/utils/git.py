@@ -102,14 +102,13 @@ def download_file(url):
         sys.exit(1)
 
 
-#
-
 def download_beman_standard():
     """
     Download and parse The Beman Standard content from the GitHub repository.
     """
     # Raw GitHub URL for the Markdown file
-    raw_url = "https://raw.githubusercontent.com/bemanproject/beman/main/docs/BEMAN_STANDARD.md"
+    # raw_url = "https://raw.githubusercontent.com/bemanproject/beman/main/docs/BEMAN_STANDARD.md"
+    raw_url = "https://raw.githubusercontent.com/bemanproject/beman/neatudarius-patch-9/docs/BEMAN_STANDARD.md"
     beman_standard_md_content = download_file(raw_url)
     bs_checks = parse_beman_standard(beman_standard_md_content)
     return bs_checks
@@ -122,3 +121,15 @@ def download_beman_default_license():
     raw_url = "https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/LICENSE"
     licent_content = download_file(raw_url)
     return licent_content
+
+
+def validate_url(url):
+    """
+    Validate the URL.
+    """
+    import requests
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        return False
