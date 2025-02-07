@@ -30,6 +30,10 @@ def get_all_implemented_checks():
         BSTopLevelLicenseCheck,
         BSTopLevelREADMECheck,
 
+        # CHANGELOG
+        BSChangelogTitleCheck,
+        BSChangelogLibraryStatus,
+
         # README
         BSReadmeTitleCheck,
         BSReadmeBadgesCheck,

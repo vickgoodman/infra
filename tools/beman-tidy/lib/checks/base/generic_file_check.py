@@ -43,33 +43,40 @@ class BSGenericFileCheck(BSCheck):
         """
         Read the file content.
         """
-        with open(self.path, 'r') as file:
-            return file.read()
+        try:
+            with open(self.path, 'r') as file:
+                return file.read()
+        except Exception as e:
+            return ""
 
     def read_lines(self):
         """
         Read the file content as lines.
         """
-        with open(self.path, 'r') as file:
-            return file.readlines()
+        try:
+            with open(self.path, 'r') as file:
+                return file.readlines()
+        except Exception as e:
+            return []
 
     def read_lines_strip(self):
         """
         Read the file content as lines and strip them.
         """
-        with open(self.path, 'r') as file:
-            return [line.strip() for line in file.readlines()]
+        return [line.strip() for line in self.read_lines()]
 
     def write(self, content):
         """
         Write the content to the file.
         """
-        with open(self.path, 'w') as file:
-            file.write(content)
+        try:
+            with open(self.path, 'w') as file:
+                file.write(content)
+        except Exception as e:
+            self.log(f"Error writing the file '{self.path}': {e}")
 
     def write_lines(self, lines):
         """
         Write the lines to the file.
         """
-        with open(self.path, 'w') as file:
-            file.writelines(lines)
+        self.write("\n".join(lines))
