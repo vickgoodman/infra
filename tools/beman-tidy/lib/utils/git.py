@@ -131,5 +131,6 @@ def validate_url(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
+        return True
     except requests.RequestException as e:
         return False
