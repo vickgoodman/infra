@@ -36,7 +36,8 @@ class BSCheck(object):
         assert self.full_text_body is not None
 
         self.log_level = 'ERROR' if self.type == 'REQUIREMENT' else 'WARNING'
-        self.log_enabled = True
+        # log is disabled by default, call set_log_enabled(True) to enable it
+        self.log_enabled = False
 
         self.repo_info = repo_info
 
@@ -48,12 +49,10 @@ class BSCheck(object):
         self.library_name = f"beman.{self.repo_name}"
         assert self.library_name is not None
 
-    def base_check(self, log_enabled=True):
+    def base_check(self):
         """
         Checks if this rule is properly initialized.
         """
-        self.log_enabled = log_enabled
-
         if self.name is None:
             self.log("The name is not set.")
             return False
@@ -68,18 +67,13 @@ class BSCheck(object):
 
         return True
 
-    def check(self, log_enabled=True):
+    def check(self):
         """
         Checks if the Beman Standard check/rule is already applied.
         - If the standard is applied, the check should return True.
         - If the standard is not applied, the check should return False and self.fix() should be able to fix the issue.
-
-        Base check method that should be overridden by subclasses.
-        But it should be called directly on first line of the subclass check method.
         """
-        self.log_enabled = log_enabled
-
-        return self.base_check(log_enabled)
+        raise NotImplementedError(f"[{self.name}] check() not implemented.")
 
     def fix(self):
         """
@@ -87,7 +81,6 @@ class BSCheck(object):
         - If the standard is applied, the check should return True. NOP here.
         - - Otherwise, the check should be applied inplace. If the check cannot be applied inplace, the check should return False.
         """
-        self.log_enabled = False
         return False
 
     def log(self, message, enabled=True):
@@ -99,3 +92,9 @@ class BSCheck(object):
 
         if enabled:
             print(f'[{self.log_level:<15}][{self.name:<25}]: {message}')
+
+    def set_log_enabled(self, log_enabled):
+        """
+        Set the log_enabled flag.
+        """
+        self.log_enabled = log_enabled

@@ -92,7 +92,7 @@ def print_coverage(repo_info, beman_standard):
     all_bs_implemented_checks = [generic_check for generic_check in all_implemented_checks if get_beman_standard_check(
         beman_standard, generic_check.name)]
     passed_bs_checks = [
-        bs_check for bs_check in all_bs_implemented_checks if bs_check.check(log_enabled=False)]
+        bs_check for bs_check in all_bs_implemented_checks if bs_check.base_check() and bs_check.check()]
 
     # Stats about the clang-tidy checks coverage over The Beman Standard.
     total_bs_checks = len(beman_standard)

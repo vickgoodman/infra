@@ -16,13 +16,11 @@ class BSGenericFileCheck(BSCheck):
 
         self.path = os.path.join(repo_info["top_level"], relative_path)
 
-    def base_check(self, log_enabled=True):
+    def base_check(self):
         """
         Checks if this rule is properly initialized.
         """
-        self.log_enabled = log_enabled
-
-        if not super().base_check(log_enabled):
+        if not super().base_check():
             return False
 
         if self.path is None:

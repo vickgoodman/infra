@@ -4,11 +4,13 @@
 from ..base.generic_file_check import BSGenericFileCheck
 from ...utils.git import *
 
+
 class BSTopLevelChangelogCheck(BSGenericFileCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.CHANGELOG", "CHANGELOG.md")
 
-    # check() already implemented in the base class.
+    def check(self):
+        return super().base_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
@@ -19,7 +21,8 @@ class BSTopLevelCMakeListsCheck(BSGenericFileCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.CMAKE", "CMakeLists.txt")
 
-    # check() already implemented in the base class.
+    def check(self):
+        return super().base_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
@@ -30,7 +33,8 @@ class BSTopLevelLicenseCheck(BSGenericFileCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.LICENSE", "LICENSE")
 
-    # check() already implemented in the base class.
+    def check(self):
+        return super().base_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
@@ -42,7 +46,8 @@ class BSTopLevelREADMECheck(BSGenericFileCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.README", "README.md")
 
-    # check() already implemented in the base class.
+    def check(self):
+        return super().base_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
