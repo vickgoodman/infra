@@ -36,7 +36,6 @@ class BSCheck(object):
         assert self.full_text_body is not None
 
         self.log_level = 'ERROR' if self.type == 'REQUIREMENT' else 'WARNING'
-        # log is disabled by default, call set_log_enabled(True) to enable it
         self.log_enabled = False
 
         self.repo_info = repo_info
@@ -90,11 +89,5 @@ class BSCheck(object):
         e.g. [ERROR][TOPLEVEL.CMAKE]: Missing top level CMakeLists.txt.'
         """
 
-        if enabled:
+        if self.log_enabled and enabled:
             print(f'[{self.log_level:<15}][{self.name:<25}]: {message}')
-
-    def set_log_enabled(self, log_enabled):
-        """
-        Set the log_enabled flag.
-        """
-        self.log_enabled = log_enabled

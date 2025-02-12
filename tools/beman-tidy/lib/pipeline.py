@@ -50,31 +50,36 @@ def get_beman_standard_check(beman_standard, check_name):
     return next(filter(lambda bs_check: bs_check[0] == check_name, beman_standard), None)
 
 
-def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False):
+def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, verbose=False):
     """
     Run the checks pipeline for The Beman Standard.
     Read-only checks if fix_inplace is False, otherwise try to fix the issues in-place.
     """
+    def log(msg):
+        if verbose:
+            print(msg)
 
-    print("Checks pipeline started ...\n")
+    log("beman-tidy started ...\n")
     for generic_check in get_all_implemented_checks():
         bs_check = generic_check(repo_info, beman_standard)
-        print(
+        bs_check.log_enabled = verbose
+
+        log(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
-        if bs_check.base_check() and bs_check.check():
-            print(f"\tcheck [{bs_check.type}][{bs_check.name}] ... PASSED\n")
+        if not fix_inplace:
+            if bs_check.base_check() and bs_check.check():
+                log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... PASSED\n")
+            else:
+                log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... FAILED\n")
         else:
-            print(f"\tcheck [{bs_check.type}][{bs_check.name}] ... FAILED\n")
+            if bs_check.fix():
+                log(f"\tcheck '{bs_check.name}' ... (already) FIXED.")
+            else:
+                log(
+                    f"\tcheck '{bs_check.name}' ... FAILED TO FIX INPLACE. Please manually fix it!")
 
-            if fix_inplace:
-                if bs_check.fix():
-                    bs_check.log(f"\tcheck '{bs_check.name}' ... FIXED.")
-                else:
-                    bs_check.log(
-                        f"\tcheck '{bs_check.name}' ... FAILED TO FIX INPLACE. Please manually fix it!")
-
-    print("\nChecks pipeline completed.")
+    log("\nbeman-tidy finished.\n")
     sys.stdout.flush()
 
 
