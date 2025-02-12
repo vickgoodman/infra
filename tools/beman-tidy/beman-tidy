@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
 import argparse
-from lib.utils.git import get_repo_info, download_beman_standard
-from lib.pipeline import run_checks_pipeline
+from lib.utils.git import *
+from lib.pipeline import *
 
 def parse_args():
     """
@@ -11,12 +11,12 @@ def parse_args():
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo_path", help="path to the repository to check",
-                        required=True)
-    parser.add_argument("--fix_inplace", help="try to automatically fix found issues",
-                        action=argparse.BooleanOptionalAction, default=False)
+    parser.add_argument("--repo-path", help="path to the repository to check",
+                        required=True, type=str)
+    parser.add_argument("--fix-inplace", help="try to automatically fix found issues",
+                        action=argparse.BooleanOptionalAction, type=bool, default=False)
     parser.add_argument("--coverage", help="show coverage of the checks",
-                        action=argparse.BooleanOptionalAction, default=False)
+                        action=argparse.BooleanOptionalAction,type=bool, default=False)
     args = parser.parse_args()
 
     # Get repository information
@@ -32,8 +32,18 @@ def main():
     """
     args = parse_args()
 
+    # No action can be performed without the Beman Standard downloaded.
     beman_standard = download_beman_standard()
-    run_checks_pipeline(args.repo_info, beman_standard, fix_inplace=args.fix_inplace, coverage=args.coverage)
+    if not beman_standard or len(beman_standard) == 0:
+        print("Failed to download the beman standard. STOP.")
+        return
+
+    # Actually run the checks.
+    run_checks_pipeline(args.repo_info, beman_standard, fix_inplace=args.fix_inplace)
+
+    # Show coverage.
+    if args.coverage:
+        print_coverage(args.repo_info, beman_standard)
 
 if __name__ == "__main__":
     main()

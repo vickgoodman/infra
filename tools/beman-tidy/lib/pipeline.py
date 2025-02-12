@@ -50,11 +50,10 @@ def get_beman_standard_check(beman_standard, check_name):
     return next(filter(lambda bs_check: bs_check[0] == check_name, beman_standard), None)
 
 
-def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, coverage=False):
+def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False):
     """
     Run the checks pipeline for The Beman Standard.
-    If fix_inplace is True, fix the issues inplace.
-    If coverage is True, print the coverage.
+    Read-only checks if fix_inplace is False, otherwise try to fix the issues in-place.
     """
 
     print("Checks pipeline started ...\n")
@@ -78,27 +77,19 @@ def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, coverage=F
     print("\nChecks pipeline completed.")
     sys.stdout.flush()
 
-    if coverage:
-        print_coverage(repo_info, beman_standard)
-
 
 def print_coverage(repo_info, beman_standard):
     """
     Print The Beman Standard coverage.
     """
-    # Actual implemented checks.
     all_implemented_checks = [generic_check(
         repo_info, beman_standard) for generic_check in get_all_implemented_checks()]
-    all_bs_implemented_checks = [generic_check for generic_check in all_implemented_checks if get_beman_standard_check(
-        beman_standard, generic_check.name)]
+    all_bs_implemented_checks = [check for check in all_implemented_checks if get_beman_standard_check(
+        beman_standard, check.name) is not None]
     passed_bs_checks = [
-        bs_check for bs_check in all_bs_implemented_checks if bs_check.base_check() and bs_check.check()]
+        check for check in all_bs_implemented_checks if check.base_check() and check.check()]
+    coverage = round(len(passed_bs_checks) / len(beman_standard) * 100, 2)
 
-    # Stats about the clang-tidy checks coverage over The Beman Standard.
-    total_bs_checks = len(beman_standard)
-    total_implemented_bs_checks = len(all_bs_implemented_checks)
-
+    # print(f"(beman-tidy implementation status: {len(all_bs_implemented_checks)}/{len(beman_standard)} checks implemented.)")
     print(
-        f"repo coverage over The Beman Standard: {len(passed_bs_checks) / total_bs_checks * 100}% ({len(passed_bs_checks)}/{total_bs_checks} checks passed).")
-    print(
-        f"clang-tidy coverage over The Beman Standard: {total_implemented_bs_checks / total_bs_checks * 100}% ({total_implemented_bs_checks}/{total_bs_checks} checks implemented).")
+        f"\nCoverage for '{repo_info['name']}' repository: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).")
