@@ -34,15 +34,14 @@ optional arguments:
 
 # Run beman-tidy on the exemplar repository (automatically fix issues).
 $ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar
-beman-tidy coverage: 17.78% (8/45 checks passed).
+Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
+
+Coverage: 17.78% (8/45 checks passed).
 
 # Run beman-tidy on the exemplar repository (automatically fix issues, verbose output).
 $ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar --verbose
 beman-tidy started ...
 
-Running check [REQUIREMENT][NO_UNSTAGED_CHANGES] ...
-    check [REQUIREMENT][NO_UNSTAGED_CHANGES] ... PASSED
-
 Running check [REQUIREMENT][TOPLEVEL.CHANGELOG] ...
     check [REQUIREMENT][TOPLEVEL.CHANGELOG] ... PASSED
 
@@ -78,51 +77,7 @@ Running check [REQUIREMENT][README.LIBRARY_STATUS] ...
 
 beman-tidy finished.
 
+Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
 
-beman-tidy coverage: 17.78% (8/45 checks passed).
-
-# Run beman-tidy on the exemplar repository (dry-run, verbose output).
-$ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar --verbose --dry-run
-beman-tidy started ...
-
-Running check [REQUIREMENT][NO_UNSTAGED_CHANGES] ...
-    check [REQUIREMENT][NO_UNSTAGED_CHANGES] ... PASSED
-
-Running check [REQUIREMENT][TOPLEVEL.CHANGELOG] ...
-    check [REQUIREMENT][TOPLEVEL.CHANGELOG] ... PASSED
-
-Running check [REQUIREMENT][TOPLEVEL.CMAKE] ...
-    check [REQUIREMENT][TOPLEVEL.CMAKE] ... PASSED
-
-Running check [REQUIREMENT][TOPLEVEL.LICENSE] ...
-    check [REQUIREMENT][TOPLEVEL.LICENSE] ... PASSED
-
-Running check [REQUIREMENT][TOPLEVEL.README] ...
-    check [REQUIREMENT][TOPLEVEL.README] ... PASSED
-
-Running check [REQUIREMENT][CHANGELOG.TITLE] ...
-    check [REQUIREMENT][CHANGELOG.TITLE] ... PASSED
-
-Running check [REQUIREMENT][CHANGELOG.LIBRARY_STATUS] ...
-    check [REQUIREMENT][CHANGELOG.LIBRARY_STATUS] ... PASSED
-
-Running check [RECOMMENDATION][README.TITLE] ...
-    check [RECOMMENDATION][README.TITLE] ... FAILED
-
-Running check [REQUIREMENT][README.BADGES] ...
-[ERROR          ][README.BADGES            ]: Only one line of badges is allowed.
-[ERROR          ][README.BADGES            ]: First line of README.md must contain badges.
-    check [REQUIREMENT][README.BADGES] ... FAILED
-
-Running check [RECOMMENDATION][README.IMPLEMENTS] ...
-    check [RECOMMENDATION][README.IMPLEMENTS] ... PASSED
-
-Running check [REQUIREMENT][README.LIBRARY_STATUS] ...
-    check [REQUIREMENT][README.LIBRARY_STATUS] ... PASSED
-
-
-beman-tidy finished.
-
-
-beman-tidy coverage: 17.78% (8/45 checks passed).
+Coverage: 17.78% (8/45 checks passed).
 ```

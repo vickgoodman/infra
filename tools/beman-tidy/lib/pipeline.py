@@ -21,9 +21,6 @@ def get_all_implemented_checks():
     Returns a list of checks that need to be run.
     """
     return [
-        # Validate CLI arguments
-        BSCheckFixInplaceIncompatibleWithUnstagedChanges,
-
         # TOPLEVEL
         BSTopLevelChangelogCheck,
         BSTopLevelCMakeListsCheck,
@@ -58,23 +55,41 @@ def run_checks_pipeline(repo_info, beman_standard, dry_run=False, verbose=False)
     def log(msg):
         if verbose:
             print(msg)
-    red_failed = "\033[91mFAILED\033[0m"
-    green_passed = "\033[92mPASSED\033[0m"
 
-    log("beman-tidy started ...\n")
-    for generic_check in get_all_implemented_checks():
+    def run_check(generic_check, log_enabled=verbose):
         bs_check = generic_check(repo_info, beman_standard)
-        bs_check.log_enabled = verbose
+        bs_check.log_enabled = log_enabled
 
         log(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
         if (bs_check.base_check() and bs_check.check()) or (not dry_run and bs_check.fix()):
             log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {green_passed}\n")
+            return True
         else:
             log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {red_failed}\n")
+            return False
+
+    red_failed = "\033[91mFAILED\033[0m"
+    green_passed = "\033[92mPASSED\033[0m"
+
+    log("beman-tidy started ...\n")
+
+    # Internal checks
+    if dry_run:
+        run_check(BSCheckFixInplaceIncompatibleWithUnstagedChanges,
+                  log_enabled=False)
+
+    cnt_passed = 0
+    cnt_failed = 0
+    for generic_check in get_all_implemented_checks():
+        if run_check(generic_check):
+            cnt_passed += 1
+        else:
+            cnt_failed += 1
 
     log("\nbeman-tidy finished.\n")
+    print(f"Summary: {cnt_passed} checks {green_passed}, {cnt_failed} checks {red_failed}, {len(beman_standard) - len(get_all_implemented_checks())} skipped (not implemented).")
     sys.stdout.flush()
 
 
@@ -91,4 +106,4 @@ def print_coverage(repo_info, beman_standard):
     coverage = round(len(passed_bs_checks) / len(beman_standard) * 100, 2)
 
     print(
-        f"\nbeman-tidy coverage: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).")
+        f"\n\033[93mCoverage: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).\033[0m")
