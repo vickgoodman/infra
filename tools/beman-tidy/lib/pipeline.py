@@ -92,4 +92,4 @@ def print_coverage(repo_info, beman_standard):
 
     # print(f"(beman-tidy implementation status: {len(all_bs_implemented_checks)}/{len(beman_standard)} checks implemented.)")
     print(
-        f"\nCoverage for '{repo_info['name']}' repository: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).")
+        f"\nbeman-tidy coverage: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).")

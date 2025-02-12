@@ -15,8 +15,6 @@ def parse_args():
                         required=True, type=str)
     parser.add_argument("--fix-inplace", help="try to automatically fix found issues",
                         action=argparse.BooleanOptionalAction, type=bool, default=False)
-    parser.add_argument("--coverage", help="show coverage of the checks",
-                        action=argparse.BooleanOptionalAction,type=bool, default=False)
     args = parser.parse_args()
 
     # Get repository information
@@ -42,8 +40,7 @@ def main():
     run_checks_pipeline(args.repo_info, beman_standard, fix_inplace=args.fix_inplace)
 
     # Show coverage.
-    if args.coverage:
-        print_coverage(args.repo_info, beman_standard)
+    print_coverage(args.repo_info, beman_standard)
 
 if __name__ == "__main__":
     main()
