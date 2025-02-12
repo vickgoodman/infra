@@ -47,23 +47,24 @@ def get_beman_standard_check(beman_standard, check_name):
     return next(filter(lambda bs_check: bs_check[0] == check_name, beman_standard), None)
 
 
-def run_checks_pipeline(repo_info, beman_standard, dry_run=False, verbose=False):
+def run_checks_pipeline(args, beman_standard):
     """
     Run the checks pipeline for The Beman Standard.
-    Read-only checks if dry_run is True, otherwise try to fix the issues in-place.
+    Read-only checks if args.dry_run is True, otherwise try to fix the issues in-place.
+    Verbosity is controlled by args.verbose.
     """
     def log(msg):
-        if verbose:
+        if args.verbose:
             print(msg)
 
-    def run_check(generic_check, log_enabled=verbose):
-        bs_check = generic_check(repo_info, beman_standard)
+    def run_check(generic_check, log_enabled=args.verbose):
+        bs_check = generic_check(args.repo_info, beman_standard)
         bs_check.log_enabled = log_enabled
 
         log(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
-        if (bs_check.base_check() and bs_check.check()) or (not dry_run and bs_check.fix()):
+        if (bs_check.base_check() and bs_check.check()) or (not args.dry_run and bs_check.fix()):
             log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {green_passed}\n")
             return True
         else:
@@ -76,7 +77,7 @@ def run_checks_pipeline(repo_info, beman_standard, dry_run=False, verbose=False)
     log("beman-tidy started ...\n")
 
     # Internal checks
-    if dry_run:
+    if args.dry_run:
         run_check(BSCheckFixInplaceIncompatibleWithUnstagedChanges,
                   log_enabled=False)
 

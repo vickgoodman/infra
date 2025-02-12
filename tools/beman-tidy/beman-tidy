@@ -39,7 +39,7 @@ def main():
         return
 
     # Actually run the checks.
-    run_checks_pipeline(args.repo_info, beman_standard, dry_run=args.dry_run, verbose=args.verbose)
+    run_checks_pipeline(args, beman_standard)
 
     # Show coverage.
     print_coverage(args.repo_info, beman_standard)
