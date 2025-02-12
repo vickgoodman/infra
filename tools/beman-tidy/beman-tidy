@@ -13,7 +13,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-path", help="path to the repository to check",
                         required=True, type=str)
-    parser.add_argument("--fix-inplace", help="try to automatically fix found issues",
+    parser.add_argument("--dry-run", help="DO NOT try to automatically fix found issues",
                         action=argparse.BooleanOptionalAction, type=bool, default=False)
     parser.add_argument("--verbose", help="print verbose output for each check",
                         action=argparse.BooleanOptionalAction, type=bool, default=False)
@@ -39,7 +39,7 @@ def main():
         return
 
     # Actually run the checks.
-    run_checks_pipeline(args.repo_info, beman_standard, fix_inplace=args.fix_inplace, verbose=args.verbose)
+    run_checks_pipeline(args.repo_info, beman_standard, dry_run=args.dry_run, verbose=args.verbose)
 
     # Show coverage.
     print_coverage(args.repo_info, beman_standard)

@@ -50,10 +50,10 @@ def get_beman_standard_check(beman_standard, check_name):
     return next(filter(lambda bs_check: bs_check[0] == check_name, beman_standard), None)
 
 
-def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, verbose=False):
+def run_checks_pipeline(repo_info, beman_standard, dry_run=False, verbose=False):
     """
     Run the checks pipeline for The Beman Standard.
-    Read-only checks if fix_inplace is False, otherwise try to fix the issues in-place.
+    Read-only checks if dry_run is True, otherwise try to fix the issues in-place.
     """
     def log(msg):
         if verbose:
@@ -69,7 +69,7 @@ def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, verbose=Fa
         log(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
-        if (bs_check.base_check() and bs_check.check()) or (fix_inplace and bs_check.fix()):
+        if (bs_check.base_check() and bs_check.check()) or (not dry_run and bs_check.fix()):
             log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {green_passed}\n")
         else:
             log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {red_failed}\n")
@@ -90,6 +90,5 @@ def print_coverage(repo_info, beman_standard):
         check for check in all_bs_implemented_checks if check.base_check() and check.check()]
     coverage = round(len(passed_bs_checks) / len(beman_standard) * 100, 2)
 
-    # print(f"(beman-tidy implementation status: {len(all_bs_implemented_checks)}/{len(beman_standard)} checks implemented.)")
     print(
         f"\nbeman-tidy coverage: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).")
