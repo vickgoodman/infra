@@ -12,7 +12,9 @@ TODO: Add a description.
 
 ## Installation
 
-TODO: Add an installation section.
+```shell
+$ pip3 install -r requirements.txt
+```
 
 ## Usage
 
