@@ -13,7 +13,7 @@ class BSCheckFixInplaceIncompatibleWithUnstagedChanges(BSCheck):
 
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard,
-                         'FIX_INPLACE_INCOMPATIBLE_WITH_UNSTAGED_CHANGES')
+                         'NO_UNSTAGED_CHANGES')
 
     def check(self):
         """

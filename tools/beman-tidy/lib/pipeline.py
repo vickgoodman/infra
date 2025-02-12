@@ -58,6 +58,8 @@ def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, verbose=Fa
     def log(msg):
         if verbose:
             print(msg)
+    red_failed = "\033[91mFAILED\033[0m"
+    green_passed = "\033[92mPASSED\033[0m"
 
     log("beman-tidy started ...\n")
     for generic_check in get_all_implemented_checks():
@@ -67,17 +69,10 @@ def run_checks_pipeline(repo_info, beman_standard, fix_inplace=False, verbose=Fa
         log(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
-        if not fix_inplace:
-            if bs_check.base_check() and bs_check.check():
-                log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... PASSED\n")
-            else:
-                log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... FAILED\n")
+        if (bs_check.base_check() and bs_check.check()) or (fix_inplace and bs_check.fix()):
+            log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {green_passed}\n")
         else:
-            if bs_check.fix():
-                log(f"\tcheck '{bs_check.name}' ... (already) FIXED.")
-            else:
-                log(
-                    f"\tcheck '{bs_check.name}' ... FAILED TO FIX INPLACE. Please manually fix it!")
+            log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {red_failed}\n")
 
     log("\nbeman-tidy finished.\n")
     sys.stdout.flush()
