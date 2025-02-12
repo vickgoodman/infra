@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
 from ..base.generic_file_check import BSGenericFileCheck
-
+from ...utils.git import *
 
 class BSTopLevelChangelogCheck(BSGenericFileCheck):
     def __init__(self, repo_info, beman_standard):
