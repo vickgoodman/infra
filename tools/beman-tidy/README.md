@@ -6,8 +6,6 @@ SPDX-License-Identifier: 2.0 license with LLVM exceptions
 
 ## Description
 
-TODO: Add a description.
-
 `beman-tidy` is a tool used to check and apply [The Beman Standard](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md).
 
 ## Installation
