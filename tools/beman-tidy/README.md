@@ -1,4 +1,4 @@
-# beman-tidy: Codebase Beminification Tool
+# beman-tidy: Codebase Bemanification Tool
 
 <!--
 SPDX-License-Identifier: 2.0 license with LLVM exceptions
