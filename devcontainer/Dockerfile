@@ -8,8 +8,7 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https:
 RUN sudo apt-get update && sudo apt-get install -y cmake
 
 # Install pre-commit
-RUN sudo apt-get install -y pipx && pipx ensurepath
-RUN pipx install pre-commit
+RUN sudo apt-get install -y pipx && pipx install pre-commit
 
 # Newer gcc/ llvm is needed to avoid ASAN Stalling, which is turned on by default across beman projects.
 # See: https://github.com/google/sanitizers/issues/1614
