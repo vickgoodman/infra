@@ -3,7 +3,7 @@
 <!-- SPDX-License-Identifier: 2.0 license with LLVM exceptions -->
 
 This folder contains the infrastructure for beman project's 
-generic devcontainer image. You can checkout the image in beman's 
+generic devcontainer image. You can checkout available images in beman's 
 [GitHub Packages page](https://github.com/orgs/bemanproject/packages/container/package/devcontainers).
 
 The image is build on top of GitHub's 
@@ -13,7 +13,29 @@ for ubuntu 24.04.
 The image includes:
 
 - The latest CMake from kitware's apt repository
-- GNU compiler version 14 (this is configurable via docker build arg)
+- Latest compiler based on build args (gnu or llvm) installed from the universe repository
+- [pre-commit](https://pre-commit.com/), the standard linter manager across beman
+
+## Example devcontainer setup
+
+```json
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/cpp
+
+{
+	"name": "Beman Generic Devcontainer",
+	"image": "ghcr.io/bemanproject/devcontainers:gnu-14",
+	"postCreateCommand": "pre-commit",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cmake-tools"
+			]
+		}
+	}
+}
+```
 
 ## Building your own image
 
