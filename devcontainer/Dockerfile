@@ -2,6 +2,9 @@
 
 FROM mcr.microsoft.com/devcontainers/cpp:1-ubuntu-24.04
 
+USER vscode
+WORKDIR /tmp
+
 # Latest CMake needed for most of the beman libraries,
 # so we need to install via kitware's apt repo
 RUN bash <<EOF
@@ -13,21 +16,11 @@ EOF
 # Newer gcc/ llvm is needed to avoid ASAN Stalling, which is turned on by default across beman projects.
 # See: https://github.com/google/sanitizers/issues/1614
 # Minimal vesion: clang-18.1.3, gcc-13.2
-ARG gnu_version=14
-RUN bash <<EOT
-    sudo apt-get remove -y gcc-${gnu_version} g++-${gnu_version}
-    sudo apt-get install -y gcc-${gnu_version} g++-${gnu_version}
+ARG compiler_kind=gnu
+ARG compiler_version=14
 
-    sudo rm -f /usr/bin/gcc
-    sudo rm -f /usr/bin/g++
-
-    sudo ln -s /usr/bin/gcc-${gnu_version} /usr/bin/gcc
-    sudo ln -s /usr/bin/g++-${gnu_version} /usr/bin/g++
-
-    gcc --version
-EOT
-
-USER vscode
+COPY install_compiler.sh .
+RUN bash install_compiler.sh ${compiler_kind} ${compiler_version}
 
 # Pre-commit is beman library's standard linting tool
 RUN sudo apt-get install -y pipx
