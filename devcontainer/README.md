@@ -19,9 +19,7 @@ The image includes:
 ## Example devcontainer setup
 
 ```json
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/cpp
-
+// SPDX-License-Identifier: 2.0 license with LLVM exceptions
 {
 	"name": "Beman Generic Devcontainer",
 	"image": "ghcr.io/bemanproject/devcontainers:gnu-14",
