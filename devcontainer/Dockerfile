@@ -10,8 +10,6 @@ RUN bash <<EOF
     sudo apt-get update && sudo apt-get install -y cmake
 EOF
 
-RUN sudo apt-get install -y pipx && pipx install pre-commit
-
 # Newer gcc/ llvm is needed to avoid ASAN Stalling, which is turned on by default across beman projects.
 # See: https://github.com/google/sanitizers/issues/1614
 # Minimal vesion: clang-18.1.3, gcc-13.2
@@ -28,3 +26,12 @@ RUN bash <<EOT
 
     gcc --version
 EOT
+
+USER vscode
+
+# Pre-commit is beman library's standard linting tool
+RUN sudo apt-get install -y pipx
+RUN pipx install pre-commit
+ENV PATH="/home/vscode/.local/bin:${PATH}"
+
+ENTRYPOINT ["/usr/bin/bash"]
