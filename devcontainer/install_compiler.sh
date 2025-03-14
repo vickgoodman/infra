@@ -2,11 +2,11 @@
 #  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 set -e
-
+set +x
 TOOL=$1
 VERSION=$2
 
-echo "Install $TOOL at: $VERSION"
+echo "Install ${TOOL} at: ${VERSION}"
 
 shopt -s nocasematch
 if [ "$TOOL" = "gnu" ]; then
@@ -24,7 +24,7 @@ else
     sudo apt-get install -y lsb-release wget software-properties-common gnupg
     wget https://apt.llvm.org/llvm.sh
 
-    sudo bash llvm.sh $2
+    sudo bash llvm.sh ${VERSION}
 
     sudo rm -f /usr/bin/clang
     sudo rm -f /usr/bin/clang++
