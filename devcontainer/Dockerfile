@@ -22,6 +22,9 @@ ARG compiler_version=14
 COPY install_compiler.sh .
 RUN bash install_compiler.sh ${compiler_kind} ${compiler_version}
 
+# Needed for recent exemplar
+RUN sudo apt-get install -y libgtest-dev
+
 # Pre-commit is beman library's standard linting tool
 RUN sudo apt-get install -y pipx
 RUN pipx install pre-commit
