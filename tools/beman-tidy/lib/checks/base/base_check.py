@@ -7,7 +7,9 @@ import sys
 
 class BaseCheck(object):
     """
-    Base class for Beman Standard check (rule).
+    Base class for checks.
+    This class is not meant to be used directly, it's meant to be subclassed.
+    e.g., check for repository name, check for changelog, check for license, etc.
     """
 
     def __init__(self, repo_info, beman_standard, check_name):

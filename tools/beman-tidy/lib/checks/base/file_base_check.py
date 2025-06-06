@@ -8,7 +8,7 @@ import sys
 
 class FileBaseCheck(BaseCheck):
     """
-    Base class for all Beman Standard checks that operate on a file.
+    Base class for checks that operate on a file.
     """
 
     def __init__(self, repo_info, beman_standard, check_name, relative_path):
