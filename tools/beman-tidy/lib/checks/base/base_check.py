@@ -7,12 +7,12 @@ import sys
 
 class BSCheck(object):
     """
-    Base class for all Beman Standard checks.
+    Base class for Beman Standard check (rule).
     """
 
     def __init__(self, repo_info, beman_standard, check_name):
         """
-        Initialize the check.
+        Create a new check instance.
         """
         # check name e.g. "LIBRARY.NAMES"
         self.name = check_name
@@ -68,17 +68,17 @@ class BSCheck(object):
 
     def check(self):
         """
-        Checks if the Beman Standard check/rule is already applied.
-        - If the standard is applied, the check should return True.
-        - If the standard is not applied, the check should return False and self.fix() should be able to fix the issue.
+        Checks if the Beman Standard check is already applied.
+        - If it's applied, this method should return True.
+        - Otherwise, it returns False and self.fix() must be able to fix the issue.
         """
         raise NotImplementedError(f"[{self.name}] check() not implemented.")
 
     def fix(self):
         """
-        Fixes the issue if The  Beman Standard is not applied.
-        - If the standard is applied, the check should return True. NOP here.
-        - - Otherwise, the check should be applied inplace. If the check cannot be applied inplace, the check should return False.
+        Fixes the issue if the Beman Standard is not applied.
+        - If check already applied, this method is a no-op and should return True.
+        - Otherwise, it will try to apply the check inplace. Returns the status of the fix attempt.
         """
         return False
 
