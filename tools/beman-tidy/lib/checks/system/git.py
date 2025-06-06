@@ -6,9 +6,9 @@ from ..base.base_check import BaseCheck
 import sys
 
 
-class BaseCheckFixInplaceIncompatibleWithUnstagedChanges(BaseCheck):
+class DisallowFixInplaceAndUnstagedChangesCheck(BaseCheck):
     """
-    Check if the fix can be applied inplace.
+    If fix is attempted, disallow it if there are unstaged changes.
     """
 
     def __init__(self, repo_info, beman_standard):
@@ -17,13 +17,13 @@ class BaseCheckFixInplaceIncompatibleWithUnstagedChanges(BaseCheck):
 
     def check(self):
         """
-        Check already applied if no unstaged changes are present.
+        Should not allow fix if there are unstaged changes.
         """
         return len(self.repo_info["unstaged_changes"]) == 0
 
     def fix(self):
         """
-        Fix the issue if the fix can be applied inplace, so unstaged changes are not present!
+        Stop the program if there are unstaged changes.
         """
         self.log(
             "The fix cannot be applied inplace. Please commit or stash your changes. STOP.")

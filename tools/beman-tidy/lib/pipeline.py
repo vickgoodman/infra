@@ -79,7 +79,7 @@ def run_checks_pipeline(args, beman_standard):
 
     # Internal checks
     if args.dry_run:
-        run_check(BaseCheckFixInplaceIncompatibleWithUnstagedChanges,
+        run_check(DisallowFixInplaceAndUnstagedChangesCheck,
                   log_enabled=False)
 
     cnt_passed = 0
