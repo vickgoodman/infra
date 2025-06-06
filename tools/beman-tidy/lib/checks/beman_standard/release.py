@@ -5,8 +5,6 @@ from ..base.file_base_check import FileBaseCheck
 from ...utils.string import *
 from ...utils.git import *
 
-# TODO README.TITLE
-# TODO README.BADGES
-# TODO README.PURPOSE
-# TODO README.IMPLEMENTS
-# TODO README.LIBRARY_STATUS
+# TODO RELEASE.GITHUB
+# TODO RELEASE.NOTES
+# TODO RELEASE.GODBOLT_TRUNK_VERSION

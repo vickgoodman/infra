@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 from .checks.system.git import *
-from .checks.beman_standard.changelog import *
 from .checks.beman_standard.cmake import *
 from .checks.beman_standard.cpp import *
 from .checks.beman_standard.directory import *
@@ -10,6 +9,7 @@ from .checks.beman_standard.file import *
 from .checks.beman_standard.general import *
 from .checks.beman_standard.license import *
 from .checks.beman_standard.readme import *
+from .checks.beman_standard.release import *
 from .checks.beman_standard.toplevel import *
 
 
@@ -21,21 +21,23 @@ def get_all_implemented_checks():
     Returns a list of checks that need to be run.
     """
     return [
-        # TOPLEVEL
-        BSTopLevelCMakeListsCheck,
-        BSTopLevelLicenseCheck,
-        BSTopLevelREADMECheck,
+        # License
 
-        # CHANGELOG
-        BSChangelogTitleCheck,
-        BSChangelogLibraryStatus,
+        # General
+
+        # Release
+
+        # Top-level
 
         # README
-        BSReadmeTitleCheck,
-        BSReadmeBadgesCheck,
-        # PURPOSE
-        BSReadmeImplementsCheck,
-        BSReadmeLibraryStatusCheck,
+
+        # Cmake
+
+        # CPP
+
+        # Directory
+
+        # File
     ]
 
 
