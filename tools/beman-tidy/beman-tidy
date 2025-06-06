@@ -2,11 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import argparse
+from lib.utils.git import *
 from lib.pipeline import *
 
 def parse_args():
     """
-    Parse the command line arguments.
+    Parse the CLI arguments.
     """
 
     parser = argparse.ArgumentParser()
@@ -27,7 +28,7 @@ def parse_args():
 
 def main():
     """
-    beman-tidy main entry point.
+    The beman-tidy main entry point.
     """
     args = parse_args()
 

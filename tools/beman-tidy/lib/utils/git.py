@@ -13,8 +13,8 @@ from git import Repo, InvalidGitRepositoryError
 
 def get_repo_info(path):
     """
-    Get information about the Git repository at the given path.
-    Returns a dictionary with data about the repository.
+    Get information about the repository at the given path.
+    Returns data as a dictionary.
     """
 
     try:
