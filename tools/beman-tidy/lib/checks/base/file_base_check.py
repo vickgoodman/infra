@@ -11,9 +11,10 @@ class FileBaseCheck(BaseCheck):
     Base class for checks that operate on a file.
     """
 
-    def __init__(self, repo_info, beman_standard, check_name, relative_path):
-        super().__init__(repo_info, beman_standard, check_name)
+    def __init__(self, repo_info, beman_standard_check_config, relative_path):
+        super().__init__(repo_info, beman_standard_check_config)
 
+        # set path - e.g. "README.md"
         self.path = os.path.join(repo_info["top_level"], relative_path)
 
     def default_check(self):

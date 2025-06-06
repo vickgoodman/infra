@@ -3,7 +3,7 @@
 
 import os
 import sys
-
+from ..system.registry import *
 
 class BaseCheck(object):
     """
@@ -12,41 +12,35 @@ class BaseCheck(object):
     e.g., check for repository name, check for changelog, check for license, etc.
     """
 
-    def __init__(self, repo_info, beman_standard, check_name):
+    def __init__(self, repo_info, beman_standard_check_config, name=None):
         """
         Create a new check instance.
         """
-        # check name e.g. "LIBRARY.NAMES"
-        self.name = check_name
 
-        # unique entry in the list - [(check_name, check_type, check_full_text_body)]
-        beman_standard_check = [
-            entry for entry in beman_standard if entry[0] == check_name]
-        assert len(beman_standard_check) <= 1
+        # check name -  e.g. "README.TITLE"
+        self.name = name if name is not None else get_beman_standard_check_name_by_class(self.__class__)
+        assert self.name is not None, f"Check name not found for class: {self.__class__.__name__}"
 
-        # set type and full_text_body
-        if len(beman_standard_check) == 1:
-            (check_name, check_type, check_body) = beman_standard_check[0]
-
-            self.type = check_type
-            self.full_text_body = check_body
-        else:
-            self.type = "REQUIREMENT"
-            self.full_text_body = "beman-tidy internal check."
+        # set type - e.g. "REQUIREMENT" or "RECOMMENDATION"
+        self.type = beman_standard_check_config[self.name]["type"]
         assert self.type in [
             'REQUIREMENT', 'RECOMMENDATION'], f"Invalid check type: {self.type} for check = {self.name}."
+
+        # set full text body - e.g. "The README.md should begin ..."
+        self.full_text_body = beman_standard_check_config[self.name]["full_text_body"]
         assert self.full_text_body is not None
 
+        # set log level - e.g. "ERROR" or "WARNING"
         self.log_level = 'ERROR' if self.type == 'REQUIREMENT' else 'WARNING'
         self.log_enabled = False
 
+        # set repo info
         self.repo_info = repo_info
-
         assert "name" in repo_info
         self.repo_name = repo_info["name"]
         assert "top_level" in repo_info
         self.repo_path = repo_info["top_level"]
-
+        assert self.repo_path is not None
         self.library_name = f"beman.{self.repo_name}"
         assert self.library_name is not None
 

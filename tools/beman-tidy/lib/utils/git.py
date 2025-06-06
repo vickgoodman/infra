@@ -7,6 +7,7 @@ import os
 import re
 import requests
 import sys
+import yaml
 
 from git import Repo, InvalidGitRepositoryError
 
@@ -61,76 +62,51 @@ def get_repo_info(path):
             f"An error occurred while getting repository information. Check {path}.")
         sys.exit(1)
 
-
-def parse_beman_standard(beman_standard_md_content):
+def load_beman_standard_config(path):
     """
-    Parse the Markdown content to extract checks from The Beman Standard
-
-    Args:
-        markdown_content (str): The raw Markdown content.
-
-    Returns:
-        [(check_name, check_type, check_body)]: A list of check tuples.
+    Load the Beman Standard YAML configuration file from the given path.
     """
-    # Regex pattern to match checks
-    pattern = r"\*\*\[([A-Z._]+)\]\*\* (REQUIREMENT|RECOMMENDATION):\s*(.*?)(?=\*\*\[|$)"
-    matches = re.finditer(pattern, beman_standard_md_content, re.DOTALL)
+    with open(path, "r") as file:
+        beman_standard_yml = yaml.safe_load(file)
 
-    bs_checks = []
-    for match in matches:
-        check_name = match.group(1)
-        check_type = match.group(2)
-        check_body = match.group(3).strip()
+    beman_standard_check_config = {}
+    for check_name in beman_standard_yml:
+        check_config = {
+            "name": check_name,
+            "full_text_body": "",
+            "type": "",
+            "regex": "",
+            "file_name": "",
+            "directory_name": "",
+            "badge_lines": "",
+            "status_lines": "",
+            "licenses": "",
+            "default_group": "",
+        }
+        for entry in beman_standard_yml[check_name]:
+            if "type" in entry:
+                check_config["type"] = entry["type"]
+            elif "regex" in entry:
+                # TODO: Implement the regex check.
+                pass
+            elif "file_name" in entry:
+                check_config["file_name"] = entry["file_name"]
+            elif "directory_name" in entry:
+                check_config["directory_name"] = entry["directory_name"]
+            elif "badge_lines" in entry:
+                # TODO: Implement the badge check.
+                pass
+            elif "status_lines" in entry:
+                # TODO: Implement the status check.
+                pass
+            elif "licenses" in entry:
+                # TODO: Implement the license check.
+                pass
+            elif "default_group" in entry:
+                check_config["default_group"] = entry["default_group"]
+            else:
+                raise ValueError(f"Invalid entry in Beman Standard YAML: {entry}")
 
-        bs_checks.append((check_name, check_type, check_body))
+        beman_standard_check_config[check_name] = check_config
 
-    return bs_checks
-
-
-def download_file(url):
-    """
-    Download a file from the given URL.
-    """
-    try:
-        # Fetch the content
-        response = requests.get(url)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        return response.text
-    except requests.RequestException as e:
-        print(
-            f"An error occurred while downloading from ${raw_url}: {e}.\nSTOP.")
-        sys.exit(1)
-
-
-def download_beman_standard():
-    """
-    Download and parse The Beman Standard content from the GitHub repository.
-    """
-    # Raw GitHub URL for the Markdown file
-    # raw_url = "https://raw.githubusercontent.com/bemanproject/beman/main/docs/BEMAN_STANDARD.md"
-    raw_url = "https://raw.githubusercontent.com/bemanproject/beman/neatudarius-patch-9/docs/BEMAN_STANDARD.md"
-    beman_standard_md_content = download_file(raw_url)
-    bs_checks = parse_beman_standard(beman_standard_md_content)
-    return bs_checks
-
-
-def download_beman_default_license():
-    """
-    Download and parse the default Beman LICENSE content from the GitHub repository.
-    """
-    raw_url = "https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/LICENSE"
-    licent_content = download_file(raw_url)
-    return licent_content
-
-
-def validate_url(url):
-    """
-    Validate the URL.
-    """
-    import requests
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return True
-    except requests.RequestException as e:
-        return False
+    return beman_standard_check_config
