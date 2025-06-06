@@ -22,7 +22,6 @@ def get_all_implemented_checks():
     """
     return [
         # TOPLEVEL
-        BSTopLevelChangelogCheck,
         BSTopLevelCMakeListsCheck,
         BSTopLevelLicenseCheck,
         BSTopLevelREADMECheck,

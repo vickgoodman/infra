@@ -4,19 +4,6 @@
 from ..base.file_base_check import FileBaseCheck
 from ...utils.git import *
 
-
-class BSTopLevelChangelogCheck(FileBaseCheck):
-    def __init__(self, repo_info, beman_standard):
-        super().__init__(repo_info, beman_standard, "TOPLEVEL.CHANGELOG", "CHANGELOG.md")
-
-    def check(self):
-        return super().default_check()  # Non-empty file check.
-
-    def fix(self):
-        # TODO import from beman_standard.
-        pass
-
-
 class BSTopLevelCMakeListsCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.CMAKE", "CMakeLists.txt")
