@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from ..base.generic_file_check import BSGenericFileCheck
+from ..base.file_base_check import FileBaseCheck
 from ...utils.string import *
 from ...utils.git import *
 
 
-class BSGenericReadmeCheck(BSGenericFileCheck):
+class BSGenericReadmeCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard, check_name):
         super().__init__(repo_info, beman_standard, check_name, "README.md")
 

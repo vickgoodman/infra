@@ -1,40 +1,40 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from ..base.generic_file_check import BSGenericFileCheck
+from ..base.file_base_check import FileBaseCheck
 from ...utils.git import *
 
 
-class BSTopLevelChangelogCheck(BSGenericFileCheck):
+class BSTopLevelChangelogCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.CHANGELOG", "CHANGELOG.md")
 
     def check(self):
-        return super().base_check()  # Non-empty file check.
+        return super().default_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
         pass
 
 
-class BSTopLevelCMakeListsCheck(BSGenericFileCheck):
+class BSTopLevelCMakeListsCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.CMAKE", "CMakeLists.txt")
 
     def check(self):
-        return super().base_check()  # Non-empty file check.
+        return super().default_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
         pass
 
 
-class BSTopLevelLicenseCheck(BSGenericFileCheck):
+class BSTopLevelLicenseCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.LICENSE", "LICENSE")
 
     def check(self):
-        return super().base_check()  # Non-empty file check.
+        return super().default_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.
@@ -42,12 +42,12 @@ class BSTopLevelLicenseCheck(BSGenericFileCheck):
         pass
 
 
-class BSTopLevelREADMECheck(BSGenericFileCheck):
+class BSTopLevelREADMECheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard):
         super().__init__(repo_info, beman_standard, "TOPLEVEL.README", "README.md")
 
     def check(self):
-        return super().base_check()  # Non-empty file check.
+        return super().default_check()  # Non-empty file check.
 
     def fix(self):
         # TODO import from beman_standard.

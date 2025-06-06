@@ -64,7 +64,7 @@ def run_checks_pipeline(args, beman_standard):
         log(
             f"Running check [{bs_check.type}][{bs_check.name}] ... ")
 
-        if (bs_check.base_check() and bs_check.check()) or (not args.dry_run and bs_check.fix()):
+        if (bs_check.default_check() and bs_check.check()) or (not args.dry_run and bs_check.fix()):
             log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {green_passed}\n")
             return True
         else:
@@ -78,7 +78,7 @@ def run_checks_pipeline(args, beman_standard):
 
     # Internal checks
     if args.dry_run:
-        run_check(BSCheckFixInplaceIncompatibleWithUnstagedChanges,
+        run_check(BaseCheckFixInplaceIncompatibleWithUnstagedChanges,
                   log_enabled=False)
 
     cnt_passed = 0
@@ -103,7 +103,7 @@ def print_coverage(repo_info, beman_standard):
     all_bs_implemented_checks = [check for check in all_implemented_checks if get_beman_standard_check(
         beman_standard, check.name) is not None]
     passed_bs_checks = [
-        check for check in all_bs_implemented_checks if check.base_check() and check.check()]
+        check for check in all_bs_implemented_checks if check.default_check() and check.check()]
     coverage = round(len(passed_bs_checks) / len(beman_standard) * 100, 2)
 
     print(

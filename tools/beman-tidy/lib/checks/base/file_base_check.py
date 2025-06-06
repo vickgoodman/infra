@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from .base_check import BSCheck
+from .base_check import BaseCheck
 import os
 import sys
 
 
-class BSGenericFileCheck(BSCheck):
+class FileBaseCheck(BaseCheck):
     """
-    Base class for all Beman Standard checks.
+    Base class for all Beman Standard checks that operate on a file.
     """
 
     def __init__(self, repo_info, beman_standard, check_name, relative_path):
@@ -16,11 +16,11 @@ class BSGenericFileCheck(BSCheck):
 
         self.path = os.path.join(repo_info["top_level"], relative_path)
 
-    def base_check(self):
+    def default_check(self):
         """
         Checks if this rule is properly initialized.
         """
-        if not super().base_check():
+        if not super().default_check():
             return False
 
         if self.path is None:

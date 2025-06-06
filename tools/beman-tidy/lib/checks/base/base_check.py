@@ -5,7 +5,7 @@ import os
 import sys
 
 
-class BSCheck(object):
+class BaseCheck(object):
     """
     Base class for Beman Standard check (rule).
     """
@@ -48,7 +48,7 @@ class BSCheck(object):
         self.library_name = f"beman.{self.repo_name}"
         assert self.library_name is not None
 
-    def base_check(self):
+    def default_check(self):
         """
         Checks if this rule is properly initialized.
         """

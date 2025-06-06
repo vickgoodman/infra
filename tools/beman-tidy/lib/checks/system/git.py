@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from ..base.base_check import BSCheck
+from ..base.base_check import BaseCheck
 
 import sys
 
 
-class BSCheckFixInplaceIncompatibleWithUnstagedChanges(BSCheck):
+class BaseCheckFixInplaceIncompatibleWithUnstagedChanges(BaseCheck):
     """
     Check if the fix can be applied inplace.
     """
