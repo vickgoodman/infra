@@ -19,25 +19,20 @@ $ pip3 install -r requirements.txt
 ```shell
 # Display help.
 $ ./tools/beman-tidy/beman-tidy --help
-usage: beman-tidy [-h] --repo-path REPO_PATH [--dry-run | --no-dry-run] [--verbose | --no-verbose]
+usage: beman-tidy repo_path [-h] [--dry-run | --no-dry-run] [--verbose | --no-verbose]
+
+positional arguments:
+  repo_path             path to the repository to check
 
 optional arguments:
   -h, --help            show this help message and exit
-  --repo-path REPO_PATH
-                        path to the repository to check
   --dry-run, --no-dry-run
                         DO NOT try to automatically fix found issues (default: False)
   --verbose, --no-verbose
                         print verbose output for each check (default: False)
 
-# Run beman-tidy on the exemplar repository (automatically fix issues).
-$ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar
-Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
-
-Coverage: 17.78% (8/45 checks passed).
-
 # Run beman-tidy on the exemplar repository (automatically fix issues, verbose output).
-$ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar --verbose
+$ ./tools/beman-tidy/beman-tidy ../exemplar --verbose
 beman-tidy started ...
 
 Running check [REQUIREMENT][TOPLEVEL.CHANGELOG] ...
