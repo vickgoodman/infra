@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# SPDX-License-Identifier: 2.0 license with LLVM exceptions
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 from .git import download_beman_default_license
 import re
