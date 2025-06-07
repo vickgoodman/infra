@@ -10,7 +10,9 @@ install:
 install-dev:
 	@echo "Installing development dependencies..."
 	pip3 install -r requirements-dev.txt &> /dev/null
-	brew install autopep8 &> /dev/null || apt-get install autopep8 -y &> /dev/null
+	brew install autopep8 &> /dev/null
+	apt-get install autopep8 -y &> /dev/null
+	pip3 install autopep8
 
 # Run tests:
 test:
