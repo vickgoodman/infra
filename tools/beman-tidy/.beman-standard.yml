@@ -1,3 +1,4 @@
+# LICENSE
 LICENSE.APPROVED:
     - type: REQUIREMENT
     - licenses:
@@ -15,6 +16,7 @@ LICENSE.APACHE_LLVM:
 LICENSE.CRITERIA:
     - type: REQUIREMENT
 
+# GENERAL
 LIBRARY.NAMES:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible>
@@ -27,13 +29,14 @@ REPOSITORY.CODEOWNERS:
 REPOSITORY.DISALLOW_GIT_SUBMODULES:
     - type: RECOMMENDATION
 
+# RELEASE
 RELEASE.GITHUB:
     - type: REQUIREMENT
 RELEASE.NOTES:
     - type: RECOMMENDATION
 RELEASE.GODBOLT_TRUNK_VERSION:
     - type: RECOMMENDATION
-
+# TOP LEVEL
 TOPLEVEL.CMAKE:
     - type: RECOMMENDATION
     - file_name: CMakeLists.txt
@@ -44,6 +47,7 @@ TOPLEVEL.README:
     - type: RECOMMENDATION
     - file_name: README.md
 
+# README
 README.TITLE:
     - type: RECOMMENDATION
 README.BADGES:
@@ -67,6 +71,7 @@ README.LIBRARY_STATUS:
             "**Status**: [Retired. No longer maintained or actively developed.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#retired-no-longer-maintained-or-actively-developed)",
         ]
 
+# CMAKE
 CMAKE.DEFAULT:
     - type: RECOMMENDATION
 CMAKE.USE_FETCH_CONTENT:
@@ -96,6 +101,7 @@ CMAKE.SKIP_EXAMPLES:
 CMAKE.AVOID_PASSTHROUGHS:
     - type: RECOMMENDATION
 
+# DIRECTORY
 DIRECTORY.INTERFACE_HEADERS:
     - type: RECOMMENDATION
     - directory_name: include
@@ -123,7 +129,7 @@ DIRECTORY.PAPERS:
     - type: RECOMMENDATION
     - directory_name: papers
 
-
+# FILE
 FILE.CPP_NAMES:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible - e.g. ${snake_case}.cpp, ${snake_case}.test.cpp>
@@ -141,6 +147,7 @@ FILE.COPYRIGHT:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible - exclude copyright lines>
 
+# CPP
 CPP.NAMESPACE:
     - type: RECOMMENDATION
 CPP.NO_FLAG_FORKING:
