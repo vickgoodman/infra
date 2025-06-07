@@ -41,47 +41,31 @@ optional arguments:
 * Run beman-tidy on the exemplar repository (default: dry-run mode)
 
 ```shell
-$ ./beman-tidy ../exemplar --verbose
-beman-tidy started ...
+# non-verbose mode
+$ ./beman-tidy ../../../exemplar
+Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
 
-Running check [REQUIREMENT][TOPLEVEL.CHANGELOG] ...
-    check [REQUIREMENT][TOPLEVEL.CHANGELOG] ... PASSED
+Coverage: 6.98% (3/43 checks passed).
 
-Running check [REQUIREMENT][TOPLEVEL.CMAKE] ...
-    check [REQUIREMENT][TOPLEVEL.CMAKE] ... PASSED
-
-Running check [REQUIREMENT][TOPLEVEL.LICENSE] ...
-    check [REQUIREMENT][TOPLEVEL.LICENSE] ... PASSED
-
-Running check [REQUIREMENT][TOPLEVEL.README] ...
-    check [REQUIREMENT][TOPLEVEL.README] ... PASSED
-
-Running check [REQUIREMENT][CHANGELOG.TITLE] ...
-    check [REQUIREMENT][CHANGELOG.TITLE] ... PASSED
-
-Running check [REQUIREMENT][CHANGELOG.LIBRARY_STATUS] ...
-    check [REQUIREMENT][CHANGELOG.LIBRARY_STATUS] ... PASSED
+# verbose mode
+$ ./beman-tidy ../../../exemplar --verbose
+beman-tidy pipeline started ...
 
 Running check [RECOMMENDATION][README.TITLE] ...
-    check [RECOMMENDATION][README.TITLE] ... FAILED
+	check [RECOMMENDATION][README.TITLE] ... PASSED
 
-Running check [REQUIREMENT][README.BADGES] ...
-[ERROR          ][README.BADGES            ]: Only one line of badges is allowed.
-[ERROR          ][README.BADGES            ]: First line of README.md must contain badges.
-    check [REQUIREMENT][README.BADGES] ... FAILED
+Running check [RECOMMENDATION][README.BADGES] ...
+	check [RECOMMENDATION][README.BADGES] ... PASSED
 
-Running check [RECOMMENDATION][README.IMPLEMENTS] ...
-    check [RECOMMENDATION][README.IMPLEMENTS] ... PASSED
-
-Running check [REQUIREMENT][README.LIBRARY_STATUS] ...
-    check [REQUIREMENT][README.LIBRARY_STATUS] ... PASSED
+Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
+	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
 
 
-beman-tidy finished.
+beman-tidy pipeline finished.
 
-Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
+Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
 
-Coverage: 17.78% (8/45 checks passed).
+Coverage: 6.98% (3/43 checks passed).
 ```
 
 * Run beman-tidy on the exemplar repository (fix issues in-place):
