@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+from ..base.directory_base_check import DirectoryBaseCheck
+
 # TODO DIRECTORY.INTERFACE_HEADERS
 # TODO DIRECTORY.IMPLEMENTATION_HEADERS
 # TODO DIRECTORY.SOURCES
