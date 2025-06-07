@@ -24,7 +24,7 @@ no_color = "\033[0m"
 def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     """
     Run the checks pipeline for The Beman Standard.
-    Read-only checks if args.dry_run is True, otherwise try to fix the issues in-place.
+    Read-only checks if args.fix_inplace is False, otherwise try to fix the issues in-place.
     Verbosity is controlled by args.verbose.
     """
 
@@ -49,7 +49,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         log(
             f"Running check [{check_instance.type}][{check_instance.name}] ... ")
 
-        if (check_instance.default_check() and check_instance.check()) or (not args.dry_run and check_instance.fix()):
+        if (check_instance.default_check() and check_instance.check()) or (args.fix_inplace and check_instance.fix()):
             log(f"\tcheck [{check_instance.type}][{check_instance.name}] ... {green_color}PASSED{no_color}\n")
             return True
         else:
@@ -61,7 +61,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     """
     def run_pipeline_helper():
         # Internal checks
-        if args.dry_run:
+        if args.fix_inplace:
             run_check(DisallowFixInplaceAndUnstagedChangesCheck,
                       log_enabled=False)
 
