@@ -2,6 +2,7 @@ import pytest
 import os
 from pathlib import Path
 
+
 def pytest_configure(config):
     """
     Add custom markers to pytest.
@@ -9,6 +10,7 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "use_test_repo: mark test to use test repository instead of exemplar"
     )
+
 
 @pytest.fixture(autouse=True)
 def _setup_test_environment():
@@ -18,9 +20,9 @@ def _setup_test_environment():
     """
     # Get the root directory of the project
     root_dir = Path(__file__).parent.parent
-    
+
     # Add the project root to PYTHONPATH if not already there
     if str(root_dir) not in os.environ.get('PYTHONPATH', ''):
         os.environ['PYTHONPATH'] = f"{root_dir}:{os.environ.get('PYTHONPATH', '')}"
-    
+
     yield

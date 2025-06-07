@@ -20,6 +20,7 @@ yellow_color = "\033[93m"
 gray_color = "\033[90m"
 no_color = "\033[0m"
 
+
 def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     """
     Run the checks pipeline for The Beman Standard.
@@ -41,7 +42,8 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     @return: True if the check passed, False otherwise.
     """
     def run_check(check_class, log_enabled=args.verbose):
-        check_instance = check_class(args.repo_info, beman_standard_check_config)
+        check_instance = check_class(
+            args.repo_info, beman_standard_check_config)
         check_instance.log_enabled = log_enabled
 
         log(
@@ -61,12 +63,13 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         # Internal checks
         if args.dry_run:
             run_check(DisallowFixInplaceAndUnstagedChangesCheck,
-                    log_enabled=False)
+                      log_enabled=False)
 
         implemented_checks = get_registered_beman_standard_checks()
         cnt_passed = 0
         cnt_failed = 0
-        cnt_skipped = len(beman_standard_check_config) - len(implemented_checks)
+        cnt_skipped = len(beman_standard_check_config) - \
+            len(implemented_checks)
         cnt_all_beman_standard_checks = len(beman_standard_check_config)
         for check_name in checks_to_run:
             if not check_name in implemented_checks:
@@ -79,18 +82,18 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
 
         return cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks
 
-
     log("beman-tidy pipeline started ...\n")
     cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks = run_pipeline_helper()
     log("\nbeman-tidy pipeline finished.\n")
 
     # Always print the summary.
     print(f"Summary: {green_color} {cnt_passed} checks PASSED{no_color}, {red_color}{cnt_failed} checks FAILED{no_color}, {gray_color}{cnt_skipped} skipped (NOT implemented).{no_color}")
-    
+
     sys.stdout.flush()
 
     # Show coverage.
-    print_coverage(cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks)
+    print_coverage(cnt_passed, cnt_failed, cnt_skipped,
+                   cnt_all_beman_standard_checks)
 
 
 def print_coverage(cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks):

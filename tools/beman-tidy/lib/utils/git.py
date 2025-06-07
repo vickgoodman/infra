@@ -58,6 +58,7 @@ def get_repo_info(path):
             f"An error occurred while getting repository information. Check {path}.")
         sys.exit(1)
 
+
 def load_beman_standard_config(path):
     """
     Load the Beman Standard YAML configuration file from the given path.
@@ -101,7 +102,8 @@ def load_beman_standard_config(path):
             elif "default_group" in entry:
                 check_config["default_group"] = entry["default_group"]
             else:
-                raise ValueError(f"Invalid entry in Beman Standard YAML: {entry}")
+                raise ValueError(
+                    f"Invalid entry in Beman Standard YAML: {entry}")
 
         beman_standard_check_config[check_name] = check_config
 

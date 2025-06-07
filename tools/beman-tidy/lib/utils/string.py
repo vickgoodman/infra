@@ -39,4 +39,3 @@ def skip_empty_lines(lines):
     while len(lines) > 0 and len(lines[0].strip()) == 0:
         lines = lines[1:]
     return lines
-

@@ -27,4 +27,4 @@ self-lint:
 self-lint-fix:
 	@echo "Running linter-fix..."
 	@pwd
-	find . -name "*.py" | xargs autopep8 --exit-code --in-place
+	find . -name "*.py" | xargs autopep8 --in-place

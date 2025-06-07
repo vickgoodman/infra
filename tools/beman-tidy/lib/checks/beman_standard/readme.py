@@ -23,6 +23,7 @@ class ReadmeTitleCheck(ReadmeBaseCheck):
     """
     Check https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmetitle
     """
+
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
@@ -40,7 +41,8 @@ class ReadmeTitleCheck(ReadmeBaseCheck):
         regex = r"^# (beman\.[a-zA-Z0-9_]+)(: (.*))?$"
         match = re.match(regex, first_line)
         if not match:
-            self.log(f"The first line of the file '{self.path}' is invalid. It should start with '# <beman.library_name>[: <short_description>]'.")
+            self.log(
+                f"The first line of the file '{self.path}' is invalid. It should start with '# <beman.library_name>[: <short_description>]'.")
             return False
 
         return True
@@ -59,6 +61,7 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
     """
     Check https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmebadges
     """
+
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 

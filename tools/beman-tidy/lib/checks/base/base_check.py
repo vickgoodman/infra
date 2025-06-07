@@ -5,6 +5,7 @@ import os
 import sys
 from ..system.registry import *
 
+
 class BaseCheck(object):
     """
     Base class for checks.
@@ -18,7 +19,8 @@ class BaseCheck(object):
         """
 
         # check name -  e.g. "README.TITLE"
-        self.name = name if name is not None else get_beman_standard_check_name_by_class(self.__class__)
+        self.name = name if name is not None else get_beman_standard_check_name_by_class(
+            self.__class__)
         assert self.name is not None, f"Check name not found for class: {self.__class__.__name__}"
 
         # set type - e.g. "REQUIREMENT" or "RECOMMENDATION"

@@ -1,10 +1,11 @@
 import pytest
 from lib.utils.git import load_beman_standard_config
 
+
 @pytest.fixture
 def mock_repo_info():
     """Return repository information for beman.exemplar library"""
-    return  {
+    return {
         "top_level": ".",
         "name": "exemplar",
         "remote_url": "https://github.com/bemanproject/exemplar",
@@ -14,8 +15,9 @@ def mock_repo_info():
         "unstaged_changes": "",
     }
 
+
 @pytest.fixture
 def mock_beman_standard_check_config():
     """Parse the Beman Standard YAML file and return a dictionary of check configurations"""
-    
+
     return load_beman_standard_config(".beman-standard.yml")
