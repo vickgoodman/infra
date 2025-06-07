@@ -9,18 +9,7 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 `beman-tidy` is a tool used to check and apply [The Beman Standard](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md).
 
 Purpose: The tool is used to `check` (`--dry-run`) and `apply` (`--fix-inplace`) the Beman Standard to a repository.
-
-Expected Development Flow:
-
-* Find a Beman Standard check that is not implemented.
-* Add a new entry to the `.beman-standard.yml` file.
-* Add a new check to the `lib/checks/beman_standard/` directory (find existing checks for inspiration).
-* Add tests for the new check.
-* Run the tests.
-
-Notes:
-* `07.06.2025`: In order to make the best and quickly use of the tool in the entire organization, most of the checks will not support the `--fix-inplace` flag in the first iteration.
-* `07.06.2025`: The Beman Standard is not stable right now, as the tool is still in development and the organization is still in the process of creating the standard. At some point, the standard will be stable. Until then, there may be a loop where implementing a check into the tool may also generates small changes to the standard (e.g., for automated fixes).
+Note: `07.06.2025`: In order to make the best and quickly use of the tool in the entire organization, most of the checks will not support the `--fix-inplace` flag in the first iteration.
 
 ## Installation
 
@@ -101,7 +90,27 @@ Coverage: 17.78% (8/45 checks passed).
 $ ./beman-tidy ../exemplar --fix-inplace --verbose
 ```
 
-## Development
+## beman-tidy Development
+
+Expected Development Flow:
+
+* Find a Beman Standard check that is not implemented.
+* Add a new entry to the `.beman-standard.yml` file.
+* Add a new check to the `lib/checks/beman_standard/` directory (find existing checks for inspiration).
+* Add tests for the new check.
+* Run the tests.
+* Commit the changes.
+
+Requirements:
+* `beman-tidy` must be able to run on Windows, Linux, and macOS, thus it's 100% Python.
+* `beman-tidy` must NOT used internet access.  A local snapshot of the standard is used (check `.beman-standard.yml`).
+* `beman-tidy` must have `verbose` and `non-verbose` modes. Default is `non-verbose`.
+* `beman-tidy` must have `dry-run` and `fix-inplace` modes. Default is `dry-run`.
+* `beman-tidy` must detect types of checks: failed, passed, skipped (not implemented) and print the summary/coverage.
+
+Limitations:
+* `07.06.2025`: `beman-tidy` will not support the `--fix-inplace` flag in the first iteration for most of the checks.
+* `07.06.2025`: `beman-tidy` may generate small changes to the standard (e.g., for automated fixes), while the standard is not stable. Thus, the tool itself may be unstable.
 
 ### Tree structure
 
