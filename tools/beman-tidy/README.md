@@ -11,6 +11,8 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 ## Installation
 
 ```shell
+$ make install
+# or
 $ pip3 install -r requirements.txt
 ```
 
@@ -80,12 +82,16 @@ Coverage: 17.78% (8/45 checks passed).
 Run the tests:
 
 ```shell
-$ python3.9 -m pytest tests/ -v
+$ make install-dev
+pip3 install -r requirements-dev.txt
+...q
+$ make test
+python3 -m pytest tests/ -v
 ========================================================================================================= test session starts =========================================================================================================
-platform darwin -- Python 3.9.6, pytest-8.4.0, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3.9
+platform darwin -- Python 3.9.6, pytest-8.4.0, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3
 cachedir: .pytest_cache
 rootdir: /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy
-collected 3 items                                                                                                                                                                                                                     
+collected 3 items
 
 tests/beman_standard/readme/test_readme.py::test_valid_readme_title PASSED                                                                                                                                                      [ 33%]
 tests/beman_standard/readme/test_readme.py::test_invalid_readme_title PASSED                                                                                                                                                    [ 66%]
