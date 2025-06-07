@@ -21,6 +21,8 @@ $ pip3 install -r requirements.txt
 
 ## Usage
 
+![beman-tidy usage example](./images/usage-example.png)
+
 * Display help:
 ```shell
 $ ./beman-tidy --help
