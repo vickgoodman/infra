@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+# TODO: 07.06.2025: This file is a partial stable snapshot of the standard.
+# TODOs and placeholders will be solved in follow-up PRs when implementing the checks.
+
 # LICENSE
 LICENSE.APPROVED:
     - type: REQUIREMENT
