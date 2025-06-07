@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+
 import pytest
 from pathlib import Path
 from lib.checks.beman_standard.readme import ReadmeTitleCheck
