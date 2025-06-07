@@ -1,4 +1,4 @@
-# beman-tidy: Codebase Bemanification Tool
+# beman-tidy: The Codebase Bemanification Tool
 
 <!--
 SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
