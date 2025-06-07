@@ -22,6 +22,11 @@ jobs:
         run: |
           make -C tools/beman-tidy install-dev
 
+      - name: Run linter
+        run: |
+          echo "Running linter..."
+          make -C tools/beman-tidy lint
+
       - name: Run tests
         run: |
           make -C tools/beman-tidy test

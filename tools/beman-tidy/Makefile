@@ -3,11 +3,28 @@ all: install test
 
 # Install tool:
 install:
-	pip3 install -r requirements.txt
+	@echo "Installing production dependencies..."
+	pip3 install -r requirements.txt &> /dev/null
 
+# Install development dependencies:
 install-dev:
-	pip3 install -r requirements-dev.txt
+	@echo "Installing development dependencies..."
+	pip3 install -r requirements-dev.txt &> /dev/null
+	brew install autopep8 &> /dev/null || apt-get install autopep8 -y &> /dev/null
 
 # Run tests:
 test:
+	@echo "Running tests..."
 	python3 -m pytest tests/ -v
+
+# Run linter:
+self-lint:
+	@echo "Running linter..."
+	@pwd
+	find . -name "*.py" | xargs autopep8 --exit-code --diff
+
+# Run lint-fix:
+self-lint-fix:
+	@echo "Running linter-fix..."
+	@pwd
+	find . -name "*.py" | xargs autopep8 --exit-code --in-place
