@@ -3,6 +3,7 @@
 
 from .base_check import BaseCheck
 import os
+import re
 import sys
 
 
@@ -93,3 +94,12 @@ class FileBaseCheck(BaseCheck):
         Check if the file is empty.
         """
         return len(self.read()) == 0
+
+    def has_content(self, content_to_match):
+        """
+        Check if the file contains the given content (literal string match).
+        """
+        readme_content = self.read()
+        if not readme_content or len(readme_content) == 0:
+            return False
+        return re.search(re.escape(content_to_match), readme_content) is not None

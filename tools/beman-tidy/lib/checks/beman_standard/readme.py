@@ -21,12 +21,11 @@ class ReadmeTitleCheck(ReadmeBaseCheck):
         lines = self.read_lines_strip()
         first_line = lines[0]
 
-        # Match the pattern "# <library_name>[: <short_description>]"
-        regex = r"^# (beman\.[a-zA-Z0-9_]+)(: (.*))?$"
-        match = re.match(regex, first_line)
-        if not match:
+        # Match the pattern "# <self.library_name>[: <short_description>]"
+        regex = rf"^# {re.escape(self.library_name)}: (.*)$"  # noqa: F541
+        if not re.match(regex, first_line):
             self.log(
-                f"The first line of the file '{self.path}' is invalid. It should start with '# <beman.library_name>[: <short_description>]'.")
+                f"The first line of the file '{self.path}' is invalid. It should start with '# {self.library_name}: <short_description>'.")
             return False
 
         return True
@@ -47,21 +46,21 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
 
     def check(self):
         """
-        self.config["values"] contains a fixed set of Bemanba badges.
+        self.config["values"] contains a fixed set of Beman badges.
         """
-        readme_content = self.read()
+        badges = self.config["values"]
+        assert len(badges) == 4  # The number of library maturity model states
 
-        values = self.config["values"]
-        assert len(values) == 4  # The number of library maturity model states
+        # Check if at exactly one of the required badges is present.
+        badge_count = len(
+            [badge for badge in badges if self.has_content(badge)])
+        if badge_count != 1:
+            self.log(
+                f"The file '{self.path}' does not contain exactly one of the required badges from {badges}")
+            return False
 
-        # Check if at least one of the required badges is present.
-        for value in values:
-            if re.search(re.escape(value), readme_content):
-                return True
+        return True
 
-        self.log(
-            f"The file '{self.path}' does not contain any of the required badges: {values}")
-        return False
 
 # TODO README.PURPOSE
 
@@ -70,3 +69,25 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
 
 
 # TODO README.LIBRARY_STATUS
+@register_beman_standard_check("README.LIBRARY_STATUS")
+class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        """
+        self.config["values"] contains a fixed set of Beman library statuses.
+        """
+        statuses = self.config["values"]
+        # The number of library maturity model states
+        assert len(statuses) == 4
+
+        # Check if at least one of the required status values is present.
+        status_count = len(
+            [status for status in statuses if self.has_content(status)])
+        if status_count != 1:
+            self.log(
+                f"The file '{self.path}' does not contain exactly one of the required statuses from {statuses}")
+            return False
+
+        return True
