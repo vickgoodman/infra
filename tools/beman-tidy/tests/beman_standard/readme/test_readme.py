@@ -3,7 +3,7 @@
 
 import pytest
 from pathlib import Path
-from lib.checks.beman_standard.readme import ReadmeTitleCheck
+from lib.checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck
 
 
 def test__README_TITLE__valid(repo_info, beman_standard_check_config, valid_readme_path):
@@ -37,3 +37,28 @@ def test__README_TITLE__fix_invalid(repo_info, beman_standard_check_config, inva
 
     assert check_instance.default_check() is True
     assert check_instance.check() is True
+
+
+def test__README_BADGES__valid(repo_info, beman_standard_check_config, valid_readme_path):
+    """Test that a valid README.md badges passes the check"""
+    check_instance = ReadmeBadgesCheck(repo_info, beman_standard_check_config)
+    check_instance.path = valid_readme_path
+    check_instance.log_enabled = True
+
+    assert check_instance.default_check() is True
+    assert check_instance.check() is True
+
+
+def test__README_BADGES__invalid(repo_info, beman_standard_check_config, invalid_readme_path):
+    """Test that an invalid README.md badges fails the check"""
+    check_instance = ReadmeBadgesCheck(repo_info, beman_standard_check_config)
+    check_instance.path = invalid_readme_path
+
+    assert check_instance.default_check() is True
+    assert check_instance.check() is False
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__README_BADGES__fix_invalid(repo_info, beman_standard_check_config, invalid_readme_path, valid_readme_path):
+    """Test that the fix method corrects an invalid README.md badges"""
+    pass

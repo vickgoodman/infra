@@ -23,6 +23,9 @@ class BaseCheck(object):
             self.__class__)
         assert self.name is not None, f"Check name not found for class: {self.__class__.__name__}"
 
+        # save the check config
+        self.config = beman_standard_check_config[self.name]
+
         # set type - e.g. "REQUIREMENT" or "RECOMMENDATION"
         self.type = beman_standard_check_config[self.name]["type"]
         assert self.type in [

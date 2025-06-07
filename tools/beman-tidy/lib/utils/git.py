@@ -83,15 +83,20 @@ def load_beman_standard_config(path):
         for entry in beman_standard_yml[check_name]:
             if "type" in entry:
                 check_config["type"] = entry["type"]
+            elif "value" in entry:  # e.g., "a string value"
+                check_config["value"] = entry["value"]
+            # e.g., ["a string value", "another string value"]
+            elif "values" in entry:
+                check_config["values"] = entry["values"]
             elif "regex" in entry:
                 # TODO: Implement the regex check.
                 pass
             elif "file_name" in entry:
-                check_config["file_name"] = entry["file_name"]
+                pass
             elif "directory_name" in entry:
-                check_config["directory_name"] = entry["directory_name"]
-            elif "badge_lines" in entry:
-                # TODO: Implement the badge check.
+                pass
+            elif "values" in entry:
+                # TODO: Implement the values check.
                 pass
             elif "status_lines" in entry:
                 # TODO: Implement the status check.

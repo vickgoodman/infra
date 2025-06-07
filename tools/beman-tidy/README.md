@@ -241,3 +241,7 @@ tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_invalid PASS
 * Default setup / mocks:
   * `repo_info`: The repository information (e.g., path, name, etc.). Mocked with hardcoded values of `beman.exemplar`.
   * `beman_standard_check_config`: The Beman Standard configuration file. Actual load of the `.beman-standard.yml` file.
+* Always add at least 3 test cases for each check.
+  * `valid`: The test case for the valid case.
+  * `invalid`: The test case for the invalid case.
+  * `fix_invalid`: The test case for the fix invalid case. If the fix is not (yet) implementable, add a `@pytest.mark.skip(reason="NOT implemented")` decorator to track the progress.

@@ -32,7 +32,7 @@ class FileBaseCheck(BaseCheck):
             self.log(f"The file '{self.path}' does not exist.")
             return False
 
-        if len(self.read_lines()) == 0:
+        if self.is_empty():
             self.log(f"The file '{self.path}' is empty.")
             return False
 
@@ -87,3 +87,9 @@ class FileBaseCheck(BaseCheck):
         lines = self.read_lines()
         lines[line_number] = new_line
         self.write_lines(lines)
+
+    def is_empty(self):
+        """
+        Check if the file is empty.
+        """
+        return len(self.read()) == 0
