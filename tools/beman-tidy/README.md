@@ -11,6 +11,8 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 ## Installation
 
 ```shell
+$ make install
+# or
 $ pip3 install -r requirements.txt
 ```
 
@@ -19,25 +21,20 @@ $ pip3 install -r requirements.txt
 ```shell
 # Display help.
 $ ./tools/beman-tidy/beman-tidy --help
-usage: beman-tidy [-h] --repo-path REPO_PATH [--dry-run | --no-dry-run] [--verbose | --no-verbose]
+usage: beman-tidy repo_path [-h] [--dry-run | --no-dry-run] [--verbose | --no-verbose]
+
+positional arguments:
+  repo_path             path to the repository to check
 
 optional arguments:
   -h, --help            show this help message and exit
-  --repo-path REPO_PATH
-                        path to the repository to check
   --dry-run, --no-dry-run
                         DO NOT try to automatically fix found issues (default: False)
   --verbose, --no-verbose
                         print verbose output for each check (default: False)
 
-# Run beman-tidy on the exemplar repository (automatically fix issues).
-$ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar
-Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
-
-Coverage: 17.78% (8/45 checks passed).
-
 # Run beman-tidy on the exemplar repository (automatically fix issues, verbose output).
-$ ./tools/beman-tidy/beman-tidy --repo-path ../exemplar --verbose
+$ ./tools/beman-tidy/beman-tidy ../exemplar --verbose
 beman-tidy started ...
 
 Running check [REQUIREMENT][TOPLEVEL.CHANGELOG] ...
@@ -78,4 +75,28 @@ beman-tidy finished.
 Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
 
 Coverage: 17.78% (8/45 checks passed).
+```
+
+## Tests
+
+Run the tests:
+
+```shell
+$ make install-dev
+pip3 install -r requirements-dev.txt
+...q
+$ make test
+python3 -m pytest tests/ -v
+========================================================================================================= test session starts =========================================================================================================
+platform darwin -- Python 3.9.6, pytest-8.4.0, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy
+collected 3 items
+
+tests/beman_standard/readme/test_readme.py::test_valid_readme_title PASSED                                                                                                                                                      [ 33%]
+tests/beman_standard/readme/test_readme.py::test_invalid_readme_title PASSED                                                                                                                                                    [ 66%]
+tests/beman_standard/readme/test_readme.py::test_fix_invalid_readme_title PASSED                                                                                                                                                [100%]
+
+========================================================================================================== 3 passed in 0.08s ==========================================================================================================
+
 ```

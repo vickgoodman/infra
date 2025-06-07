@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from .git import download_beman_default_license
 import re
 
 
@@ -20,7 +19,7 @@ def is_beman_snake_case(name):
 
 def match_badges(string):
     """
-    ![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg) ![Continuous Integration Tests](https://github.com/bemanproject/exemplar/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/exemplar/actions/workflows/pre-commit.yml/badge.svg)
+    e.g., ![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg) ![Continuous Integration Tests](https://github.com/bemanproject/exemplar/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/exemplar/actions/workflows/pre-commit.yml/badge.svg)
     """
     if string is None:
         return None
@@ -40,3 +39,4 @@ def skip_empty_lines(lines):
     while len(lines) > 0 and len(lines[0].strip()) == 0:
         lines = lines[1:]
     return lines
+

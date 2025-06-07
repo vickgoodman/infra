@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+from .checks.system.registry import *
+
 from .checks.system.git import *
 from .checks.beman_standard.cmake import *
 from .checks.beman_standard.cpp import *
@@ -12,100 +14,90 @@ from .checks.beman_standard.readme import *
 from .checks.beman_standard.release import *
 from .checks.beman_standard.toplevel import *
 
+red_color = "\033[91m"
+green_color = "\033[92m"
+yellow_color = "\033[93m"
+gray_color = "\033[90m"
+no_color = "\033[0m"
 
-def get_all_implemented_checks():
-    """
-    Get the checks pipeline - it is a list of checks, that need to be run.
-    The list may contain checks that are not from The Beman Standard.
-
-    Returns a list of checks that need to be run.
-    """
-    return [
-        # License
-
-        # General
-
-        # Release
-
-        # Top-level
-
-        # README
-
-        # Cmake
-
-        # CPP
-
-        # Directory
-
-        # File
-    ]
-
-
-def get_beman_standard_check(beman_standard, check_name):
-    """
-    Get The Beman Standard check object from the Beman Standard that matches the check_name.
-    """
-    return next(filter(lambda bs_check: bs_check[0] == check_name, beman_standard), None)
-
-
-def run_checks_pipeline(args, beman_standard):
+def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     """
     Run the checks pipeline for The Beman Standard.
     Read-only checks if args.dry_run is True, otherwise try to fix the issues in-place.
     Verbosity is controlled by args.verbose.
     """
+
+    """ 
+    Helper function to log messages.
+    """
     def log(msg):
         if args.verbose:
             print(msg)
 
-    def run_check(generic_check, log_enabled=args.verbose):
-        bs_check = generic_check(args.repo_info, beman_standard)
-        bs_check.log_enabled = log_enabled
+    """
+    Helper function to run a check.
+    @param check_class: The check class type to run.
+    @param log_enabled: Whether to log the check result.
+    @return: True if the check passed, False otherwise.
+    """
+    def run_check(check_class, log_enabled=args.verbose):
+        check_instance = check_class(args.repo_info, beman_standard_check_config)
+        check_instance.log_enabled = log_enabled
 
         log(
-            f"Running check [{bs_check.type}][{bs_check.name}] ... ")
+            f"Running check [{check_instance.type}][{check_instance.name}] ... ")
 
-        if (bs_check.default_check() and bs_check.check()) or (not args.dry_run and bs_check.fix()):
-            log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {green_passed}\n")
+        if (check_instance.default_check() and check_instance.check()) or (not args.dry_run and check_instance.fix()):
+            log(f"\tcheck [{check_instance.type}][{check_instance.name}] ... {green_color}PASSED{no_color}\n")
             return True
         else:
-            log(f"\tcheck [{bs_check.type}][{bs_check.name}] ... {red_failed}\n")
+            log(f"\tcheck [{check_instance.type}][{check_instance.name}] ... {red_color}FAILED{no_color}\n")
             return False
 
-    red_failed = "\033[91mFAILED\033[0m"
-    green_passed = "\033[92mPASSED\033[0m"
+    """
+    Main pipeline.
+    """
+    def run_pipeline_helper():
+        # Internal checks
+        if args.dry_run:
+            run_check(DisallowFixInplaceAndUnstagedChangesCheck,
+                    log_enabled=False)
 
-    log("beman-tidy started ...\n")
+        implemented_checks = get_registered_beman_standard_checks()
+        cnt_passed = 0
+        cnt_failed = 0
+        cnt_skipped = len(beman_standard_check_config) - len(implemented_checks)
+        cnt_all_beman_standard_checks = len(beman_standard_check_config)
+        for check_name in checks_to_run:
+            if not check_name in implemented_checks:
+                continue
 
-    # Internal checks
-    if args.dry_run:
-        run_check(DisallowFixInplaceAndUnstagedChangesCheck,
-                  log_enabled=False)
+            if run_check(implemented_checks[check_name]):
+                cnt_passed += 1
+            else:
+                cnt_failed += 1
 
-    cnt_passed = 0
-    cnt_failed = 0
-    for generic_check in get_all_implemented_checks():
-        if run_check(generic_check):
-            cnt_passed += 1
-        else:
-            cnt_failed += 1
+        return cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks
 
-    log("\nbeman-tidy finished.\n")
-    print(f"Summary: {cnt_passed} checks {green_passed}, {cnt_failed} checks {red_failed}, {len(beman_standard) - len(get_all_implemented_checks())} skipped (not implemented).")
+
+    log("beman-tidy pipeline started ...\n")
+    cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks = run_pipeline_helper()
+    log("\nbeman-tidy pipeline finished.\n")
+
+    # Always print the summary.
+    print(f"Summary: {green_color} {cnt_passed} checks PASSED{no_color}, {red_color}{cnt_failed} checks FAILED{no_color}, {gray_color}{cnt_skipped} skipped (NOT implemented).{no_color}")
+    
     sys.stdout.flush()
 
+    # Show coverage.
+    print_coverage(cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks)
 
-def print_coverage(repo_info, beman_standard):
+
+def print_coverage(cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks):
     """
     Print The Beman Standard coverage.
     """
-    all_implemented_checks = [generic_check(
-        repo_info, beman_standard) for generic_check in get_all_implemented_checks()]
-    all_bs_implemented_checks = [check for check in all_implemented_checks if get_beman_standard_check(
-        beman_standard, check.name) is not None]
-    passed_bs_checks = [
-        check for check in all_bs_implemented_checks if check.default_check() and check.check()]
-    coverage = round(len(passed_bs_checks) / len(beman_standard) * 100, 2)
+    coverage = round(cnt_passed / cnt_all_beman_standard_checks * 100, 2)
 
     print(
-        f"\n\033[93mCoverage: {coverage}% ({len(passed_bs_checks)}/{len(beman_standard)} checks passed).\033[0m")
+        f"\n{yellow_color}Coverage: {coverage}% ({cnt_passed}/{cnt_all_beman_standard_checks} checks passed).{no_color}")
