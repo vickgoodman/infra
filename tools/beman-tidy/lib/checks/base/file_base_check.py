@@ -79,3 +79,11 @@ class FileBaseCheck(BaseCheck):
         Write the lines to the file.
         """
         self.write("\n".join(lines))
+
+    def replace_line(self, line_number, new_line):
+        """
+        Replace the line at the given line number with the new line.
+        """
+        lines = self.read_lines()
+        lines[line_number] = new_line
+        self.write_lines(lines)

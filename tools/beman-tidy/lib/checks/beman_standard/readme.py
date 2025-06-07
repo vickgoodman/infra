@@ -27,14 +27,20 @@ class ReadmeTitleCheck(ReadmeBaseCheck):
         super().__init__(repo_info, beman_standard_check_config)
 
     def check(self):
-        
+        print(f"self.path: {self.path}")
+        print(f"self.library_name: {self.library_name}")
+
         lines = self.read_lines_strip()
         if len(lines) == 0:
+            self.log(f"The file '{self.path}' is empty.")
             return False
         first_line = lines[0]
 
         # Match the pattern "# <library_name>[: <short_description>]"
-        if not first_line[2:].startswith(f"{self.library_name}:"):
+        regex = r"^# (beman\.[a-zA-Z0-9_]+)(: (.*))?$"
+        match = re.match(regex, first_line)
+        if not match:
+            self.log(f"The first line of the file '{self.path}' is invalid. It should start with '# <beman.library_name>[: <short_description>]'.")
             return False
 
         return True
@@ -43,8 +49,9 @@ class ReadmeTitleCheck(ReadmeBaseCheck):
         """
         Fix the issue if the Beman Standard is not applied.
         """
-        # TODO: Implement the fix.
-        return False
+        new_title_line = f"# {self.library_name}: TODO Short Description"
+        self.replace_line(0, new_title_line)
+        return True
 
 
 @register_beman_standard_check("README.BADGES")

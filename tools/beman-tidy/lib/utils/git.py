@@ -1,11 +1,7 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from .terminal import run_command
-import markdown
 import os
-import re
-import requests
 import sys
 import yaml
 

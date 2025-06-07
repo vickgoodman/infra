@@ -74,3 +74,23 @@ Summary: 8 checks PASSED, 2 checks FAILED, 35 skipped (not implemented).
 
 Coverage: 17.78% (8/45 checks passed).
 ```
+
+## Tests
+
+Run the tests:
+
+```shell
+$ python3.9 -m pytest tests/ -v
+========================================================================================================= test session starts =========================================================================================================
+platform darwin -- Python 3.9.6, pytest-8.4.0, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy
+collected 3 items                                                                                                                                                                                                                     
+
+tests/beman_standard/readme/test_readme.py::test_valid_readme_title PASSED                                                                                                                                                      [ 33%]
+tests/beman_standard/readme/test_readme.py::test_invalid_readme_title PASSED                                                                                                                                                    [ 66%]
+tests/beman_standard/readme/test_readme.py::test_fix_invalid_readme_title PASSED                                                                                                                                                [100%]
+
+========================================================================================================== 3 passed in 0.08s ==========================================================================================================
+
+```
