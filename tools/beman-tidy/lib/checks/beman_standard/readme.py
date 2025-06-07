@@ -6,12 +6,6 @@ from ...utils.string import *
 from ...utils.git import *
 from ..system.registry import register_beman_standard_check
 
-# TODO README.TITLE
-# TODO README.BADGES
-# TODO README.PURPOSE
-# TODO README.IMPLEMENTS
-# TODO README.LIBRARY_STATUS
-
 
 class ReadmeBaseCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
@@ -68,3 +62,11 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
         self.log(
             f"The file '{self.path}' does not contain any of the required badges: {values}")
         return False
+
+# TODO README.PURPOSE
+
+
+# TODO README.IMPLEMENTS
+
+
+# TODO README.LIBRARY_STATUS
