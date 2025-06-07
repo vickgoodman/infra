@@ -199,7 +199,9 @@ $ make lint
 $ make lint-fix
 ```
 
-### Running Tests
+### Testing
+
+#### Running Tests
 
 Run the tests:
 
@@ -224,3 +226,18 @@ tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_invalid PASS
 
 
 ```
+
+#### Writing Tests
+
+* `tests/beman_standard/<check_category>/test_<check_category>.py`: The test file for the `<check_category>` check.
+  * e.g., for `check_category = "readme"` the test file is `tests/beman_standard/readme/test_readme.py`.
+* `test__<check_category>__<test_case_name>()` function inside the test file.
+  * e.g., for `check_category = "readme"` and `test_case_name = "valid"` the function is `test__README_TITLE__valid()`.
+  * e.g., for `check_category = "readme"` and `test_case_name = "invalid"` the function is `test__README_TITLE__invalid()`.
+* `tests/beman_standard/<check_category>/data/`: The data for the tests (e.g., files, directories, etc.).
+  * e.g., for `check_category = "readme"` and `test_case_name = "valid"` the data is in `tests/beman_standard/readme/data/valid/`.
+  * e.g., for `check_category = "readme"` and `test_case_name = "invalid"` the data is in `tests/beman_standard/readme/data/invalid/`.
+  * e.g., for `check_category = "readme"` and `test_case_name = "fix_invalid"` the data may use both `valid` and `invalid` files. It is recommended to not change these files and use temporary copies having suffix `.delete_me` (which are not tracked by git).
+* Default setup / mocks:
+  * `repo_info`: The repository information (e.g., path, name, etc.). Mocked with hardcoded values of `beman.exemplar`.
+  * `beman_standard_check_config`: The Beman Standard configuration file. Actual load of the `.beman-standard.yml` file.
