@@ -208,6 +208,7 @@ $ make install-dev
 pip3 install -r requirements-dev.txt
 ...q
 $ make test
+Running tests...
 python3 -m pytest tests/ -v
 ========================================================================================================= test session starts =========================================================================================================
 platform darwin -- Python 3.9.6, pytest-8.4.0, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3
@@ -215,10 +216,11 @@ cachedir: .pytest_cache
 rootdir: /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy
 collected 3 items
 
-tests/beman_standard/readme/test_readme.py::test_valid_readme_title PASSED                                                                                                                                                      [ 33%]
-tests/beman_standard/readme/test_readme.py::test_invalid_readme_title PASSED                                                                                                                                                    [ 66%]
-tests/beman_standard/readme/test_readme.py::test_fix_invalid_readme_title PASSED                                                                                                                                                [100%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__valid PASSED                                                                                                                                                    [ 33%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__invalid PASSED                                                                                                                                                  [ 66%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_invalid PASSED                                                                                                                                              [100%]
 
 ========================================================================================================== 3 passed in 0.08s ==========================================================================================================
+
 
 ```
