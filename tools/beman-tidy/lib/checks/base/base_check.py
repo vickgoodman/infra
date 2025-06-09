@@ -48,6 +48,12 @@ class BaseCheck(ABC):
         self.library_name = f"beman.{self.repo_name}"
         assert self.library_name is not None
 
+        # set beman library maturity model
+        beman_library_maturity_model = beman_standard_check_config["README.LIBRARY_STATUS"]
+        assert "values" in beman_library_maturity_model
+        assert len(beman_library_maturity_model["values"]) == 4
+        self.beman_library_maturity_model = beman_library_maturity_model["values"]
+
     def default_check(self):
         """
         Checks if this rule is properly initialized.

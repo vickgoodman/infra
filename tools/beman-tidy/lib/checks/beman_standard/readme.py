@@ -82,8 +82,7 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
         self.config["values"] contains a fixed set of Beman library statuses.
         """
         statuses = self.config["values"]
-        # The number of library maturity model states
-        assert len(statuses) == 4
+        assert len(statuses) == len(self.beman_library_maturity_model)
 
         # Check if at least one of the required status values is present.
         status_count = len(
