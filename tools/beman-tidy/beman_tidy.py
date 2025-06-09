@@ -14,14 +14,24 @@ def parse_args():
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("repo_path", help="path to the repository to check",
-                        type=str)
-    parser.add_argument("--fix-inplace", help="Try to automatically fix found issues",
-                        action=argparse.BooleanOptionalAction, type=bool, default=False)
-    parser.add_argument("--verbose", help="print verbose output for each check",
-                        action=argparse.BooleanOptionalAction, type=bool, default=False)
-    parser.add_argument("--checks", help="array of checks to run",
-                        type=str, default=None)
+    parser.add_argument("repo_path", help="path to the repository to check", type=str)
+    parser.add_argument(
+        "--fix-inplace",
+        help="Try to automatically fix found issues",
+        action=argparse.BooleanOptionalAction,
+        type=bool,
+        default=False,
+    )
+    parser.add_argument(
+        "--verbose",
+        help="print verbose output for each check",
+        action=argparse.BooleanOptionalAction,
+        type=bool,
+        default=False,
+    )
+    parser.add_argument(
+        "--checks", help="array of checks to run", type=str, default=None
+    )
     args = parser.parse_args()
 
     args.repo_info = get_repo_info(args.repo_path)
@@ -41,8 +51,11 @@ def main():
         print("Failed to download the beman standard. STOP.")
         return
 
-    checks_to_run = [
-        check for check in beman_standard_check_config] if args.checks is None else args.checks
+    checks_to_run = (
+        [check for check in beman_standard_check_config]
+        if args.checks is None
+        else args.checks
+    )
 
     failed_checks = run_checks_pipeline(
         checks_to_run, args, beman_standard_check_config)

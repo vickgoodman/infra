@@ -22,23 +22,24 @@ $ pip3 install -r requirements.txt
 ## Usage
 
 * Display help:
-```shell
-$ ./beman-tidy --help
-usage: beman-tidy [-h] [--fix-inplace | --no-fix-inplace] [--verbose | --no-verbose] [--checks CHECKS] repo_path
 
-positional arguments:
-  repo_path             path to the repository to check
+  ```console
+  $ uv run beman-tidy --help
+  usage: beman-tidy [-h] [--fix-inplace | --no-fix-inplace] [--verbose | --no-verbose] [--checks CHECKS] repo_path
 
-optional arguments:
-  -h, --help            show this help message and exit
-  --fix-inplace, --no-fix-inplace
-                        Try to automatically fix found issues (default: False)
-  --verbose, --no-verbose
-                        print verbose output for each check (default: False)
-  --checks CHECKS       array of checks to run
-```
+  positional arguments:
+    repo_path             path to the repository to check
 
-* Run beman-tidy on the exemplar repository (default: dry-run mode)
+  optional arguments:
+    -h, --help            show this help message and exit
+    --fix-inplace, --no-fix-inplace
+                          Try to automatically fix found issues (default: False)
+    --verbose, --no-verbose
+                          print verbose output for each check (default: False)
+    --checks CHECKS       array of checks to run
+  ```
+
+* Run beman-tidy on the exemplar repository **(default: dry-run mode)**
 
 ```shell
 $ ./beman-tidy ../../../exemplar
@@ -51,20 +52,20 @@ Coverage: 66.67% (2/3 checks passed).
 $ ./beman-tidy /path/to/exemplar --verbose
 beman-tidy pipeline started ...
 
-Running check [RECOMMENDATION][README.TITLE] ...
-[WARNING        ][README.TITLE             ]: The first line of the file '/Users/dariusn/dev/dn/git/Beman/exemplar/README.md' is invalid. It should start with '# beman.exemplar: <short_description>'.
-	check [RECOMMENDATION][README.TITLE] ... FAILED
+  Running check [RECOMMENDATION][README.TITLE] ...
+  [WARNING        ][README.TITLE             ]: The first line of the file '/Users/dariusn/dev/dn/git/Beman/exemplar/README.md' is invalid. It should start with '# beman.exemplar: <short_description>'.
+    check [RECOMMENDATION][README.TITLE] ... FAILED
 
-Running check [RECOMMENDATION][README.BADGES] ...
-	check [RECOMMENDATION][README.BADGES] ... PASSED
+  Running check [RECOMMENDATION][README.BADGES] ...
+    check [RECOMMENDATION][README.BADGES] ... PASSED
 
-Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
-	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
+  Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
+    check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
 
 
-beman-tidy pipeline finished.
+  beman-tidy pipeline finished.
 
-Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
+  Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
 
 Coverage: 66.67% (2/3 checks passed).
 
@@ -91,9 +92,9 @@ Coverage: 100.0% (3/3 checks passed).
 
 * Run beman-tidy on the exemplar repository (fix issues in-place):
 
-```shell
-$ ./beman-tidy ../exemplar --fix-inplace --verbose
-```
+  ```console
+  $ uv run beman-tidy path/to/exemplar --fix-inplace --verbose
+  ```
 
 ## beman-tidy Development
 
