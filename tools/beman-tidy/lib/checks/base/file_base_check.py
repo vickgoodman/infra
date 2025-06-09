@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from .base_check import BaseCheck
+from abc import ABC, abstractmethod
 import os
 import re
-import sys
+
+from .base_check import BaseCheck
 
 
 class FileBaseCheck(BaseCheck):
@@ -20,6 +21,7 @@ class FileBaseCheck(BaseCheck):
 
     def default_check(self):
         """
+        Override.
         Checks if this rule is properly initialized.
         """
         if not super().default_check():
@@ -38,6 +40,20 @@ class FileBaseCheck(BaseCheck):
             return False
 
         return True
+
+    @abstractmethod
+    def check(self):
+        """
+        Override this method, make it abstract because this is style an abstract class.
+        """
+        pass
+
+    @abstractmethod
+    def fix(self):
+        """
+        Override this method, make it abstract because this is style an abstract class.
+        """
+        pass
 
     def read(self):
         """

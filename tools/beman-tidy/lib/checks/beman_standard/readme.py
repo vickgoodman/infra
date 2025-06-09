@@ -61,6 +61,9 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
 
         return True
 
+    def fix(self):
+        # TODO: Implement the fix.
+        pass
 
 # TODO README.PURPOSE
 
@@ -91,3 +94,7 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
             return False
 
         return True
+
+    def fix(self):
+        # TODO: Implement the fix.
+        pass

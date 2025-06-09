@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-import os
-import sys
+from abc import ABC, abstractmethod
 from ..system.registry import get_beman_standard_check_name_by_class
 
 
-class BaseCheck(object):
+class BaseCheck(ABC):
     """
     Base class for checks.
     This class is not meant to be used directly, it's meant to be subclassed.
@@ -67,21 +66,23 @@ class BaseCheck(object):
 
         return True
 
+    @abstractmethod
     def check(self):
         """
         Checks if the Beman Standard check is already applied.
         - If it's applied, this method should return True.
         - Otherwise, it returns False and self.fix() must be able to fix the issue.
         """
-        raise NotImplementedError(f"[{self.name}] check() not implemented.")
+        pass
 
+    @abstractmethod
     def fix(self):
         """
         Fixes the issue if the Beman Standard is not applied.
         - If check already applied, this method is a no-op and should return True.
         - Otherwise, it will try to apply the check inplace. Returns the status of the fix attempt.
         """
-        return False
+        pass
 
     def log(self, message, enabled=True):
         """
