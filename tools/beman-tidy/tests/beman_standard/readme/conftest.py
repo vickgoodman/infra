@@ -4,6 +4,7 @@
 import os
 import pytest
 from pathlib import Path
+
 from tests.utils.conftest import mock_repo_info, mock_beman_standard_check_config
 
 

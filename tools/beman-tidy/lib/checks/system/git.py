@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from ..base.base_check import BaseCheck
-
 import sys
+
+from ..base.base_check import BaseCheck
 
 
 class DisallowFixInplaceAndUnstagedChangesCheck(BaseCheck):

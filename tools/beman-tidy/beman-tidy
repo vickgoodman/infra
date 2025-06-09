@@ -2,8 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import argparse
-from lib.utils.git import *
-from lib.pipeline import *
+
+from lib.utils.git import get_repo_info, load_beman_standard_config
+from lib.pipeline import run_checks_pipeline
+
 
 def parse_args():
     """
@@ -33,14 +35,17 @@ def main():
     """
     args = parse_args()
 
-    beman_standard_check_config = load_beman_standard_config(".beman-standard.yml")
+    beman_standard_check_config = load_beman_standard_config(
+        ".beman-standard.yml")
     if not beman_standard_check_config or len(beman_standard_check_config) == 0:
         print("Failed to download the beman standard. STOP.")
         return
 
-    checks_to_run = [check for check in beman_standard_check_config] if args.checks is None else args.checks
+    checks_to_run = [
+        check for check in beman_standard_check_config] if args.checks is None else args.checks
 
     run_checks_pipeline(checks_to_run, args, beman_standard_check_config)
+
 
 if __name__ == "__main__":
     main()

@@ -1,18 +1,21 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from .checks.system.registry import *
+import sys
 
-from .checks.system.git import *
-from .checks.beman_standard.cmake import *
-from .checks.beman_standard.cpp import *
-from .checks.beman_standard.directory import *
-from .checks.beman_standard.file import *
-from .checks.beman_standard.general import *
-from .checks.beman_standard.license import *
-from .checks.beman_standard.readme import *
-from .checks.beman_standard.release import *
-from .checks.beman_standard.toplevel import *
+from .checks.system.registry import get_registered_beman_standard_checks
+from .checks.system.git import DisallowFixInplaceAndUnstagedChangesCheck
+
+# Import all the implemented checks.
+# from .checks.beman_standard.cmake import
+# from .checks.beman_standard.cpp import
+# from .checks.beman_standard.directory import
+# from .checks.beman_standard.file import
+# from .checks.beman_standard.general import
+# from .checks.beman_standard.license import
+from .checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck, ReadmeLibraryStatusCheck
+# from .checks.beman_standard.release import
+# from .checks.beman_standard.toplevel import
 
 red_color = "\033[91m"
 green_color = "\033[92m"
@@ -28,7 +31,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     Verbosity is controlled by args.verbose.
     """
 
-    """ 
+    """
     Helper function to log messages.
     """
     def log(msg):

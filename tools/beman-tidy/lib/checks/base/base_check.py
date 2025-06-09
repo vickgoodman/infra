@@ -3,7 +3,7 @@
 
 import os
 import sys
-from ..system.registry import *
+from ..system.registry import get_beman_standard_check_name_by_class
 
 
 class BaseCheck(object):

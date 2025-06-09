@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+import re
+
 from ..base.file_base_check import FileBaseCheck
-from ...utils.string import *
-from ...utils.git import *
 from ..system.registry import register_beman_standard_check
 
 

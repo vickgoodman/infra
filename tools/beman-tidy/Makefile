@@ -25,10 +25,10 @@ test:
 self-lint:
 	@echo "Running linter..."
 	@pwd
-	find . -name "*.py" | xargs autopep8 --exit-code --diff
+	find . -name "*.py" -or -name "beman-tidy" | xargs autopep8 --exit-code --diff
 
 # Run lint-fix:
 self-lint-fix:
 	@echo "Running linter-fix..."
 	@pwd
-	find . -name "*.py" | xargs autopep8 --in-place
+	find . -name "*.py" -or -name "beman-tidy" | xargs autopep8 --in-place
