@@ -51,7 +51,7 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
         badges = self.config["values"]
         assert len(badges) == 4  # The number of library maturity model states
 
-        # Check if at exactly one of the required badges is present.
+        # Check if exactly one of the required badges is present.
         badge_count = len(
             [badge for badge in badges if self.has_content(badge)])
         if badge_count != 1:
