@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 `beman-tidy` is a tool used to check and apply [The Beman Standard](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md).
 
 Purpose: The tool is used to `check` (`--dry-run`) and `apply` (`--fix-inplace`) the Beman Standard to a repository.
-Note: `07.06.2025`: In order to make the best and quickly use of the tool in the entire organization, most of the checks will not support the `--fix-inplace` flag in the first iteration.
+Note: `2025-06-07`: In order to make the best and quickly use of the tool in the entire organization, most of the checks will not support the `--fix-inplace` flag in the first iteration.
 
 ## Installation
 
@@ -110,14 +110,14 @@ Expected Development Flow:
 
 Requirements:
 * `beman-tidy` must be able to run on Windows, Linux, and macOS, thus it's 100% Python.
-* `beman-tidy` must NOT used internet access.  A local snapshot of the standard is used (check `.beman-standard.yml`).
+* `beman-tidy` must NOT use internet access.  A local snapshot of the standard is used (check `.beman-standard.yml`).
 * `beman-tidy` must have `verbose` and `non-verbose` modes. Default is `non-verbose`.
 * `beman-tidy` must have `dry-run` and `fix-inplace` modes. Default is `dry-run`.
 * `beman-tidy` must detect types of checks: failed, passed, skipped (not implemented) and print the summary/coverage.
 
 Limitations:
-* `07.06.2025`: `beman-tidy` will not support the `--fix-inplace` flag in the first iteration for most of the checks.
-* `07.06.2025`: `beman-tidy` may generate small changes to the standard (e.g., for automated fixes), while the standard is not stable. Thus, the tool itself may be unstable.
+* `2025-06-07`: `beman-tidy` will not support the `--fix-inplace` flag in the first iteration for most of the checks.
+* `2025-06-07`: `beman-tidy` may generate small changes to the standard (e.g., for automated fixes), while the standard is not stable. Thus, the tool itself may be unstable.
 
 ### Tree structure
 
