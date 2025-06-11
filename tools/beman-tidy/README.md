@@ -21,8 +21,6 @@ $ pip3 install -r requirements.txt
 
 ## Usage
 
-![beman-tidy usage example](./images/usage-example.png)
-
 * Display help:
 ```shell
 $ ./beman-tidy --help
@@ -43,44 +41,24 @@ optional arguments:
 * Run beman-tidy on the exemplar repository (default: dry-run mode)
 
 ```shell
-# non-verbose mode
 $ ./beman-tidy ../../../exemplar
-Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
+# non-verbose mode
+Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
 
-Coverage: 6.98% (3/43 checks passed).
+Coverage: 66.67% (2/3 checks passed).
 
 # verbose mode - no errors
 $ ./beman-tidy ../../../exemplar --verbose
 beman-tidy pipeline started ...
 
-Running check [RECOMMENDATION][README.TITLE] ...
-	check [RECOMMENDATION][README.TITLE] ... PASSED
-
-Running check [RECOMMENDATION][README.BADGES] ...
-	check [RECOMMENDATION][README.BADGES] ... PASSED
-
-Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
-	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
-
-
-beman-tidy pipeline finished.
-
-Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
-
-Coverage: 6.98% (3/43 checks passed).
-
-# verbose mode - with errors
-$ ./beman-tidy ../../../exemplar --verbose
-beman-tidy pipeline started ...
-
-Running check [RECOMMENDATION][README.TITLE] ...
+Running check [RECOMMENDATION][README.TITLE] ... 
 [WARNING        ][README.TITLE             ]: The first line of the file '/Users/dariusn/dev/dn/git/Beman/exemplar/README.md' is invalid. It should start with '# beman.exemplar: <short_description>'.
 	check [RECOMMENDATION][README.TITLE] ... FAILED
 
-Running check [RECOMMENDATION][README.BADGES] ...
+Running check [RECOMMENDATION][README.BADGES] ... 
 	check [RECOMMENDATION][README.BADGES] ... PASSED
 
-Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
+Running check [RECOMMENDATION][README.LIBRARY_STATUS] ... 
 	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
 
 
@@ -88,7 +66,27 @@ beman-tidy pipeline finished.
 
 Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
 
-Coverage: 4.65% (2/43 checks passed).
+Coverage: 66.67% (2/3 checks passed).
+
+# verbose mode - with errors
+$ ./beman-tidy ../../../exemplar --verbose 
+beman-tidy pipeline started ...
+
+Running check [RECOMMENDATION][README.TITLE] ... 
+	check [RECOMMENDATION][README.TITLE] ... PASSED
+
+Running check [RECOMMENDATION][README.BADGES] ... 
+	check [RECOMMENDATION][README.BADGES] ... PASSED
+
+Running check [RECOMMENDATION][README.LIBRARY_STATUS] ... 
+	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
+
+
+beman-tidy pipeline finished.
+
+Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
+
+Coverage: 100.0% (3/3 checks passed).
 ```
 
 * Run beman-tidy on the exemplar repository (fix issues in-place):

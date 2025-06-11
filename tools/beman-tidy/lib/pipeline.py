@@ -69,11 +69,11 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
                       log_enabled=False)
 
         implemented_checks = get_registered_beman_standard_checks()
+        cnt_all_beman_standard_checks = len(beman_standard_check_config)
+        cnt_implemented_checks = len(implemented_checks)
         cnt_passed = 0
         cnt_failed = 0
-        cnt_skipped = len(beman_standard_check_config) - \
-            len(implemented_checks)
-        cnt_all_beman_standard_checks = len(beman_standard_check_config)
+        cnt_skipped = cnt_all_beman_standard_checks - cnt_implemented_checks
         for check_name in checks_to_run:
             if not check_name in implemented_checks:
                 continue
@@ -83,27 +83,18 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
             else:
                 cnt_failed += 1
 
-        return cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks
+        return cnt_passed, cnt_failed, cnt_skipped, cnt_implemented_checks, cnt_all_beman_standard_checks
 
     log("beman-tidy pipeline started ...\n")
-    cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks = run_pipeline_helper()
+    cnt_passed, cnt_failed, cnt_skipped, cnt_implemented_checks, cnt_all_beman_standard_checks = run_pipeline_helper()
     log("\nbeman-tidy pipeline finished.\n")
 
     # Always print the summary.
     print(f"Summary: {green_color} {cnt_passed} checks PASSED{no_color}, {red_color}{cnt_failed} checks FAILED{no_color}, {gray_color}{cnt_skipped} skipped (NOT implemented).{no_color}")
 
-    sys.stdout.flush()
-
-    # Show coverage.
-    print_coverage(cnt_passed, cnt_failed, cnt_skipped,
-                   cnt_all_beman_standard_checks)
-
-
-def print_coverage(cnt_passed, cnt_failed, cnt_skipped, cnt_all_beman_standard_checks):
-    """
-    Print The Beman Standard coverage.
-    """
-    coverage = round(cnt_passed / cnt_all_beman_standard_checks * 100, 2)
-
+    # Always print the coverage.
+    coverage = round(cnt_passed / cnt_implemented_checks * 100, 2)
     print(
-        f"\n{yellow_color}Coverage: {coverage}% ({cnt_passed}/{cnt_all_beman_standard_checks} checks passed).{no_color}")
+        f"\n{yellow_color}Coverage: {coverage}% ({cnt_passed}/{cnt_implemented_checks} checks passed).{no_color}")
+
+    sys.stdout.flush()
