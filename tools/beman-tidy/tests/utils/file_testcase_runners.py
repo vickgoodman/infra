@@ -9,10 +9,10 @@ def file_testcase_run(file_path, check_class, repo_info, beman_standard_check_co
     check_instance.path = file_path
     check_instance.log_level = True
 
-    assert check_instance.default_check(
-    ) is True, f"Default check failed for {file_path}"
+    assert check_instance.pre_check(
+    ) is True, f"[{check_instance.__name__}] pre_check() failed for {file_path}"
     assert check_instance.check(
-    ) is expected_result, f"Check failed for {file_path}"
+    ) is expected_result, f"[{check_instance.__name__}] check() failed for {file_path}"
 
 
 def file_testcase_run_valid(file_path, check_class, repo_info, beman_standard_check_config):
@@ -30,12 +30,12 @@ def file_testcase_run_fix_invalid(invalid_file_path, check_class, repo_info, bem
     check_instance.path = f"{invalid_file_path}.delete_me"
     check_instance.write(invalid_file_path.read_text())
 
-    assert check_instance.default_check() is True
+    assert check_instance.pre_check() is True
     assert check_instance.check() is False
 
     assert check_instance.fix() is True
 
-    assert check_instance.default_check() is True
+    assert check_instance.pre_check() is True
     assert check_instance.check() is True
 
     # Delete the temporary file

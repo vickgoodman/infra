@@ -52,7 +52,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         log(
             f"Running check [{check_instance.type}][{check_instance.name}] ... ")
 
-        if (check_instance.default_check() and check_instance.check()) or (args.fix_inplace and check_instance.fix()):
+        if (check_instance.pre_check() and check_instance.check()) or (args.fix_inplace and check_instance.fix()):
             log(f"\tcheck [{check_instance.type}][{check_instance.name}] ... {green_color}PASSED{no_color}\n")
             return True
         else:

@@ -19,12 +19,12 @@ class FileBaseCheck(BaseCheck):
         # set path - e.g. "README.md"
         self.path = os.path.join(repo_info["top_level"], relative_path)
 
-    def default_check(self):
+    def pre_check(self):
         """
         Override.
-        Checks if this rule is properly initialized.
+        Pre-checks if the file exists and is not empty.
         """
-        if not super().default_check():
+        if not super().pre_check():
             return False
 
         if self.path is None:

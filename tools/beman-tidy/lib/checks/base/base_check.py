@@ -54,9 +54,10 @@ class BaseCheck(ABC):
         assert len(beman_library_maturity_model["values"]) == 4
         self.beman_library_maturity_model = beman_library_maturity_model["values"]
 
-    def default_check(self):
+    def pre_check(self):
         """
-        Checks if this rule is properly initialized.
+        Pre-checks if this rule is properly initialized.
+        Usually, this is internal use only.
         """
         if self.name is None:
             self.log("The name is not set.")
