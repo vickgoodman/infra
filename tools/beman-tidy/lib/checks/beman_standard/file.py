@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from ..base.file_base_check import FileBaseCheck
-
 # [FILE.*] checks category.
 # All checks in this file extend the FileBaseCheck class.
 #

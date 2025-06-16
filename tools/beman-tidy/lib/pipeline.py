@@ -13,7 +13,7 @@ from .checks.system.git import DisallowFixInplaceAndUnstagedChangesCheck
 # from .checks.beman_standard.file import
 # from .checks.beman_standard.general import
 # from .checks.beman_standard.license import
-from .checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck
+from .checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck, ReadmeLibraryStatusCheck  # noqa: F401
 # from .checks.beman_standard.release import
 # from .checks.beman_standard.toplevel import
 
@@ -77,7 +77,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         cnt_failed = 0
         cnt_skipped = cnt_all_beman_standard_checks - cnt_implemented_checks
         for check_name in checks_to_run:
-            if not check_name in implemented_checks:
+            if check_name not in implemented_checks:
                 continue
 
             if run_check(implemented_checks[check_name]):

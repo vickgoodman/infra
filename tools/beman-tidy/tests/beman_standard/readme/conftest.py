@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-import os
 import pytest
 from pathlib import Path
 
-from tests.utils.conftest import mock_repo_info, mock_beman_standard_check_config
+from tests.utils.conftest import mock_repo_info, mock_beman_standard_check_config  # noqa: F401
 
 
 @pytest.fixture
