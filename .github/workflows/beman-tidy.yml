@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-name: Run Beman Tidy Tests
+name: beman-tidy tests
 
 on:
   workflow_dispatch:
