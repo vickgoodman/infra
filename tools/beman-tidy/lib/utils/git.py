@@ -58,7 +58,14 @@ def get_repo_info(path):
         sys.exit(1)
 
 
-def load_beman_standard_config(path):
+def get_beman_standard_config_path():
+    """
+    Get the path to the Beman Standard YAML configuration file.
+    """
+    return os.path.join(os.path.dirname(__file__), "..", "..", ".beman-standard.yml")
+
+
+def load_beman_standard_config(path=get_beman_standard_config_path()):
     """
     Load the Beman Standard YAML configuration file from the given path.
     """
