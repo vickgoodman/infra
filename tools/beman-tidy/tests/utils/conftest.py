@@ -23,4 +23,4 @@ def mock_repo_info():
 def mock_beman_standard_check_config():
     """Parse the Beman Standard YAML file and return a dictionary of check configurations"""
 
-    return load_beman_standard_config(".beman-standard.yml")
+    return load_beman_standard_config()
