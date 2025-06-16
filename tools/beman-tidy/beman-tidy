@@ -7,6 +7,7 @@ import sys
 from lib.utils.git import get_repo_info, load_beman_standard_config
 from lib.pipeline import run_checks_pipeline
 
+
 def parse_args():
     """
     Parse the CLI arguments.
@@ -43,8 +44,10 @@ def main():
     checks_to_run = [
         check for check in beman_standard_check_config] if args.checks is None else args.checks
 
-    failed_checks = run_checks_pipeline(checks_to_run, args, beman_standard_check_config)
+    failed_checks = run_checks_pipeline(
+        checks_to_run, args, beman_standard_check_config)
     sys.exit(failed_checks)
+
 
 if __name__ == "__main__":
     main()
