@@ -29,6 +29,8 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     Run the checks pipeline for The Beman Standard.
     Read-only checks if args.fix_inplace is False, otherwise try to fix the issues in-place.
     Verbosity is controlled by args.verbose.
+
+    @return: The number of failed checks.
     """
 
     """
@@ -98,3 +100,5 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         f"\n{yellow_color}Coverage: {coverage}% ({cnt_passed}/{cnt_implemented_checks} checks passed).{no_color}")
 
     sys.stdout.flush()
+
+    return cnt_failed
