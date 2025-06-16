@@ -58,6 +58,8 @@ class BaseCheck(ABC):
         """
         Pre-checks if this rule is properly initialized.
         Usually, this is internal use only.
+
+        Note: This method is internally called by the framework.
         """
         if self.name is None:
             self.log("The name is not set.")
@@ -79,6 +81,8 @@ class BaseCheck(ABC):
         Checks if the Beman Standard check is already applied.
         - If it's applied, this method should return True.
         - Otherwise, it returns False and self.fix() must be able to fix the issue.
+
+        Note: This methods must be always implemented.
         """
         pass
 
@@ -88,6 +92,9 @@ class BaseCheck(ABC):
         Fixes the issue if the Beman Standard is not applied.
         - If check already applied, this method is a no-op and should return True.
         - Otherwise, it will try to apply the check inplace. Returns the status of the fix attempt.
+
+        Note: The subclasses might not implement more than a stub if the fix method
+        is too difficult to implement or does not make sense.
         """
         pass
 
