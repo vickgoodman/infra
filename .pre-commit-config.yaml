@@ -1,9 +1,0 @@
-repos:
-  - repo: local
-    hooks:
-      - id: beman-tidy
-        name: Run beman-tidy on repo
-        entry: ./tools/beman-tidy/beman-tidy .
-        language: system
-        pass_filenames: false
-        always_run: true
