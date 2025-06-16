@@ -3,6 +3,12 @@
 
 from ..base.file_base_check import FileBaseCheck
 
-# TODO TOPLEVEL.CMAKE
-# TODO TOPLEVEL.LICENSE
-# TODO TOPLEVEL.README
+# [TOPLEVEL.*] checks category.
+
+# TODO TOPLEVEL.CMAKE - use CMakeBaseCheck
+
+
+# TODO TOPLEVEL.LICENSE - use FileBaseCheck
+
+
+# TODO TOPLEVEL.README - use ReadmeBaseCheck
