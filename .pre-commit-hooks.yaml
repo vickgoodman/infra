@@ -1,5 +1,5 @@
 - id: beman-tidy
-  name: Run beman-tidy on repo
+  name: "beman-tidy: bemanification your repo"
   entry: ./tools/beman-tidy/beman-tidy
   language: script
   pass_filenames: false
