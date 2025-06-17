@@ -13,7 +13,7 @@ from .checks.system.git import DisallowFixInplaceAndUnstagedChangesCheck
 # from .checks.beman_standard.file import
 # from .checks.beman_standard.general import
 # from .checks.beman_standard.license import
-from .checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck, ReadmeLibraryStatusCheck  # noqa: F401
+from .checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck  # noqa: F401
 # from .checks.beman_standard.release import
 # from .checks.beman_standard.toplevel import
 
