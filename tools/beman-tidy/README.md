@@ -13,11 +13,14 @@ Note: `2025-06-07`: In order to make the best and quickly use of the tool in the
 
 ## Installation
 
-```shell
-$ make install
-# or
-$ pip3 install -r requirements.txt
-```
+- The current recommended workflow relies on [Astral's uv](https://docs.astral.sh/uv/)
+- However, we provide a [PEP 751](https://peps.python.org/pep-0751/) `pylock.toml`, so don't feel forced to use uv
+- You can use beman-tidy as a pre-commit hook or install it on your system using `pipx`
+
+  ```console
+  $ uv build
+  $ pipx install path/to/wheel
+  ```
 
 ## Usage
 
@@ -41,54 +44,57 @@ $ pip3 install -r requirements.txt
 
 * Run beman-tidy on the exemplar repository **(default: dry-run mode)**
 
-```shell
-$ ./beman-tidy ../../../exemplar
-# non-verbose mode
-Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
+  ```shell
+  $ uv run beman-tidy path/to/exemplar
+  # non-verbose mode
+  Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
 
-Coverage: 66.67% (2/3 checks passed).
+  Coverage: 66.67% (2/3 checks passed).
 
-# verbose mode - no errors
-$ ./beman-tidy /path/to/exemplar --verbose
-beman-tidy pipeline started ...
+  # verbose mode - no errors
+  $ ./beman-tidy /path/to/exemplar --verbose
+  beman-tidy pipeline started ...
+
+    Running check [RECOMMENDATION][README.TITLE] ...
+    [WARNING        ][README.TITLE             ]: The first line of the file '/Users/dariusn/dev/dn/git/Beman/exemplar/README.md' is invalid. It should start with '# beman.exemplar: <short_description>'.
+      check [RECOMMENDATION][README.TITLE] ... FAILED
+
+    Running check [RECOMMENDATION][README.BADGES] ...
+      check [RECOMMENDATION][README.BADGES] ... PASSED
+
+    Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
+      check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
+
+
+    beman-tidy pipeline finished.
+
+    Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
+
+  Coverage: 66.67% (2/3 checks passed).
+  ```
+
+- Run beman-tidy in verbose mode
+
+  ```console
+  $ ./beman-tidy /path/to/exemplar --verbose
+  beman-tidy pipeline started ...
 
   Running check [RECOMMENDATION][README.TITLE] ...
-  [WARNING        ][README.TITLE             ]: The first line of the file '/Users/dariusn/dev/dn/git/Beman/exemplar/README.md' is invalid. It should start with '# beman.exemplar: <short_description>'.
-    check [RECOMMENDATION][README.TITLE] ... FAILED
+  	check [RECOMMENDATION][README.TITLE] ... PASSED
 
   Running check [RECOMMENDATION][README.BADGES] ...
-    check [RECOMMENDATION][README.BADGES] ... PASSED
+  	check [RECOMMENDATION][README.BADGES] ... PASSED
 
   Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
-    check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
+  	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
 
 
   beman-tidy pipeline finished.
 
-  Summary:  2 checks PASSED, 1 checks FAILED, 40 skipped (NOT implemented).
+  Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
 
-Coverage: 66.67% (2/3 checks passed).
-
-# verbose mode - with errors
-$ ./beman-tidy /path/to/exemplar --verbose
-beman-tidy pipeline started ...
-
-Running check [RECOMMENDATION][README.TITLE] ...
-	check [RECOMMENDATION][README.TITLE] ... PASSED
-
-Running check [RECOMMENDATION][README.BADGES] ...
-	check [RECOMMENDATION][README.BADGES] ... PASSED
-
-Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
-	check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
-
-
-beman-tidy pipeline finished.
-
-Summary:  3 checks PASSED, 0 checks FAILED, 40 skipped (NOT implemented).
-
-Coverage: 100.0% (3/3 checks passed).
-```
+  Coverage: 100.0% (3/3 checks passed).
+  ```
 
 * Run beman-tidy on the exemplar repository (fix issues in-place):
 
