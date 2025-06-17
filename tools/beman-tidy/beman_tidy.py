@@ -19,14 +19,12 @@ def parse_args():
         "--fix-inplace",
         help="Try to automatically fix found issues",
         action=argparse.BooleanOptionalAction,
-        type=bool,
         default=False,
     )
     parser.add_argument(
         "--verbose",
         help="print verbose output for each check",
         action=argparse.BooleanOptionalAction,
-        type=bool,
         default=False,
     )
     parser.add_argument(
