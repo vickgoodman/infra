@@ -34,13 +34,11 @@ Limitations:
 
 ## Linting
 
-Run the linter:
+Run the linter on the beman-tidy's codebase:
 
 ```shell
-# Run the linter - dry run.
-$ make lint
-# Run the linter - fix issues.
-$ make lint-fix
+$ uv run ruff check --diff
+$ uv run ruff check --fix
 ```
 
 ## Testing
@@ -50,25 +48,22 @@ $ make lint-fix
 Run the tests:
 
 ```shell
-$ make install-dev
-pip3 install -r requirements-dev.txt
-...q
-$ make test
-Running tests...
-python3 -m pytest tests/ -v
-========================================================================================================= test session starts =========================================================================================================
-platform darwin -- Python 3.9.6, pytest-8.4.0, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3
+$ uv run pytest -v
+================================================================================================================ test session starts ================================================================================================================
+platform darwin -- Python 3.14.0b2, pytest-8.4.0, pluggy-1.6.0 -- /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy/.venv/bin/python
 cachedir: .pytest_cache
 rootdir: /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy
-collected 3 items
+configfile: pyproject.toml
+collected 6 items
 
-tests/beman_standard/readme/test_readme.py::test__README_TITLE__valid PASSED                                                                                                                                                    [ 33%]
-tests/beman_standard/readme/test_readme.py::test__README_TITLE__invalid PASSED                                                                                                                                                  [ 66%]
-tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_invalid PASSED                                                                                                                                              [100%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__valid PASSED                                                                                                                                                                  [ 16%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__invalid PASSED                                                                                                                                                                [ 33%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_invalid PASSED                                                                                                                                                            [ 50%]
+tests/beman_standard/readme/test_readme.py::test__README_BADGES__valid PASSED                                                                                                                                                                 [ 66%]
+tests/beman_standard/readme/test_readme.py::test__README_BADGES__invalid PASSED                                                                                                                                                               [ 83%]
+tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_invalid SKIPPED (NOT implemented)                                                                                                                                        [100%]
 
-========================================================================================================== 3 passed in 0.08s ==========================================================================================================
-
-
+=========================================================================================================== 5 passed, 1 skipped in 0.07s ============================================================================================================
 ```
 
 ### Writing Tests

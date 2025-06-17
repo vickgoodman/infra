@@ -43,3 +43,6 @@ __pycache__/
 *.pyzw
 *.pyzwz
 *.delete_me
+
+# MAC OS
+*.DS_Store
