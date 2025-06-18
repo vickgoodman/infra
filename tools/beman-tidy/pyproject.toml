@@ -3,13 +3,10 @@ name = "beman-tidy"
 version = "0.1.0"
 description = "The Codebase Bemanification Tool"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 authors = [{ name = "Darius Neațu", email = "neatudarius@gmail.com" }]
 maintainers = [{ name = "Rishyak", email = "hello@rishyak.com" }]
-dependencies = [
-    "gitpython==3.1.44",
-    "pyyaml==6.0.2",
-]
+dependencies = ["gitpython==3.1.44", "pyyaml==6.0.2"]
 
 [build-system]
 requires = ["flit_core >=3.2,<4"]
