@@ -22,39 +22,25 @@ Limitations:
 
 ## Tree structure
 
-```shell
-$ ls -l
-total 104
--rw-r--r--  1 dariusn  staff   4257 Jun 18 08:15 README.md
-drwxr-xr-x  7 dariusn  staff    224 Jun 18 08:29 beman_tidy
-drwxr-xr-x  3 dariusn  staff     96 Jun 18 08:25 docs
--rw-r--r--  1 dariusn  staff  19490 Jun 18 08:15 pylock.toml
--rw-r--r--  1 dariusn  staff    582 Jun 18 08:15 pyproject.toml
-drwxr-xr-x  7 dariusn  staff    224 Jun 18 08:29 tests
--rw-r--r--  1 dariusn  staff  18975 Jun 18 08:15 uv.lock
-```
-
-* `beman-tidy`: All production code.
-* `docs/`: The internal documentation for the `beman-tidy` tool.
 * `README.md`: The public documentation for the `beman-tidy` tool.
-* `beman_tidy/`: The package for the `beman-tidy` tool.
-   * `beman_tidy/cli.py`: The CLI for the `beman-tidy` tool.
-   * `beman_tidy/lib/`: The library for the `beman-tidy` tool.
-      * `beman_tidy/lib/checks/`: The checks for the `beman-tidy` tool.
-      * `beman_tidy/lib/utils/`: The utility functions for the `beman-tidy` tool.
-      * `beman_tidy/lib/pipeline.py`: The pipeline for the `beman-tidy` tool.
-   * `beman_tidy/.beman-standard.yml`: Stable version of the standard; the tool does not fetch the latest unstable version of the standard.
-* `tests/`: The tests for the `beman-tidy` tool.
+* `docs/`: The internal documentation.
+* `beman_tidy/`: The package/production code for the tool.
+   * `beman_tidy/cli.py`: The CLI / entry point for the tool.
+   * `beman_tidy/lib/`: The library for the tool.
+      * `beman_tidy/lib/checks/`: The checks for the tool.
+      * `beman_tidy/lib/pipeline.py`: The checks pipeline for the `beman-tidy` tool.
+   * `beman_tidy/.beman-standard.yml`: Stable (offline)version of the standard.
+* `tests/`: Unit tests for the tool.
    * Structure is similar to the `beman_tidy/` directory.
    * `pytest` is used for testing.
 
 ## Adding a new check
 
-* Add the check to the `beman_tidy/lib/checks/beman_standard/` directory.
-* Add the check to the `beman_tidy/lib/pipeline.py` file.
-* Add the check to the `tests/beman_standard/` directory.
-* Add the check to the `docs/dev-guide.md` file.
-* Add the check to the `README.md` file.
+* Add the check to the `beman_tidy/lib/checks/beman_standard/` directory (e.g., `README.*` -> `beman_tidy/lib/checks/beman_standard/readme.py`).
+* Import the check to the `beman_tidy/lib/pipeline.py` file (e.g., `from .checks.beman_standard.readme import ReadmeTitleCheck`).
+* Add tests for the check to the `tests/beman_standard/` directory (e.g., `README.*` -> `tests/lib/checks/beman_standard/readme/test_readme.py`).
+* Updates docs if needed in `README.md` and `docs/dev-guide.md` files.
+* Update the `beman_tidy/cli.py` file if the public API has changed.
 
 Check this PR example: [beman-tidy: add check - README.LIBRARY_STATUS](https://github.com/bemanproject/infra/pull/35).
 
