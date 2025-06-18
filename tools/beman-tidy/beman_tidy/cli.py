@@ -28,6 +28,12 @@ def parse_args():
         default=False,
     )
     parser.add_argument(
+        "--require-all",
+        help="all checks are required regardless of their type (e.g., all RECOMMENDATIONs become REQUIREMENTs)",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+    )
+    parser.add_argument(
         "--checks", help="array of checks to run", type=str, default=None
     )
     args = parser.parse_args()
