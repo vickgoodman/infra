@@ -6,16 +6,16 @@ import sys
 from .checks.system.registry import get_registered_beman_standard_checks
 from .checks.system.git import DisallowFixInplaceAndUnstagedChangesCheck
 
-# Import all the implemented checks.
-# from .checks.beman_standard.cmake import
-# from .checks.beman_standard.cpp import
-# from .checks.beman_standard.directory import
-# from .checks.beman_standard.file import
-# from .checks.beman_standard.general import
-# from .checks.beman_standard.license import
-from .checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck, ReadmeLibraryStatusCheck # noqa: F401
-# from .checks.beman_standard.release import
-# from .checks.beman_standard.toplevel import
+# import all the implemented checks.
+from .checks.beman_standard.cmake import *  # noqa: F401
+from .checks.beman_standard.cpp import *  # noqa: F401
+from .checks.beman_standard.directory import *  # noqa: F401
+from .checks.beman_standard.file import *  # noqa: F401
+from .checks.beman_standard.general import *  # noqa: F401
+from .checks.beman_standard.license import *  # noqa: F401
+from .checks.beman_standard.readme import *  # noqa: F401
+from .checks.beman_standard.release import *  # noqa: F401
+from .checks.beman_standard.toplevel import *  # noqa: F401
 
 red_color = "\033[91m"
 green_color = "\033[92m"
