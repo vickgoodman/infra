@@ -48,7 +48,7 @@ $ uv run ruff check --fix
 Run the tests:
 
 ```shell
-$ uv run pytest -v
+$ uv run pytest
 ================================================================================================================ test session starts ================================================================================================================
 platform darwin -- Python 3.14.0b2, pytest-8.4.0, pluggy-1.6.0 -- /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy/.venv/bin/python
 cachedir: .pytest_cache
@@ -84,3 +84,13 @@ tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_invalid SKI
   * `valid`: The test case for the valid case.
   * `invalid`: The test case for the invalid case.
   * `fix_invalid`: The test case for the fix invalid case. If the fix is not (yet) implementable, add a `@pytest.mark.skip(reason="NOT implemented")` decorator to track the progress.
+
+
+## Changing dependencies
+
+* Add / update the dependency to the `pyproject.toml` file.
+* Run `uv clean` to make sure the dependencies are updated.
+* Run `uv sync && uv export -o pylock.toml` to update the dependencies.
+* Run `uv build` to build the wheel.
+* Run `uv run beman-tidy --help` to check if the new dependency is available.
+* Commit the changes from `pyproject.toml`, `pylock.toml` and `uv.lock`.

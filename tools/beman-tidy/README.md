@@ -32,7 +32,7 @@ Building wheel from source distribution...
 Successfully built dist/beman_tidy-0.1.0.tar.gz
 Successfully built dist/beman_tidy-0.1.0-py3-none-any.whl
 
-$ pipx install dist/beman_tidy-0.1.0-py3-none-any.whl --force
+$ pipx install dist/beman_tidy-0.1.0-py3-none-any.whl
 Installing to existing venv 'beman-tidy'
   installed package beman-tidy 0.1.0, installed using Python 3.13.4
   These apps are now globally available
