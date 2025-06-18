@@ -8,18 +8,21 @@ from tests.utils.file_testcase_runners import file_testcases_run_valid, file_tes
 # Actual tested checks.
 from beman_tidy.lib.checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck
 
+test_data_prefix = "tests/lib/checks/beman_standard/readme/data"
+valid_prefix = f"{test_data_prefix}/valid"
+invalid_prefix = f"{test_data_prefix}/invalid"
 
 def test__README_TITLE__valid(repo_info, beman_standard_check_config):
     """Test that a valid README.md title passes the check"""
     valid_readme_paths = [
         # Title: # beman.exemplar: A Beman Library Exemplar
-        Path("tests/beman_standard/readme/data/valid/README-v1.md"),
+        Path(f"{valid_prefix}/README-v1.md"),
         # Title: # beman.exemplar: Another Beman Library
-        Path("tests/beman_standard/readme/data/valid/README-v2.md"),
+        Path(f"{valid_prefix}/README-v2.md"),
         # Title: # beman.exemplar: Awesome Beman Library
-        Path("tests/beman_standard/readme/data/valid/README-v3.md"),
+        Path(f"{valid_prefix}/README-v3.md"),
         # Title: # beman.exemplar: The Most Awesome Beman Library
-        Path("tests/beman_standard/readme/data/valid/README-v4.md"),
+        Path(f"{valid_prefix}/README-v4.md"),
     ]
 
     file_testcases_run_valid(valid_readme_paths, ReadmeTitleCheck,
@@ -29,11 +32,11 @@ def test__README_TITLE__valid(repo_info, beman_standard_check_config):
 def test__README_TITLE__invalid(repo_info, beman_standard_check_config):
     """Test that an invalid README.md title fails the check"""
     invalid_readme_paths = [
-        Path("tests/beman_standard/readme/data/invalid/invalid.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v1.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v2.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v3.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v4.md"),
+        Path(f"{invalid_prefix}/invalid.md"),
+        Path(f"{invalid_prefix}/invalid-title-v1.md"),
+        Path(f"{invalid_prefix}/invalid-title-v2.md"),
+        Path(f"{invalid_prefix}/invalid-title-v3.md"),
+        Path(f"{invalid_prefix}/invalid-title-v4.md"),
     ]
 
     file_testcases_run_invalid(invalid_readme_paths, ReadmeTitleCheck,
@@ -43,10 +46,10 @@ def test__README_TITLE__invalid(repo_info, beman_standard_check_config):
 def test__README_TITLE__fix_invalid(repo_info, beman_standard_check_config):
     """Test that the fix method corrects an invalid README.md title"""
     invalid_readme_paths = [
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v1.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v2.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v3.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-title-v4.md"),
+        Path(f"{invalid_prefix}/invalid-title-v1.md"),
+        Path(f"{invalid_prefix}/invalid-title-v2.md"),
+        Path(f"{invalid_prefix}/invalid-title-v3.md"),
+        Path(f"{invalid_prefix}/invalid-title-v4.md"),
     ]
 
     file_testcases_run_fix_invalid(
@@ -56,10 +59,10 @@ def test__README_TITLE__fix_invalid(repo_info, beman_standard_check_config):
 def test__README_BADGES__valid(repo_info, beman_standard_check_config, valid_readme_path):
     """Test that a valid README.md badges passes the check"""
     valid_readme_paths = [
-        Path("tests/beman_standard/readme/data/valid/README-v1.md"),
-        Path("tests/beman_standard/readme/data/valid/README-v2.md"),
-        Path("tests/beman_standard/readme/data/valid/README-v3.md"),
-        Path("tests/beman_standard/readme/data/valid/README-v4.md"),
+        Path(f"{valid_prefix}/README-v1.md"),
+        Path(f"{valid_prefix}/README-v2.md"),
+        Path(f"{valid_prefix}/README-v3.md"),
+        Path(f"{valid_prefix}/README-v4.md"),
     ]
 
     file_testcases_run_valid(valid_readme_paths, ReadmeBadgesCheck,
@@ -69,10 +72,10 @@ def test__README_BADGES__valid(repo_info, beman_standard_check_config, valid_rea
 def test__README_BADGES__invalid(repo_info, beman_standard_check_config, invalid_readme_path):
     """Test that an invalid README.md badges fails the check"""
     invalid_readme_paths = [
-        Path("tests/beman_standard/readme/data/invalid/invalid.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-badge-v1.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-badge-v2.md"),
-        Path("tests/beman_standard/readme/data/invalid/invalid-badge-v3.md"),
+        Path(f"{invalid_prefix}/invalid.md"),
+        Path(f"{invalid_prefix}/invalid-badge-v1.md"),
+        Path(f"{invalid_prefix}/invalid-badge-v2.md"),
+        Path(f"{invalid_prefix}/invalid-badge-v3.md"),
     ]
 
     file_testcases_run_invalid(invalid_readme_paths, ReadmeBadgesCheck,
