@@ -22,15 +22,27 @@ Limitations:
 
 ## Tree structure
 
-* `beman-tidy`: A Python script that is used to check and apply the Beman Standard to a repository.
-* `.beman-standard.yml`: Stable version of the standard; the tool does not fetch the latest unstable version of the standard.
-* `lib/`: The library for the beman-tidy tool (e.g, checks, utils, etc.).
-   * `lib/checks/beman_standard/`: Direct implementation of the checks from the standard (e.g, `lib/checks/beman_standard/readme.py` is the implementation of the `README.md` checks).
-   * `lib/checks/base/`: Base classes for the checks - not to be used directly.
-   * `lib/pipeline.py`: The pipeline for the `beman-tidy` tool.
-* `tests/`: The tests for the beman-tidy tool.
-   * Structure is similar to the `lib/` directory.
+* `README.md`: The public documentation for the `beman-tidy` tool.
+* `docs/`: The internal documentation.
+* `beman_tidy/`: The package/production code for the tool.
+   * `beman_tidy/cli.py`: The CLI / entry point for the tool.
+   * `beman_tidy/lib/`: The library for the tool.
+      * `beman_tidy/lib/checks/`: The checks for the tool.
+      * `beman_tidy/lib/pipeline.py`: The checks pipeline for the `beman-tidy` tool.
+   * `beman_tidy/.beman-standard.yml`: Stable (offline)version of the standard.
+* `tests/`: Unit tests for the tool.
+   * Structure is similar to the `beman_tidy/` directory.
    * `pytest` is used for testing.
+
+## Adding a new check
+
+* Add the check to the `beman_tidy/lib/checks/beman_standard/` directory (e.g., `README.*` checks will most likely go to a path similar to `beman_tidy/lib/checks/beman_standard/readme.py`).
+* Import the check to the `beman_tidy/lib/pipeline.py` file (e.g., `from .checks.beman_standard.readme import ReadmeTitleCheck`).
+* Add tests for the check to the `tests/beman_standard/` directory (e.g., `README.*` checks tests will most likely go to a path similar to `tests/lib/checks/beman_standard/readme/test_readme.py`).
+* Updates docs if needed in `README.md` and `docs/dev-guide.md` files.
+* Update the `beman_tidy/cli.py` file if the public API has changed.
+
+Check this PR example: [beman-tidy: add check - README.LIBRARY_STATUS](https://github.com/bemanproject/infra/pull/35).
 
 ## Linting
 
