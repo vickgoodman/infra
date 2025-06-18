@@ -46,3 +46,7 @@ __pycache__/
 
 # MAC OS
 *.DS_Store
+
+# editor files
+.vscode/
+.idea/
