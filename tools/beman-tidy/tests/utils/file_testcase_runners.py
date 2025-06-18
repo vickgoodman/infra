@@ -10,9 +10,9 @@ def file_testcase_run(file_path, check_class, repo_info, beman_standard_check_co
     check_instance.log_level = True
 
     assert check_instance.pre_check(
-    ) is True, f"[{check_instance.__name__}] pre_check() failed for {file_path}"
+    ) is True, f"[{check_instance.__class__.__name__}] pre_check() failed for {file_path}"
     assert check_instance.check(
-    ) is expected_result, f"[{check_instance.__name__}] check() failed for {file_path}"
+    ) is expected_result, f"[{check_instance.__class__.__name__}] check() failed for {file_path}"
 
 
 def file_testcase_run_valid(file_path, check_class, repo_info, beman_standard_check_config):
