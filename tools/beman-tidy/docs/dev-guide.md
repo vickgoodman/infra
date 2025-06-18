@@ -90,7 +90,8 @@ tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_invalid SKI
 
 * Add / update the dependency to the `pyproject.toml` file.
 * Run `uv clean` to make sure the dependencies are updated.
-* Run `uv sync && uv export -o pylock.toml` to update the dependencies.
+* Run `uv sync` to update the uv lockfile
+* Run `uv export -o pylock.toml` to update `pylock.toml`
 * Run `uv build` to build the wheel.
 * Run `uv run beman-tidy --help` to check if the new dependency is available.
 * Commit the changes from `pyproject.toml`, `pylock.toml` and `uv.lock`.
