@@ -29,7 +29,7 @@ REPOSITORY.NAME:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible>
 REPOSITORY.CODEOWNERS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - default_group: "@bemanproject/core-reviewers"
 REPOSITORY.DISALLOW_GIT_SUBMODULES:
     - type: RECOMMENDATION
@@ -43,13 +43,13 @@ RELEASE.GODBOLT_TRUNK_VERSION:
     - type: RECOMMENDATION
 # TOP LEVEL
 TOPLEVEL.CMAKE:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - file_name: CMakeLists.txt
 TOPLEVEL.LICENSE:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - file_name: LICENSE
 TOPLEVEL.README:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - file_name: README.md
 
 # README
@@ -68,7 +68,7 @@ README.PURPOSE:
 README.IMPLEMENTS:
     - type: RECOMMENDATION
 README.LIBRARY_STATUS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - values: [
             "**Status**: [Under development and not yet ready for production use.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#under-development-and-not-yet-ready-for-production-use)",
             "**Status**: [Production ready. API may undergo changes.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#production-ready-api-may-undergo-changes)",
@@ -89,14 +89,16 @@ CMAKE.LIBRARY_NAME:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible>
 CMAKE.LIBRARY_ALIAS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - regex: <put a regex here if possible>
 CMAKE.TARGET_NAMES:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible>
 CMAKE.PASSIVE_TARGETS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - regex: <put a regex here if possible>
+CMAKE.CONFIG:
+    - type: REQUIREMENT
 CMAKE.SKIP_TESTS:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible>
@@ -108,30 +110,30 @@ CMAKE.AVOID_PASSTHROUGHS:
 
 # DIRECTORY
 DIRECTORY.INTERFACE_HEADERS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - directory_name: include
     - regex: <put a regex here if possible - e.g. include/beman/${LIBRARY_NAME}>
 DIRECTORY.IMPLEMENTATION_HEADERS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - regex: <put a regex here if possible - e.g. include/beman/${LIBRARY_NAME}/detail or include/beman/${LIBRARY_NAME}/detail_/>
 DIRECTORY.SOURCES:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - directory_name: src
     - regex: <put a regex here if possible - e.g. src/beman/${LIBRARY_NAME}>
 DIRECTORY.TESTS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - directory_name: tests
     - regex: <put a regex here if possible - e.g. tests/beman/${LIBRARY_NAME}>
 DIRECTORY.EXAMPLES:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - directory_name: examples
     - regex: <put a regex here if possible>
 DIRECTORY.DOCS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - directory_name: docs
     - regex: <put a regex here if possible>
 DIRECTORY.PAPERS:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - directory_name: papers
 
 # FILE
@@ -139,10 +141,10 @@ FILE.CPP_NAMES:
     - type: RECOMMENDATION
     - regex: <put a regex here if possible - e.g. ${snake_case}.cpp, ${snake_case}.test.cpp>
 FILE.TEST_NAMES:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - regex: <put a regex here if possible - e.g. ${snake_case}.test.cpp>
 FILE.LICENSE_ID:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - regex: [
             "// SPDX-License-Identifier: <SPDX License Expression>",
             "# SPDX-License-Identifier: <SPDX License Expression>",
