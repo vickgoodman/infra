@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import pytest
-from lib.utils.git import load_beman_standard_config
+from beman_tidy.lib.utils.git import load_beman_standard_config
 
 
 @pytest.fixture

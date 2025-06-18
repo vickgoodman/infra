@@ -6,7 +6,7 @@ from pathlib import Path
 
 from tests.utils.file_testcase_runners import file_testcases_run_valid, file_testcases_run_invalid, file_testcases_run_fix_invalid
 # Actual tested checks.
-from lib.checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck
+from beman_tidy.lib.checks.beman_standard.readme import ReadmeTitleCheck, ReadmeBadgesCheck
 
 
 def test__README_TITLE__valid(repo_info, beman_standard_check_config):

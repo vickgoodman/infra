@@ -16,7 +16,7 @@ build-backend = "flit_core.buildapi"
 dev = ["pytest>=8.4.0", "ruff>=0.11.13"]
 
 [project.scripts]
-beman-tidy = "beman_tidy:main"
+beman-tidy = "beman_tidy.main:main"
 
 [tool.pytest.ini_options]
 addopts = "-v"
