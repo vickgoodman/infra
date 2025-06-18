@@ -47,6 +47,14 @@ __pycache__/
 # MAC OS
 *.DS_Store
 
-# editor files
+# Editor files
 .vscode/
 .idea/
+
+# Build directories
+infra.egg-info/
+beman_tidy.egg-info/
+*.egg-info/
+build/
+dist/
+
