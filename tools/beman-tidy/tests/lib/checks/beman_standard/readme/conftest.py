@@ -6,25 +6,6 @@ from pathlib import Path
 
 from tests.utils.conftest import mock_repo_info, mock_beman_standard_check_config  # noqa: F401
 
-
-@pytest.fixture
-def test_data_dir():
-    """Return the path to the test data directory"""
-    return Path(__file__).parent / "data"
-
-
-@pytest.fixture
-def valid_readme_path(test_data_dir):
-    """Return the path to a valid README.md file"""
-    return test_data_dir / "valid" / "README.md"
-
-
-@pytest.fixture
-def invalid_readme_path(test_data_dir):
-    """Return the path to an invalid README.md file"""
-    return test_data_dir / "invalid" / "README.md"
-
-
 @pytest.fixture(autouse=True)
 def repo_info(mock_repo_info):  # noqa: F811
     return mock_repo_info
