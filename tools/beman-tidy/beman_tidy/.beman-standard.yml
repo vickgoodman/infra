@@ -56,7 +56,7 @@ TOPLEVEL.README:
 README.TITLE:
     - type: RECOMMENDATION
 README.BADGES:
-    - type: RECOMMENDATION
+    - type: REQUIREMENT
     - values: [
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg)",
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_api_may_undergo_changes.svg)",

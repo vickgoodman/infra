@@ -56,7 +56,7 @@ def test__README_TITLE__fix_invalid(repo_info, beman_standard_check_config):
         invalid_readme_paths, ReadmeTitleCheck, repo_info, beman_standard_check_config)
 
 
-def test__README_BADGES__valid(repo_info, beman_standard_check_config, valid_readme_path):
+def test__README_BADGES__valid(repo_info, beman_standard_check_config):
     """Test that a valid README.md badges passes the check"""
     valid_readme_paths = [
         Path(f"{valid_prefix}/README-v1.md"),
@@ -69,7 +69,7 @@ def test__README_BADGES__valid(repo_info, beman_standard_check_config, valid_rea
                              repo_info, beman_standard_check_config)
 
 
-def test__README_BADGES__invalid(repo_info, beman_standard_check_config, invalid_readme_path):
+def test__README_BADGES__invalid(repo_info, beman_standard_check_config):
     """Test that an invalid README.md badges fails the check"""
     invalid_readme_paths = [
         Path(f"{invalid_prefix}/invalid.md"),
@@ -83,6 +83,6 @@ def test__README_BADGES__invalid(repo_info, beman_standard_check_config, invalid
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__README_BADGES__fix_invalid(repo_info, beman_standard_check_config, invalid_readme_path, valid_readme_path):
+def test__README_BADGES__fix_invalid(repo_info, beman_standard_check_config):
     """Test that the fix method corrects an invalid README.md badges"""
     pass
