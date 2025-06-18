@@ -36,9 +36,9 @@ Limitations:
 
 ## Adding a new check
 
-* Add the check to the `beman_tidy/lib/checks/beman_standard/` directory (e.g., `README.*` -> `beman_tidy/lib/checks/beman_standard/readme.py`).
+* Add the check to the `beman_tidy/lib/checks/beman_standard/` directory (e.g., `README.*` checks will most likely go to a path similar to `beman_tidy/lib/checks/beman_standard/readme.py`).
 * Import the check to the `beman_tidy/lib/pipeline.py` file (e.g., `from .checks.beman_standard.readme import ReadmeTitleCheck`).
-* Add tests for the check to the `tests/beman_standard/` directory (e.g., `README.*` -> `tests/lib/checks/beman_standard/readme/test_readme.py`).
+* Add tests for the check to the `tests/beman_standard/` directory (e.g., `README.*` checks tests will most likely go to a path similar to `tests/lib/checks/beman_standard/readme/test_readme.py`).
 * Updates docs if needed in `README.md` and `docs/dev-guide.md` files.
 * Update the `beman_tidy/cli.py` file if the public API has changed.
 
