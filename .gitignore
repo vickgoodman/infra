@@ -50,3 +50,8 @@ __pycache__/
 # editor files
 .vscode/
 .idea/
+
+# Python
+infra.egg-info
+beman_tidy.egg-info
+*.egg-info
