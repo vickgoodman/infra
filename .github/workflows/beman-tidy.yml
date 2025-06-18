@@ -3,29 +3,32 @@
 name: beman-tidy tests
 
 on:
-  workflow_dispatch:
+  push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/beman-tidy
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies (production)
-        run: |
-          make -C tools/beman-tidy install
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Install dependencies (development)
+      - name: Sync environment
         run: |
-          make -C tools/beman-tidy install-dev
+          uv sync
 
       - name: Run linter
         run: |
-          echo "Running linter..."
-          make -C tools/beman-tidy self-lint
+          echo "Running linter"
+          uv run ruff check --diff
 
       - name: Run tests
         run: |
-          make -C tools/beman-tidy test
+          uv run pytest tests/ -v

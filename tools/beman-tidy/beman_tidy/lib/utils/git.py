@@ -52,7 +52,7 @@ def get_repo_info(path):
     except InvalidGitRepositoryError:
         print(f"The path '{path}' is not inside a valid Git repository.")
         sys.exit(1)
-    except Exception as e:
+    except Exception:
         print(
             f"An error occurred while getting repository information. Check {path}.")
         sys.exit(1)

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 import os
 import re
 
@@ -62,7 +62,7 @@ class FileBaseCheck(BaseCheck):
         try:
             with open(self.path, 'r') as file:
                 return file.read()
-        except Exception as e:
+        except Exception:
             return ""
 
     def read_lines(self):
@@ -72,7 +72,7 @@ class FileBaseCheck(BaseCheck):
         try:
             with open(self.path, 'r') as file:
                 return file.readlines()
-        except Exception as e:
+        except Exception:
             return []
 
     def read_lines_strip(self):
