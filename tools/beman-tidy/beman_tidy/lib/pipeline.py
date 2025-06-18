@@ -129,15 +129,13 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     total_coverage = round((cnt_passed['REQUIREMENT'] + cnt_passed['RECOMMENDATION']) / (cnt_implemented_checks['REQUIREMENT'] + cnt_implemented_checks['RECOMMENDATION']) * 100, 2)
     print(
         f"\n{green_color if coverage_requirement == 100 else red_color}Coverage    REQUIREMENT: {coverage_requirement}% ({cnt_passed['REQUIREMENT']}/{cnt_implemented_checks['REQUIREMENT']} checks passed).{no_color}")
-    if args.require-all:
+    if args.require_all:
         print(
             f"{green_color if coverage_recommendation == 100 else red_color}Coverage RECOMMENDATION: {coverage_recommendation}% ({cnt_passed['RECOMMENDATION']}/{cnt_implemented_checks['RECOMMENDATION']} checks passed).{no_color}")
     else:
-        print(f"Note: RECOMMENDATION coverage is not printed because --enforce-all is not set.")
+        print("Note: RECOMMENDATIONs are not included (--require-all NOT set).")
+    total_cnt_failed = cnt_failed['REQUIREMENT'] + (cnt_failed['RECOMMENDATION'] if args.require_all else 0)
 
-    total_cnt_failed = cnt_failed['REQUIREMENT'] + (cnt_failed['RECOMMENDATION'] if args.require-all else 0)
-    if total_cnt_failed > 0:
-        print(f"{red_color}Total failed checks: {total_cnt_failed}.{no_color}")
 
     sys.stdout.flush()
     return total_cnt_failed
