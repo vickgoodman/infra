@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 from abc import abstractmethod
-import os
 import re
 
 from .base_check import BaseCheck
@@ -17,7 +16,7 @@ class FileBaseCheck(BaseCheck):
         super().__init__(repo_info, beman_standard_check_config)
 
         # set path - e.g. "README.md"
-        self.path = os.path.join(repo_info["top_level"], relative_path)
+        self.path = self.repo_path / relative_path
 
     def pre_check(self):
         """
@@ -31,7 +30,7 @@ class FileBaseCheck(BaseCheck):
             self.log("The path is not set.")
             return False
 
-        if not os.path.exists(self.path):
+        if not self.path.exists():
             self.log(f"The file '{self.path}' does not exist.")
             return False
 

@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 from abc import ABC, abstractmethod
+from pathlib import Path
+
 from ..system.registry import get_beman_standard_check_name_by_class
 
 
@@ -43,7 +45,7 @@ class BaseCheck(ABC):
         assert "name" in repo_info
         self.repo_name = repo_info["name"]
         assert "top_level" in repo_info
-        self.repo_path = repo_info["top_level"]
+        self.repo_path = Path(repo_info["top_level"])
         assert self.repo_path is not None
         self.library_name = f"beman.{self.repo_name}"
         assert self.library_name is not None
@@ -69,7 +71,7 @@ class BaseCheck(ABC):
             self.log(f"The repo_name is not set for check = {self.name}.")
             return False
 
-        if self.repo_path is None:
+        if not self.repo_path:
             self.log(f"The repo_path is not set for check = {self.name}.")
             return False
 

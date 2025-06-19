@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 from abc import abstractmethod
-import os
+from pathlib import Path
 
 from .base_check import BaseCheck
 
@@ -14,9 +14,10 @@ class DirectoryBaseCheck(BaseCheck):
 
     def __init__(self, repo_info, beman_standard_check_config, relative_path):
         super().__init__(repo_info, beman_standard_check_config)
+        print(repo_info)
 
         # set path - e.g. "src/beman/exemplar"
-        self.path = os.path.join(repo_info["top_level"], relative_path)
+        self.path = self.repo_path / relative_path
 
     def pre_check(self):
         """
@@ -30,7 +31,7 @@ class DirectoryBaseCheck(BaseCheck):
             self.log("The path is not set.")
             return False
 
-        if not os.path.exists(self.path):
+        if not self.path.exists():
             self.log(f"The directory '{self.path}' does not exist.")
             return False
 
@@ -54,12 +55,12 @@ class DirectoryBaseCheck(BaseCheck):
         """
         pass
 
-    def read(self):
+    def read(self) -> list[Path]:
         """
         Read the directory content.
         """
         try:
-            return os.listdir(self.path)
+            return list(self.path.iterdir())
         except Exception:
             return []
 

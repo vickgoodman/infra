@@ -1,27 +1,29 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-import os
 import sys
 import yaml
+from pathlib import Path
+
 from git import Repo, InvalidGitRepositoryError
 
 
-def get_repo_info(path):
+def get_repo_info(path: str):
     """
     Get information about the repository at the given path.
     Returns data as a dictionary.
     """
 
+    path: Path = Path(path)
     try:
         # Initialize the repository object
-        repo = Repo(os.path.abspath(path), search_parent_directories=True)
+        repo = Repo(path.absolute(), search_parent_directories=True)
 
         # Get the top-level directory of the repository
-        top_level_dir = repo.git.rev_parse("--show-toplevel")
+        top_level_dir = Path(repo.git.rev_parse("--show-toplevel"))
 
         # Get the repository name (directory name of the top level)
-        repo_name = os.path.basename(top_level_dir)
+        repo_name = top_level_dir.name
 
         # Get the remote URL (assuming 'origin' is the remote name)
         remote_url = None
@@ -62,7 +64,7 @@ def get_beman_standard_config_path():
     """
     Get the path to the Beman Standard YAML configuration file.
     """
-    return os.path.join(os.path.dirname(__file__), "..", "..", ".beman-standard.yml")
+    return Path(__file__).parent.parent.parent / ".beman-standard.yml"
 
 
 def load_beman_standard_config(path=get_beman_standard_config_path()):

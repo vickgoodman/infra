@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import os
-
+from pathlib import Path
 
 def file_testcase_run(file_path, check_class, repo_info, beman_standard_check_config, expected_result):
     check_instance = check_class(repo_info, beman_standard_check_config)
-    check_instance.path = file_path
+    check_instance.path = Path(file_path)
     check_instance.log_level = True
 
     assert check_instance.pre_check(
@@ -27,7 +27,7 @@ def file_testcase_run_invalid(file_path, check_class, repo_info, beman_standard_
 
 def file_testcase_run_fix_invalid(invalid_file_path, check_class, repo_info, beman_standard_check_config):
     check_instance = check_class(repo_info, beman_standard_check_config)
-    check_instance.path = f"{invalid_file_path}.delete_me"
+    check_instance.path = Path(f"{invalid_file_path}.delete_me")
     check_instance.write(invalid_file_path.read_text())
 
     assert check_instance.pre_check() is True
