@@ -126,16 +126,34 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     # Always print the coverage.
     coverage_requirement = round(cnt_passed['REQUIREMENT'] / cnt_implemented_checks['REQUIREMENT'] * 100, 2)
     coverage_recommendation = round(cnt_passed['RECOMMENDATION'] / cnt_implemented_checks['RECOMMENDATION'] * 100, 2)
-    total_coverage = round((cnt_passed['REQUIREMENT'] + cnt_passed['RECOMMENDATION']) / (cnt_implemented_checks['REQUIREMENT'] + cnt_implemented_checks['RECOMMENDATION']) * 100, 2)
+    total_passed = cnt_passed['REQUIREMENT'] + cnt_passed['RECOMMENDATION']
+    total_implemented = cnt_implemented_checks['REQUIREMENT'] + cnt_implemented_checks['RECOMMENDATION']
+    total_coverage = round((total_passed) / (total_implemented) * 100, 2)
     print(
-        f"\n{green_color if coverage_requirement == 100 else red_color}Coverage    REQUIREMENT: {coverage_requirement}% ({cnt_passed['REQUIREMENT']}/{cnt_implemented_checks['REQUIREMENT']} checks passed).{no_color}")
+        f"\n{__calculate_coverage_color(coverage_requirement)}Coverage    REQUIREMENT: {coverage_requirement:{6}.2f}% ({cnt_passed['REQUIREMENT']}/{cnt_implemented_checks['REQUIREMENT']} checks passed).{no_color}")
     if args.require_all:
         print(
-            f"{green_color if coverage_recommendation == 100 else red_color}Coverage RECOMMENDATION: {coverage_recommendation}% ({cnt_passed['RECOMMENDATION']}/{cnt_implemented_checks['RECOMMENDATION']} checks passed).{no_color}")
+            f"{__calculate_coverage_color(coverage_recommendation)}Coverage RECOMMENDATION: {coverage_recommendation:{6}.2f}% ({cnt_passed['RECOMMENDATION']}/{cnt_implemented_checks['RECOMMENDATION']} checks passed).{no_color}")
+        print(
+            f"{__calculate_coverage_color(total_coverage)}Coverage          TOTAL: {total_coverage:{6}.2f}% ({total_passed}/{total_implemented} checks passed).{no_color}")
     else:
         print("Note: RECOMMENDATIONs are not included (--require-all NOT set).")
     total_cnt_failed = cnt_failed['REQUIREMENT'] + (cnt_failed['RECOMMENDATION'] if args.require_all else 0)
 
-
     sys.stdout.flush()
     return total_cnt_failed
+
+
+def __calculate_coverage_color(cov):
+    """
+    Returns the colour for the coverage print based on severity
+    Green for 100%
+    Red for 0%
+    Yellow for anything else
+    """
+    if cov == 100:
+        return green_color
+    elif cov == 0:
+        return red_color
+    else:
+        return yellow_color
