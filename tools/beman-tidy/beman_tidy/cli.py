@@ -62,7 +62,8 @@ def main():
     )
 
     failed_checks = run_checks_pipeline(
-        checks_to_run, args, beman_standard_check_config)
+        checks_to_run, args, beman_standard_check_config
+    )
     sys.exit(failed_checks)
 
 

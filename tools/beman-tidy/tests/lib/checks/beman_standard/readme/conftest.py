@@ -5,6 +5,7 @@ import pytest
 
 from tests.utils.conftest import mock_repo_info, mock_beman_standard_check_config  # noqa: F401
 
+
 @pytest.fixture(autouse=True)
 def repo_info(mock_repo_info):  # noqa: F811
     return mock_repo_info

@@ -12,8 +12,9 @@ def run_command(command, return_stdout=False, cwd=None):
     """
     print(f"Running command: {command} with cwd: {cwd}")
     if return_stdout:
-        bin = subprocess.Popen(command, shell=True,
-                               stdout=subprocess.PIPE, cwd=cwd).stdout.read()
+        bin = subprocess.Popen(
+            command, shell=True, stdout=subprocess.PIPE, cwd=cwd
+        ).stdout.read()
         return bin.decode("utf-8")
     else:
         return subprocess.run(command, shell=True, cwd=cwd).returncode

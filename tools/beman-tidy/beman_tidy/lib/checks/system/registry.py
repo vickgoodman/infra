@@ -19,9 +19,11 @@ def register_beman_standard_check(check: str):
     Notes: Only register most derived check classes, which are actually part from
     The Beman Standard - e.g., README.TITLE, README.BADGES, etc.
     """
+
     def decorator(check_class: Type) -> Type:
         _beman_standard_check_registry[check] = check_class
         return check_class
+
     return decorator
 
 

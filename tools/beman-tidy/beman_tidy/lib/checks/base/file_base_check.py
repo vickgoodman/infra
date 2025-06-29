@@ -59,7 +59,7 @@ class FileBaseCheck(BaseCheck):
         Read the file content.
         """
         try:
-            with open(self.path, 'r') as file:
+            with open(self.path, "r") as file:
                 return file.read()
         except Exception:
             return ""
@@ -69,7 +69,7 @@ class FileBaseCheck(BaseCheck):
         Read the file content as lines.
         """
         try:
-            with open(self.path, 'r') as file:
+            with open(self.path, "r") as file:
                 return file.readlines()
         except Exception:
             return []
@@ -85,7 +85,7 @@ class FileBaseCheck(BaseCheck):
         Write the content to the file.
         """
         try:
-            with open(self.path, 'w') as file:
+            with open(self.path, "w") as file:
                 file.write(content)
         except Exception as e:
             self.log(f"Error writing the file '{self.path}': {e}")
