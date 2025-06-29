@@ -24,6 +24,7 @@ class ToplevelCmakeCheck(CMakeBaseCheck):
         # TODO: Implement the fix.
         pass
 
+
 @register_beman_standard_check("TOPLEVEL.LICENSE")
 class ToplevelLicenseCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
@@ -33,9 +34,12 @@ class ToplevelLicenseCheck(FileBaseCheck):
         # since this class simply checks for the existence of a LICENSE file,
         # there's nothing more to do than the default pre-check.
         return super().pre_check()
+
     def fix(self):
-        # TODO: Implement the fix.
-        pass
+        self.log(
+            "Please add a LICENSE file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#license for more information."
+        )
+
 
 @register_beman_standard_check("TOPLEVEL.README")
 class ToplevelReadmeCheck(ReadmeBaseCheck):
@@ -46,5 +50,8 @@ class ToplevelReadmeCheck(ReadmeBaseCheck):
         # since this class simply checks for the existence of a README file,
         # there's nothing more to do than the default pre-check.
         return super().pre_check()
+
     def fix(self):
-        self.log("Please write a README file.")
+        self.log(
+            "Please write a README file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmemd for the desired format."
+        )
