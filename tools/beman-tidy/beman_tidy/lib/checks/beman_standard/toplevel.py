@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 from .cmake import CMakeBaseCheck
-from ..base.file_base_check import FileBaseCheck
+from .license import LicenseBaseCheck
 from .readme import ReadmeBaseCheck
 from ..system.registry import register_beman_standard_check
 
@@ -26,9 +26,9 @@ class ToplevelCmakeCheck(CMakeBaseCheck):
 
 
 @register_beman_standard_check("TOPLEVEL.LICENSE")
-class ToplevelLicenseCheck(FileBaseCheck):
+class ToplevelLicenseCheck(LicenseBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
-        super().__init__(repo_info, beman_standard_check_config, "LICENSE")
+        super().__init__(repo_info, beman_standard_check_config)
 
     def check(self):
         # since this class simply checks for the existence of a LICENSE file,
