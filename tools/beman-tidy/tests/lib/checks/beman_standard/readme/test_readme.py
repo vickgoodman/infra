@@ -4,10 +4,9 @@
 import pytest
 from pathlib import Path
 
-from tests.utils.file_testcase_runners import (
-    file_testcases_run_valid,
-    file_testcases_run_invalid,
-    file_testcases_run_fix_inplace,
+from tests.utils.path_runners import (
+    run_check_for_each_path,
+    run_fix_inplace_for_each_file_path,
 )
 
 # Actual tested checks.
@@ -37,8 +36,8 @@ def test__README_TITLE__valid(repo_info, beman_standard_check_config):
         Path(f"{valid_prefix}/README-v4.md"),
     ]
 
-    file_testcases_run_valid(
-        valid_readme_paths, ReadmeTitleCheck, repo_info, beman_standard_check_config
+    run_check_for_each_path(
+        True, valid_readme_paths, ReadmeTitleCheck, repo_info, beman_standard_check_config
     )
 
 
@@ -54,8 +53,8 @@ def test__README_TITLE__invalid(repo_info, beman_standard_check_config):
         Path(f"{invalid_prefix}/invalid-title-v4.md"),
     ]
 
-    file_testcases_run_invalid(
-        invalid_readme_paths, ReadmeTitleCheck, repo_info, beman_standard_check_config
+    run_check_for_each_path(
+        False, invalid_readme_paths,ReadmeTitleCheck, repo_info, beman_standard_check_config
     )
 
 
@@ -70,8 +69,9 @@ def test__README_TITLE__fix_inplace(repo_info, beman_standard_check_config):
         Path(f"{invalid_prefix}/invalid-title-v4.md"),
     ]
 
-    file_testcases_run_fix_inplace(
-        invalid_readme_paths, ReadmeTitleCheck, repo_info, beman_standard_check_config
+    run_fix_inplace_for_each_file_path(
+        invalid_readme_paths, ReadmeTitleCheck,
+        repo_info, beman_standard_check_config
     )
 
 
@@ -86,8 +86,8 @@ def test__README_BADGES__valid(repo_info, beman_standard_check_config):
         Path(f"{valid_prefix}/README-v4.md"),
     ]
 
-    file_testcases_run_valid(
-        valid_readme_paths, ReadmeBadgesCheck, repo_info, beman_standard_check_config
+    run_check_for_each_path(
+        True, valid_readme_paths, ReadmeBadgesCheck, repo_info, beman_standard_check_config
     )
 
 
@@ -102,8 +102,8 @@ def test__README_BADGES__invalid(repo_info, beman_standard_check_config):
         Path(f"{invalid_prefix}/invalid-badge-v3.md"),
     ]
 
-    file_testcases_run_invalid(
-        invalid_readme_paths, ReadmeBadgesCheck, repo_info, beman_standard_check_config
+    run_check_for_each_path(
+        False, invalid_readme_paths, ReadmeBadgesCheck, repo_info, beman_standard_check_config
     )
 
 
@@ -126,11 +126,8 @@ def test__README_LIBRARY_STATUS__valid(repo_info, beman_standard_check_config):
         Path(f"{valid_prefix}/README-v4.md"),
     ]
 
-    file_testcases_run_valid(
-        valid_readme_paths,
-        ReadmeLibraryStatusCheck,
-        repo_info,
-        beman_standard_check_config,
+    run_check_for_each_path(
+        True, valid_readme_paths, ReadmeLibraryStatusCheck, repo_info, beman_standard_check_config
     )
 
 
@@ -145,11 +142,8 @@ def test__README_LIBRARY_STATUS__invalid(repo_info, beman_standard_check_config)
         Path(f"{invalid_prefix}/invalid-status-line-v3.md"),
     ]
 
-    file_testcases_run_invalid(
-        invalid_readme_paths,
-        ReadmeLibraryStatusCheck,
-        repo_info,
-        beman_standard_check_config,
+    run_check_for_each_path(
+        False, invalid_readme_paths, ReadmeLibraryStatusCheck, repo_info, beman_standard_check_config
     )
 
 
