@@ -10,8 +10,8 @@ from pathlib import Path
 # - file_testcase_run
 # - file_testcase_run_<expected_result>
 # - file_testcases_run_<expected_result>
-# - file_testcase_run_fix_invalid
-# - file_testcases_run_fix_invalid
+# - file_testcase_run_fix_inplace
+# - file_testcases_run_fix_inplace
 
 
 def file_testcase_run(
@@ -65,7 +65,7 @@ def file_testcase_run_invalid(
     )
 
 
-def file_testcase_run_fix_invalid(
+def file_testcase_run_fix_inplace(
     invalid_file_path, check_class, repo_info, beman_standard_check_config
 ):
     """
@@ -152,7 +152,7 @@ def file_testcases_run_invalid(
     )
 
 
-def file_testcases_run_fix_invalid(
+def file_testcases_run_fix_inplace(
     invalid_file_paths, check_class, repo_info, beman_standard_check_config
 ):
     """
@@ -169,6 +169,6 @@ def file_testcases_run_fix_invalid(
         beman_standard_check_config = "beman_tidy/.beman-standard.yml"
     """
     for invalid_file_path in invalid_file_paths:
-        file_testcase_run_fix_invalid(
+        file_testcase_run_fix_inplace(
             invalid_file_path, check_class, repo_info, beman_standard_check_config
         )

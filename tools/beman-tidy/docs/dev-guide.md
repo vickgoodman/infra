@@ -73,10 +73,10 @@ collected 6 items
 
 tests/beman_standard/readme/test_readme.py::test__README_TITLE__valid PASSED                                                                                                                                                                  [ 16%]
 tests/beman_standard/readme/test_readme.py::test__README_TITLE__invalid PASSED                                                                                                                                                                [ 33%]
-tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_invalid PASSED                                                                                                                                                            [ 50%]
+tests/beman_standard/readme/test_readme.py::test__README_TITLE__fix_inplace PASSED                                                                                                                                                            [ 50%]
 tests/beman_standard/readme/test_readme.py::test__README_BADGES__valid PASSED                                                                                                                                                                 [ 66%]
 tests/beman_standard/readme/test_readme.py::test__README_BADGES__invalid PASSED                                                                                                                                                               [ 83%]
-tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_invalid SKIPPED (NOT implemented)                                                                                                                                        [100%]
+tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_inplace SKIPPED (NOT implemented)                                                                                                                                        [100%]
 
 =========================================================================================================== 5 passed, 1 skipped in 0.07s ============================================================================================================
 ```
@@ -95,7 +95,7 @@ tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_invalid SKI
     `tests/lib/checks/beman_standard/readme/data/valid/`.
   * e.g., for `check_category = "readme"` and `test_case_name = "invalid"` the data is in
     `tests/lib/checks/beman_standard/readme/data/invalid/`.
-  * e.g., for `check_category = "readme"` and `test_case_name = "fix_invalid"` the data may use both `valid` and
+  * e.g., for `check_category = "readme"` and `test_case_name = "fix_inplace"` the data may use both `valid` and
     `invalid` files. It is recommended to not change these files and use temporary copies having suffix `.delete_me`
     (which are not tracked by git).
 * Default setup / mocks:
@@ -105,7 +105,7 @@ tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_invalid SKI
 * Always add at least 3 test cases for each check.
   * `valid`: The test case for the valid case.
   * `invalid`: The test case for the invalid case.
-  * `fix_invalid`: The test case for the fix invalid case. If the fix is not (yet) implementable, add a
+  * `fix_inplace`: The test case for the fix invalid case. If the fix is not (yet) implementable, add a
     `@pytest.mark.skip(reason="NOT implemented")` decorator to track the progress.
 
 ## Changing dependencies

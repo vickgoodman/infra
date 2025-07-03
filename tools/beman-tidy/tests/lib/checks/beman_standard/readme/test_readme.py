@@ -7,7 +7,7 @@ from pathlib import Path
 from tests.utils.file_testcase_runners import (
     file_testcases_run_valid,
     file_testcases_run_invalid,
-    file_testcases_run_fix_invalid,
+    file_testcases_run_fix_inplace,
 )
 
 # Actual tested checks.
@@ -59,7 +59,7 @@ def test__README_TITLE__invalid(repo_info, beman_standard_check_config):
     )
 
 
-def test__README_TITLE__fix_invalid(repo_info, beman_standard_check_config):
+def test__README_TITLE__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md title.
     """
@@ -70,7 +70,7 @@ def test__README_TITLE__fix_invalid(repo_info, beman_standard_check_config):
         Path(f"{invalid_prefix}/invalid-title-v4.md"),
     ]
 
-    file_testcases_run_fix_invalid(
+    file_testcases_run_fix_inplace(
         invalid_readme_paths, ReadmeTitleCheck, repo_info, beman_standard_check_config
     )
 
@@ -108,7 +108,7 @@ def test__README_BADGES__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__README_BADGES__fix_invalid(repo_info, beman_standard_check_config):
+def test__README_BADGES__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md badges.
     """
@@ -154,7 +154,7 @@ def test__README_LIBRARY_STATUS__invalid(repo_info, beman_standard_check_config)
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__README_LIBRARY_STATUS__fix_invalid(repo_info, beman_standard_check_config):
+def test__README_LIBRARY_STATUS__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md library status.
     """
