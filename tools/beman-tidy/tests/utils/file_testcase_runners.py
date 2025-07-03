@@ -39,6 +39,24 @@ def file_testcase_run(
     )
 
 
+def file_testcases_run(
+    file_paths, check_class, repo_info, beman_standard_check_config, expected_result
+):
+    """
+    Run multiple testcases for a file-based check.
+
+    Example: Similar to file_testcase_run(), but with multiple file_paths.
+    """
+    for file_path in file_paths:
+        file_testcase_run(
+            file_path,
+            check_class,
+            repo_info,
+            beman_standard_check_config,
+            expected_result,
+        )
+
+
 def file_testcase_run_valid(
     file_path, check_class, repo_info, beman_standard_check_config
 ):
@@ -64,52 +82,6 @@ def file_testcase_run_invalid(
         file_path, check_class, repo_info, beman_standard_check_config, False
     )
 
-
-def file_testcase_run_fix_inplace(
-    invalid_file_path, check_class, repo_info, beman_standard_check_config
-):
-    """
-    Run a testcase for a file-based check, starting with a file that is invalid,
-    and then fixing it.
-
-    Example:
-        invalid_file_path = "tests/lib/checks/beman_standard/readme/data/invalid/README-v1.md"
-        check_class = ReadmeTitleCheck
-        repo_info = "beman.exemplar"
-        beman_standard_check_config = "beman_tidy/.beman-standard.yml"
-    """
-    check_instance = check_class(repo_info, beman_standard_check_config)
-    check_instance.path = Path(f"{invalid_file_path}.delete_me")
-    check_instance.write(invalid_file_path.read_text())
-
-    assert check_instance.pre_check() is True
-    assert check_instance.check() is False
-
-    assert check_instance.fix() is True
-
-    assert check_instance.pre_check() is True
-    assert check_instance.check() is True
-
-    # Delete the temporary file
-    os.remove(f"{invalid_file_path}.delete_me")
-
-
-def file_testcases_run(
-    file_paths, check_class, repo_info, beman_standard_check_config, expected_result
-):
-    """
-    Run multiple testcases for a file-based check.
-
-    Example: Similar to file_testcase_run(), but with multiple file_paths.
-    """
-    for file_path in file_paths:
-        file_testcase_run(
-            file_path,
-            check_class,
-            repo_info,
-            beman_standard_check_config,
-            expected_result,
-        )
 
 
 def file_testcases_run_valid(
@@ -150,6 +122,34 @@ def file_testcases_run_invalid(
     file_testcases_run(
         file_paths, check_class, repo_info, beman_standard_check_config, False
     )
+
+def file_testcase_run_fix_inplace(
+    invalid_file_path, check_class, repo_info, beman_standard_check_config
+):
+    """
+    Run a testcase for a file-based check, starting with a file that is invalid,
+    and then fixing it.
+
+    Example:
+        invalid_file_path = "tests/lib/checks/beman_standard/readme/data/invalid/README-v1.md"
+        check_class = ReadmeTitleCheck
+        repo_info = "beman.exemplar"
+        beman_standard_check_config = "beman_tidy/.beman-standard.yml"
+    """
+    check_instance = check_class(repo_info, beman_standard_check_config)
+    check_instance.path = Path(f"{invalid_file_path}.delete_me")
+    check_instance.write(invalid_file_path.read_text())
+
+    assert check_instance.pre_check() is True
+    assert check_instance.check() is False
+
+    assert check_instance.fix() is True
+
+    assert check_instance.pre_check() is True
+    assert check_instance.check() is True
+
+    # Delete the temporary file
+    os.remove(f"{invalid_file_path}.delete_me")
 
 
 def file_testcases_run_fix_inplace(
