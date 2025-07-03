@@ -4,6 +4,7 @@
 import os
 from pathlib import Path
 
+
 def run_check_for_each_path(
     expected_result, paths, check_class, repo_info, beman_standard_check_config
 ):
@@ -30,7 +31,8 @@ def run_check_for_each_path(
         )
         assert check_instance.check() is expected_result, (
             f"[{check_instance.__class__.__name__}] check() failed for {path}"
-    )
+        )
+
 
 def run_fix_inplace_for_each_file_path(
     invalid_file_paths, check_class, repo_info, beman_standard_check_config
