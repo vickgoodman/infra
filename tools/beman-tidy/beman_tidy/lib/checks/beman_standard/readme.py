@@ -75,8 +75,51 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
 # TODO README.PURPOSE
 
 
-# TODO README.IMPLEMENTS
+@register_beman_standard_check("README.IMPLEMENTS")
+class ReadmeImplementsCheck(ReadmeBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
 
+    def check(self):
+        lines = self.read_lines_strip()
+
+        bold_full_pattern   = re.compile(r"^\*\*Implements\*\*:\s*\S.+") # Correct format with content
+        bold_empty_pattern  = re.compile(r"^\*\*Implements\*\*:\s*$")    # Correct format but empty
+        plain_pattern       = re.compile(r"^Implements:\s*\S.+")         # Unbolded, with content
+        plain_empty_pattern = re.compile(r"^Implements:\s*$")            # Unbolded, but empty
+
+        # Find and check the "Implements" line
+        for line in lines:
+            if bold_full_pattern.match(line):
+                return True # All good
+
+            if bold_empty_pattern.match(line):
+                self.log(
+                    f"The '**Implements**:' line in '{self.path}' is present but empty. Please add a one-line summary that indicates what the repository implements."
+                )
+                return False
+
+            if plain_pattern.match(line):
+                self.log(
+                    f"Found 'Implements:' in '{self.path}', but it should be bolded as '**Implements**:'."
+                )
+                return False
+
+            if plain_empty_pattern.match(line):
+                self.log(
+                    f"The 'Implements:' line in '{self.path}' is present but empty. It should be bolded as '**Implements**:' and is a one-line summary that indicates what the repository implements."
+                )
+                return False
+
+        # Nothing found
+        self.log(
+            f"Missing '**Implements**: ...' line in '{self.path}'. It should indicate what the repository implements after the badges. See BEMAN_STANDARD.md."
+        )
+        return False
+
+    def fix(self):
+        # TODO
+        pass
 
 @register_beman_standard_check("README.LIBRARY_STATUS")
 class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
