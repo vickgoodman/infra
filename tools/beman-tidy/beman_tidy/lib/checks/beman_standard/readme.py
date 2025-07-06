@@ -83,15 +83,19 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
     def check(self):
         lines = self.read_lines_strip()
 
-        bold_full_pattern   = re.compile(r"^\*\*Implements\*\*:\s*\S.+") # Correct format with content
-        bold_empty_pattern  = re.compile(r"^\*\*Implements\*\*:\s*$")    # Correct format but empty
+        bold_full_pattern = re.compile(
+            r"^\*\*Implements\*\*:\s*\S.+"
+        ) # Correct format with content
+        bold_empty_pattern  = re.compile(
+            r"^\*\*Implements\*\*:\s*$"
+        )    # Correct format but empty
         plain_pattern       = re.compile(r"^Implements:\s*\S.+")         # Unbolded, with content
         plain_empty_pattern = re.compile(r"^Implements:\s*$")            # Unbolded, but empty
 
         # Find and check the "Implements" line
         for line in lines:
             if bold_full_pattern.match(line):
-                return True # All good
+                return True  # All good
 
             if bold_empty_pattern.match(line):
                 self.log(
@@ -120,6 +124,7 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
     def fix(self):
         # TODO
         pass
+
 
 @register_beman_standard_check("README.LIBRARY_STATUS")
 class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
