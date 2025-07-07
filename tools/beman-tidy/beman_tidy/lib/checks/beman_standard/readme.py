@@ -83,41 +83,28 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
     def check(self):
         lines = self.read_lines_strip()
 
-        bold_full_pattern = re.compile(
-            r"^\*\*Implements\*\*:\s*\S.+"
-        )  # Correct format with content
-        bold_empty_pattern = re.compile(
-            r"^\*\*Implements\*\*:\s*$"
-        )  # Correct format but empty
-        plain_pattern = re.compile(r"^Implements:\s*\S.+")  # Unbolded, with content
-        plain_empty_pattern = re.compile(r"^Implements:\s*$")  # Unbolded, but empty
+        regex = r"^\*\*Implements\*\*:\s+.*\bP\d{4}R\d+\b.*wg21\.link/\S+"
 
-        # Find and check the "Implements" line
+        # Find and check the "Implements:" line
         for line in lines:
-            if bold_full_pattern.match(line):
-                return True  # All good
-
-            if bold_empty_pattern.match(line):
-                self.log(
-                    f"The '**Implements**:' line in '{self.path}' is present but empty. Please add a one-line summary that indicates what the repository implements."
-                )
-                return False
-
-            if plain_pattern.match(line):
-                self.log(
-                    f"Found 'Implements:' in '{self.path}', but it should be bolded as '**Implements**:'."
-                )
-                return False
-
-            if plain_empty_pattern.match(line):
-                self.log(
-                    f"The 'Implements:' line in '{self.path}' is present but empty. It should be bolded as '**Implements**:' and is a one-line summary that indicates what the repository implements."
-                )
-                return False
+            if "Implements" in line:
+                if re.match(regex, line):
+                    return True
+                else:
+                    self.log(
+                        "\n\tThe \"Implements:\" line is invalid.\n"
+                        "\tIt should indicate which papers the repository implements with proper paper references and wg21.link URLs.\n"
+                        "\tUse the following style:\n"
+                        "\t**Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).\n"
+                    )
+                    return False
 
         # Nothing found
         self.log(
-            f"Missing '**Implements**: ...' line in '{self.path}'. It should indicate what the repository implements after the badges. See BEMAN_STANDARD.md."
+            f"\n\tMissing \"Implements:\" line in '{self.path}'.\n"
+            "\tIt should indicate which papers the repository implements with proper paper references and wg21.link URLs.\n"
+            "\tUse the following style:\n"
+            "\t**Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).\n"
         )
         return False
 

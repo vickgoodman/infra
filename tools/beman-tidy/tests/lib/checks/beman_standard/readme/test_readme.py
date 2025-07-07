@@ -175,7 +175,7 @@ def test__README_IMPLEMENTS__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__README_IMPLEMENTS__fix_invalid(repo_info, beman_standard_check_config):
+def test__README_IMPLEMENTS__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md "Implements"
     """
