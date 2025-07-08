@@ -72,9 +72,6 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
         pass
 
 
-# TODO README.PURPOSE
-
-
 @register_beman_standard_check("README.IMPLEMENTS")
 class ReadmeImplementsCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
@@ -83,34 +80,28 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
     def check(self):
         lines = self.read_lines_strip()
 
+        # Match the pattern to start with "Implements:" and then have a paper reference and a wg21.link URL.
+        # Examples of valid lines:
+        # **Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).
+        # **Implements**: [Give *std::optional* Range Support (P3168R2)](https://wg21.link/P3168R2) and [`std::optional<T&>` (P2988R5)](https://wg21.link/P2988R5)
         regex = r"^\*\*Implements\*\*:\s+.*\bP\d{4}R\d+\b.*wg21\.link/\S+"
 
         # Find and check the "Implements:" line
         for line in lines:
-            if "Implements" in line:
-                if re.match(regex, line):
-                    return True
-                else:
-                    self.log(
-                        '\n\tThe "Implements:" line is invalid.\n'
-                        "\tIt should indicate which papers the repository implements with proper paper references and wg21.link URLs.\n"
-                        "\tUse the following style:\n"
-                        "\t**Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).\n"
-                    )
-                    return False
+            if re.match(regex, line):
+                return True
 
         # Nothing found
         self.log(
-            f"\n\tMissing \"Implements:\" line in '{self.path}'.\n"
-            "\tIt should indicate which papers the repository implements with proper paper references and wg21.link URLs.\n"
-            "\tUse the following style:\n"
-            "\t**Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).\n"
+            f"Invalid 'Implements' line in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for more information."
         )
         return False
 
     def fix(self):
-        # TODO
-        pass
+        self.log(
+            "Please write a Implements line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for the desired format."
+        )
+        return False
 
 
 @register_beman_standard_check("README.LIBRARY_STATUS")
