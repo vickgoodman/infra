@@ -97,9 +97,9 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
         if implement_lines == 1:
             return True
 
-        # Invalid/missing/multiple "Implements:" lines
+        # Invalid/missing/duplicate "Implements:" line
         self.log(
-            f"Invalid/missing/multiple 'Implements:' lines in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for more information."
+            f"Invalid/missing/duplicate 'Implements:' line in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for more information."
         )
         return False
 
