@@ -82,18 +82,24 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
 
         # Match the pattern to start with "Implements:" and then have a paper reference and a wg21.link URL.
         # Examples of valid lines:
-        # **Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).
+        # **Implements**: [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).
         # **Implements**: [Give *std::optional* Range Support (P3168R2)](https://wg21.link/P3168R2) and [`std::optional<T&>` (P2988R5)](https://wg21.link/P2988R5)
+        # **Implements**: [.... (PxyzwRr)](https://wg21.link/PxyzwRr), [.... (PabcdRr)](https://wg21.link/PabcdRr), and [.... (PijklRr)](https://wg21.link/PijklRr),
         regex = r"^\*\*Implements\*\*:\s+.*\bP\d{4}R\d+\b.*wg21\.link/\S+"
 
-        # Find and check the "Implements:" line
+        # Count how many lines match the regex
+        implement_lines = 0
         for line in lines:
             if re.match(regex, line):
-                return True
+                implement_lines += 1
 
-        # Nothing found
+        # If there is exactly one "Implements:" line, it is valid
+        if implement_lines == 1:
+            return True
+
+        # Invalid/missing/multiple "Implements:" lines
         self.log(
-            f"Invalid 'Implements' line in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for more information."
+            f"Invalid/missing/multiple 'Implements:' lines in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for more information."
         )
         return False
 

@@ -160,6 +160,7 @@ def test__README_IMPLEMENTS__invalid(repo_info, beman_standard_check_config):
         Path(f"{invalid_prefix}/invalid-implements-v1.md"),
         Path(f"{invalid_prefix}/invalid-implements-v2.md"),
         Path(f"{invalid_prefix}/invalid-implements-v3.md"),
+        Path(f"{invalid_prefix}/invalid-implements-v4.md"),
     ]
 
     run_check_for_each_path(
