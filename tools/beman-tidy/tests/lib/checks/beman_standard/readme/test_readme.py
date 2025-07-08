@@ -131,9 +131,6 @@ def test__README_BADGES__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
 
-# TODO: README.PURPOSE
-
-
 def test__README_IMPLEMENTS__valid(repo_info, beman_standard_check_config):
     """
     Test that a valid README.md "Implements" passes the check
