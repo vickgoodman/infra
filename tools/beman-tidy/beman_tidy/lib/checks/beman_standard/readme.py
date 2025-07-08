@@ -92,7 +92,7 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
                     return True
                 else:
                     self.log(
-                        "\n\tThe \"Implements:\" line is invalid.\n"
+                        '\n\tThe "Implements:" line is invalid.\n'
                         "\tIt should indicate which papers the repository implements with proper paper references and wg21.link URLs.\n"
                         "\tUse the following style:\n"
                         "\t**Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).\n"
