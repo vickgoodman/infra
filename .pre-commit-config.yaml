@@ -2,10 +2,10 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
@@ -16,9 +16,9 @@ repos:
   - repo: https://github.com/BlankSpruce/gersemi
     rev: 0.15.1
     hooks:
-    - id: gersemi
-      name: CMake linting
-
+      - id: gersemi
+        name: CMake linting
+        exclude: ^infra/tools/beman-tidy/tests/lib/checks/beman_standard/toplevel/data/invalid/.*CMakeLists\.txt$
   # Python linting and formatting
   # config file: ruff.toml (not currently present but add if needed)
   # https://docs.astral.sh/ruff/configuration/
