@@ -18,7 +18,6 @@ repos:
     hooks:
       - id: gersemi
         name: CMake linting
-        exclude: ^tools/beman-tidy/tests/lib/checks/beman_standard/toplevel/data/invalid/invalid-CMAKE1/CMakeLists\.txt$
   # Python linting and formatting
   # config file: ruff.toml (not currently present but add if needed)
   # https://docs.astral.sh/ruff/configuration/
