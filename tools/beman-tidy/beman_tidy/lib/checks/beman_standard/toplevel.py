@@ -12,7 +12,7 @@ from ..system.registry import register_beman_standard_check
 # Note: ToplevelBaseCheck is not a registered check!
 
 
-@register_beman_standard_check(check="TOPLEVEL.CMAKE")
+@register_beman_standard_check("TOPLEVEL.CMAKE")
 class ToplevelCmakeCheck(CMakeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -47,7 +47,7 @@ class ToplevelReadmeCheck(ReadmeBaseCheck):
         super().__init__(repo_info, beman_standard_check_config)
 
     def check(self):
-        # since this class simply checks for the existence of a README file,
+        # Since this class simply checks for the existence of a README file,
         # there's nothing more to do than the default pre-check.
         return super().pre_check()
 
