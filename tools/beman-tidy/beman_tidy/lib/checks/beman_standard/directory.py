@@ -16,9 +16,9 @@ class BemanTreeDirectoryCheck(DirectoryBaseCheck):
     - include/beman/exemplar
     - src/beman/exemplar
     - tests/beman/exemplar
-    - examples/beman/exemplar
-    - docs/beman/exemplar
-    - papers/beman/exemplar
+    - examples/
+    - docs/
+    - papers/
     """
 
     def __init__(self, repo_info, beman_standard_check_config, prefix_path):
