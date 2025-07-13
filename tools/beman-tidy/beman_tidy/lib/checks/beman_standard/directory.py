@@ -47,7 +47,24 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
         super().__init__(repo_info, beman_standard_check_config, "src")
 
     def check(self):
-        return self.pre_check()  # Check if the directory exists and is not empty.
+        # Check if path with prefix `src/` exits.
+        src_path = self.repo_path / "src/"
+        if src_path.exists():
+            # Check self.path (src/beman/$library) exists and is not empty.
+            return (
+                self.pre_check()
+            )  
+        # Should not allow known source locations.
+        for prefix in ["source", "sources", "lib", "library"]:
+            prefix_path = self.repo_path / prefix
+            if prefix_path.exists():
+                self.log(
+                    f"Please move sources from {prefix} to src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorysources for more information."
+                )
+                return False
+
+        # Probably it's a header only library, we validate the current structure.
+        return True
 
     def fix(self):
         self.log(
