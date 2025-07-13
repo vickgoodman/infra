@@ -23,7 +23,7 @@ def test__TOPLEVEL_CMAKE__valid(repo_info, beman_standard_check_config):
     Test that repositories with valid CMakeLists.txt.
     """
     valid_cmake_paths = [
-        Path(f"{valid_prefix}/exemplar/"),
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
     ]
 
     run_check_for_each_path(
@@ -40,9 +40,12 @@ def test__TOPLEVEL_CMAKE__invalid(repo_info, beman_standard_check_config):
     Test that repositories with invalid CMakeLists.txt.
     """
     invalid_cmake_paths = [
-        Path(f"{invalid_prefix}/missing-CMAKE/"),
-        Path(f"{invalid_prefix}/invalid-CMAKE1/"),
-        Path(f"{invalid_prefix}/invalid-CMAKE2/"),
+        # exemplar/ repo with empty CMakeLists.txt file.
+        Path(f"{invalid_prefix}/repo-exemplar-v1/"),
+        # exemplar/ repo with CMakeLists.txt in non-root location.
+        Path(f"{invalid_prefix}/repo-exemplar-v2/"),
+        # exemplar/ repo without CMakeLists.txt file.
+        Path(f"{invalid_prefix}/repo-exemplar-v3/"),
     ]
 
     run_check_for_each_path(
