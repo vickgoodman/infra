@@ -6,6 +6,7 @@ import re
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
 
+
 # [README.*] checks category.
 # All checks in this file extend the ReadmeBaseCheck class.
 #

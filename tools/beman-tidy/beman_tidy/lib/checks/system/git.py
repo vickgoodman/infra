@@ -12,7 +12,9 @@ class DisallowFixInplaceAndUnstagedChangesCheck(BaseCheck):
     """
 
     def __init__(self, repo_info, beman_standard_check_config):
-        super().__init__(repo_info, beman_standard_check_config, "INTERNAL.NO_UNSTAGED_CHANGES")
+        super().__init__(
+            repo_info, beman_standard_check_config, "INTERNAL.NO_UNSTAGED_CHANGES"
+        )
 
     def check(self):
         """
