@@ -86,11 +86,11 @@ def test__TOPLEVEL_LICENSE__invalid(repo_info, beman_standard_check_config):
     """
     invalid_cmake_paths = [
         # exemplar/ repo with empty LICENSE file.
-        Path(f"{invalid_prefix}/repo-exemplar-v4/"),
+        Path(f"{invalid_prefix}/repo-exemplar-v1/"),
         # exemplar/ repo with LICENSE in non-root location.
-        Path(f"{invalid_prefix}/repo-exemplar-v5/"),
+        Path(f"{invalid_prefix}/repo-exemplar-v2/"),
         # exemplar/ repo without LICENSE file.
-        Path(f"{invalid_prefix}/repo-exemplar-v6/"),
+        Path(f"{invalid_prefix}/repo-exemplar-v3/"),
     ]
 
     run_check_for_each_path(
