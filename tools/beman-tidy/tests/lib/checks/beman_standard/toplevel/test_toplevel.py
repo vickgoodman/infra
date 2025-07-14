@@ -24,7 +24,7 @@ def test__TOPLEVEL_CMAKE__valid(repo_info, beman_standard_check_config):
     Test that repositories with valid CMakeLists.txt pass the check.
     """
     valid_cmake_paths = [
-        # exemplar/ repo with non-empty CMakeLists.txt file.
+        # exemplar/ repo with valid CMakeLists.txt file.
         Path(f"{valid_prefix}/repo-exemplar-v1/"),
     ]
 
@@ -69,7 +69,7 @@ def test__TOPLEVEL_LICENSE__valid(repo_info, beman_standard_check_config):
     Test that repositories with valid LICENSE pass the check.
     """
     valid_license_paths = [
-        # exemplar/ repo with non-empty LICENSE file.
+        # exemplar/ repo with valid LICENSE file.
         Path(f"{valid_prefix}/repo-exemplar-v1/"),
     ]
 
