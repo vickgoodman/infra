@@ -38,10 +38,8 @@ class RepositoryDefaultBranchCheck(BaseCheck):
     def check(self):
         default_branch = self.repo_info["default_branch"]
         if default_branch != "main":
-             self.log(
-                 f"Invalid default branch in repo: {default_branch} vs 'main'."
-             )
-             return False
+            self.log(f"Invalid default branch in repo: {default_branch} vs 'main'.")
+            return False
 
         return True
 
