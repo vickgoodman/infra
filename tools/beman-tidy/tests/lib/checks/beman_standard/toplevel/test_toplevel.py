@@ -20,7 +20,7 @@ invalid_prefix = f"{test_data_prefix}/invalid"
 
 def test__TOPLEVEL_CMAKE__valid(repo_info, beman_standard_check_config):
     """
-    Test that repositories with valid CMakeLists.txt.
+    Test that repositories with valid CMakeLists.txt pass the check.
     """
     valid_cmake_paths = [
         Path(f"{valid_prefix}/repo-exemplar-v1/"),
@@ -37,7 +37,7 @@ def test__TOPLEVEL_CMAKE__valid(repo_info, beman_standard_check_config):
 
 def test__TOPLEVEL_CMAKE__invalid(repo_info, beman_standard_check_config):
     """
-    Test that repositories with invalid CMakeLists.txt.
+    Test that repositories with invalid CMakeLists.txt fail the check.
     """
     invalid_cmake_paths = [
         # exemplar/ repo with empty CMakeLists.txt file.
