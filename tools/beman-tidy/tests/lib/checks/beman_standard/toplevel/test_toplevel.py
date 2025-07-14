@@ -11,6 +11,7 @@ from tests.utils.path_runners import (
 # Actual tested checks.
 from beman_tidy.lib.checks.beman_standard.toplevel import (
     ToplevelCmakeCheck,
+    ToplevelLicenseCheck
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/toplevel/data"
@@ -59,4 +60,48 @@ def test__TOPLEVEL_CMAKE__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__TOPLEVEL_CMAKE__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+def test__TOPLEVEL_LICENSE__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with valid LICENSE.
+    """
+    valid_cmake_paths = [
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_cmake_paths,
+        ToplevelLicenseCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__TOPLEVEL_LICENSE__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with invalid LICENSE.
+    """
+    invalid_cmake_paths = [
+        # exemplar/ repo with empty LICENSE file.
+        Path(f"{invalid_prefix}/repo-exemplar-v4/"),
+        # exemplar/ repo with LICENSE in non-root location.
+        Path(f"{invalid_prefix}/repo-exemplar-v5/"),
+        # exemplar/ repo without LICENSE file.
+        Path(f"{invalid_prefix}/repo-exemplar-v6/"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_cmake_paths,
+        ToplevelLicenseCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__TOPLEVEL_LICENSE__fix_inplace(repo_info, beman_standard_check_config):
     pass
