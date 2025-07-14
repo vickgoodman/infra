@@ -11,7 +11,7 @@ from tests.utils.path_runners import (
 # Actual tested checks.
 from beman_tidy.lib.checks.beman_standard.toplevel import (
     ToplevelCmakeCheck,
-    ToplevelLicenseCheck
+    ToplevelLicenseCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/toplevel/data"
@@ -65,7 +65,7 @@ def test__TOPLEVEL_CMAKE__fix_inplace(repo_info, beman_standard_check_config):
 
 def test__TOPLEVEL_LICENSE__valid(repo_info, beman_standard_check_config):
     """
-    Test that repositories with valid LICENSE.
+    Test that repositories with valid LICENSE pass the check.
     """
     valid_cmake_paths = [
         Path(f"{valid_prefix}/repo-exemplar-v1/"),
@@ -82,7 +82,7 @@ def test__TOPLEVEL_LICENSE__valid(repo_info, beman_standard_check_config):
 
 def test__TOPLEVEL_LICENSE__invalid(repo_info, beman_standard_check_config):
     """
-    Test that repositories with invalid LICENSE.
+    Test that repositories with invalid LICENSE fail the check.
     """
     invalid_cmake_paths = [
         # exemplar/ repo with empty LICENSE file.
