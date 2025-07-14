@@ -92,7 +92,7 @@ def test__REPOSITORY_DEFAULT_BRANCH__invalid(repo_info, beman_standard_check_con
         repo_info.copy() | {"default_branch": "develop"},
         repo_info.copy() | {"default_branch": "dev"},
         repo_info.copy() | {"default_branch": "trunk"},
-        repo_info.copy() | {"default_branch": "tdefault"},
+        repo_info.copy() | {"default_branch": "default"},
         repo_info.copy() | {"default_branch": "production"},
         repo_info.copy() | {"default_branch": "release"},
         repo_info.copy() | {"default_branch": "stable"},
