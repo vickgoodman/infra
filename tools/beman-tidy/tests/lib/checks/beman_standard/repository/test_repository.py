@@ -9,11 +9,11 @@ from tests.utils.path_runners import (
 )
 
 # Actual tested checks.
-from beman_tidy.lib.checks.beman_standard.general import (
+from beman_tidy.lib.checks.beman_standard.repository import (
     RepositoryCodeownersCheck,
 )
 
-test_data_prefix = "tests/lib/checks/beman_standard/general/data"
+test_data_prefix = "tests/lib/checks/beman_standard/repository/data"
 valid_prefix = f"{test_data_prefix}/valid"
 invalid_prefix = f"{test_data_prefix}/invalid"
 

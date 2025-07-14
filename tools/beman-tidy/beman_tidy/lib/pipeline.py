@@ -16,6 +16,7 @@ from .checks.beman_standard.general import *  # noqa: F401, F403
 from .checks.beman_standard.license import *  # noqa: F401, F403
 from .checks.beman_standard.readme import *  # noqa: F401, F403
 from .checks.beman_standard.release import *  # noqa: F401, F403
+from .checks.beman_standard.repository import *  # noqa: F401, F403
 from .checks.beman_standard.toplevel import *  # noqa: F401, F403
 
 red_color = "\033[91m"
