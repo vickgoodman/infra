@@ -36,17 +36,18 @@ class RepositoryDefaultBranchCheck(BaseCheck):
         super().__init__(repo_info, beman_standard_check_config)
 
     def check(self):
-        if self.repo_info["default_branch"] == "main":
-            return True
+        default_branch = self.repo_info["default_branch"]
+        if default_branch != "main":
+             self.log(
+                 f"Invalid default branch in repo: {default_branch} vs 'main'."
+             )
+             return False
 
-        self.log(
-            f"The default branch of the repository should be 'main', but it is '{self.repo_info['default_branch']}'."
-        )
-        return False
+        return True
 
     def fix(self):
         self.log(
-            "Please change the default branch to 'main'. This typically needs to be done through your Git hosting platform (GitHub, GitLab, etc.)."
+            "Please set `main` as default branch in the repository. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydefault_branch for more information."
         )
 
 
