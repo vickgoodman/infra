@@ -9,18 +9,18 @@ from tests.utils.path_runners import (
 )
 
 # Actual tested checks.
-from beman_tidy.lib.checks.beman_standard.general import (
+from beman_tidy.lib.checks.beman_standard.repository import (
     RepositoryCodeownersCheck,
 )
 
-test_data_prefix = "tests/lib/checks/beman_standard/general/data"
+test_data_prefix = "tests/lib/checks/beman_standard/repository/data"
 valid_prefix = f"{test_data_prefix}/valid"
 invalid_prefix = f"{test_data_prefix}/invalid"
 
 
 def test__REPOSITORY_CODEOWNERS__valid(repo_info, beman_standard_check_config):
     """
-    Test that repositories with valid CMakeLists.txt.
+    Test that repositories with valid CODEOWNERS pass the check.
     """
     valid_cmake_paths = [
         Path(f"{valid_prefix}/repo-exemplar-v1/"),
@@ -37,7 +37,7 @@ def test__REPOSITORY_CODEOWNERS__valid(repo_info, beman_standard_check_config):
 
 def test__REPOSITORY_CODEOWNERS__invalid(repo_info, beman_standard_check_config):
     """
-    Test that repositories with invalid CMakeLists.txt.
+    Test that repositories with invalid CODEOWNERS fail the check.
     """
     invalid_cmake_paths = [
         # exemplar/ repo without CODEOWNERS file inside .github/.
