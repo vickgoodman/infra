@@ -103,5 +103,7 @@ def test__REPOSITORY_DEFAULT_BRANCH__invalid(repo_info, beman_standard_check_con
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__REPOSITORY_DEFAULT_BRANCH__fix_inplace(repo_info, beman_standard_check_config):
+def test__REPOSITORY_DEFAULT_BRANCH__fix_inplace(
+    repo_info, beman_standard_check_config
+):
     pass
