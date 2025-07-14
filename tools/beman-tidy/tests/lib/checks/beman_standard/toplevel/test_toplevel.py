@@ -12,6 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.toplevel import (
     ToplevelCmakeCheck,
     ToplevelLicenseCheck,
+    ToplevelReadmeCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/toplevel/data"
@@ -104,4 +105,48 @@ def test__TOPLEVEL_LICENSE__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__TOPLEVEL_LICENSE__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+def test__TOPLEVEL_README__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with valid README.md pass the check.
+    """
+    valid_cmake_paths = [
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_cmake_paths,
+        ToplevelReadmeCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__TOPLEVEL_README__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with invalid README.md fail the check.
+    """
+    invalid_cmake_paths = [
+        # exemplar/ repo with empty README.md file.
+        Path(f"{invalid_prefix}/repo-exemplar-v7/"),
+        # exemplar/ repo with README.md in non-root location.
+        Path(f"{invalid_prefix}/repo-exemplar-v8/"),
+        # exemplar/ repo without README.md file.
+        Path(f"{invalid_prefix}/repo-exemplar-v9/"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_cmake_paths,
+        ToplevelReadmeCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__TOPLEVEL_README__fix_inplace(repo_info, beman_standard_check_config):
     pass
