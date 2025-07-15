@@ -44,16 +44,16 @@ class DirectoryInterfaceHeadersCheck(DirectoryBaseCheck):
             return False
 
         # Get all .hpp files paths, excluding certain directories.
-        exclude_dirs = {'src'}
+        exclude_dirs = {"src"}
         if self.repo_info["name"] == "exemplar":
-            exclude_dirs.add('cookiecutter')
+            exclude_dirs.add("cookiecutter")
 
         hpp_files = []
         for root, dirs, files in os.walk(self.path):
             dirs[:] = [d for d in dirs if d not in exclude_dirs]
 
             for name in files:
-                if name.lower().endswith('.hpp'):
+                if name.lower().endswith(".hpp"):
                     hpp_files.append(os.path.join(root, name))
 
         # Check that all .hpp files are under the include/beman/<short_name>/

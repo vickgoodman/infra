@@ -35,6 +35,7 @@ def test__DIRECTORY_INTERFACE_HEADERS__valid(repo_info, beman_standard_check_con
         beman_standard_check_config,
     )
 
+
 def test__DIRECTORY_INTERFACE_HEADERS__invalid(repo_info, beman_standard_check_config):
     """
     Test that repositories with invalid public header files fail the check.
@@ -58,5 +59,7 @@ def test__DIRECTORY_INTERFACE_HEADERS__invalid(repo_info, beman_standard_check_c
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__DIRECTORY_INTERFACE_HEADERS__fix_inplace(repo_info, beman_standard_check_config):
+def test__DIRECTORY_INTERFACE_HEADERS__fix_inplace(
+    repo_info, beman_standard_check_config
+):
     pass
