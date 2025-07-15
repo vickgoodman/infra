@@ -32,7 +32,11 @@ class DirectoryInterfaceHeadersCheck(DirectoryBaseCheck):
         # Check if the path exists.
         # Example path: "exemplar/include/beman/exemplar"
         include_path = self.path / "include" / "beman" / self.repo_info["name"]
-        if not os.path.exists(include_path) or os.path.isfile(include_path) or len(os.listdir(include_path)) == 0:
+        if (
+            not os.path.exists(include_path)
+            or os.path.isfile(include_path)
+            or len(os.listdir(include_path)) == 0
+        ):
             self.log(
                 f"The path '{self.path}' does not exist, is a file or is empty."
                 " All public header files must reside within include/beman/<short_name>/."
