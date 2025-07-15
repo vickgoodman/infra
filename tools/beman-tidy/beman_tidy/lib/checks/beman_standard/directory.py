@@ -54,6 +54,7 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
         return True
 
     def check(self):
+        # TODO: This is a temporary implementation. Use CMakeLists.txt to actually get the source files location.
         # Should not allow other known source locations.
         forbidden_source_locations = ["source/", "sources/", "lib/", "library/"]
         for forbidden_prefix in forbidden_source_locations:
