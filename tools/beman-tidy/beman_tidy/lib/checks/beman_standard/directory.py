@@ -11,14 +11,15 @@ from ..system.registry import register_beman_standard_check
 # Note: DirectoryBaseCheck is not a registered check!
 class BemanTreeDirectoryCheck(DirectoryBaseCheck):
     """
-    Check if the directory tree is a Beman tree: ${prefix_path}/beman/${short_name}.
+    Beman tree: ${prefix_path}/beman/${short_name}.
+    Available via member: self.path
+
     Examples for a repo named "exemplar":
     - include/beman/exemplar
-    - src/beman/exemplar
     - tests/beman/exemplar
-    - examples/
-    - docs/
-    - papers/
+    - src/beman/exemplar
+
+    Note: A path can be optional. Actual implementation will be in the derived's check().
     """
 
     def __init__(self, repo_info, beman_standard_check_config, prefix_path):
