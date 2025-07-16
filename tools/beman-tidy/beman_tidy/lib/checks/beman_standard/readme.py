@@ -6,12 +6,11 @@ import re
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
 
+
 # [README.*] checks category.
 # All checks in this file extend the ReadmeBaseCheck class.
 #
 # Note: ReadmeBaseCheck is not a registered check!
-
-
 class ReadmeBaseCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config, "README.md")
