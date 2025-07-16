@@ -84,7 +84,7 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
         self.log(
             "Please add required badges in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmebadges for the desired format."
         )
-        return False
+        return True
 
 
 @register_beman_standard_check("README.IMPLEMENTS")
@@ -122,7 +122,7 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
         self.log(
             "Please write a Implements line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for the desired format."
         )
-        return False
+        return True
 
 
 @register_beman_standard_check("README.LIBRARY_STATUS")
@@ -148,5 +148,7 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
         return True
 
     def fix(self):
-        # TODO: Implement the fix.
-        pass
+        self.log(
+            "Please write a Status line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelibrary_status for the desired format."
+        )
+        return True
