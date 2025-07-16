@@ -58,11 +58,16 @@ README.TITLE:
     - type: RECOMMENDATION
 README.BADGES:
     - type: REQUIREMENT
-    - values: [
+    - values:
+        - library_status: [
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg)",
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_api_may_undergo_changes.svg)",
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_stable_api.svg)",
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_retired.svg)"
+        ]
+        - standard_target: [
+            "![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp26.svg)",
+            "![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp29.svg)"
         ]
 README.PURPOSE:
     - type: RECOMMENDATION
