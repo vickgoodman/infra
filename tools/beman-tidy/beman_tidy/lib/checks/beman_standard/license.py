@@ -24,11 +24,7 @@ class LicenseApprovedCheck(LicenseBaseCheck):
     def check(self):
         lines = self.read_lines_strip()
 
-        approved_licenses = [
-            "Apache License",
-            "Boost Software License",
-            "MIT License"
-        ]
+        approved_licenses = ["Apache License", "Boost Software License", "MIT License"]
 
         for line in lines:
             if any(license_name in line for license_name in approved_licenses):

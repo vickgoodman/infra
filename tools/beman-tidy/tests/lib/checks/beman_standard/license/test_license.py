@@ -6,7 +6,6 @@ from pathlib import Path
 
 from tests.utils.path_runners import (
     run_check_for_each_path,
-    run_fix_inplace_for_each_file_path,
 )
 
 # Actual tested checks.
