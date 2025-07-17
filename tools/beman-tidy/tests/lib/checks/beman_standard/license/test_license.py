@@ -23,7 +23,7 @@ def test__LICENSE_APPROVED__valid(repo_info, beman_standard_check_config):
     Test that a valid LICENSE file passes the check.
     """
     valid_license_paths = [
-        # Apache License 2.0
+        # Apache License v2.0 with LLVM Exceptions
         Path(f"{valid_prefix}/LICENSE-v1"),
         # Boost Software License 1.0
         Path(f"{valid_prefix}/LICENSE-v2"),
@@ -45,11 +45,11 @@ def test__LICENSE_APPROVED__invalid(repo_info, beman_standard_check_config):
     Test that an invalid LICENSE file fails the check.
     """
     invalid_license_paths = [
-        # GNU General Public License (GPL) v3.0
+        # LICENSE without header
         Path(f"{invalid_prefix}/invalid-LICENSE-v1"),
-        # GNU Lesser General Public License (LGPL) v3.0
+        # LICENSE without footer
         Path(f"{invalid_prefix}/invalid-LICENSE-v2"),
-        # BSD-2-Clause License
+        # LICENSE with only header and footer
         Path(f"{invalid_prefix}/invalid-LICENSE-v3"),
     ]
 
