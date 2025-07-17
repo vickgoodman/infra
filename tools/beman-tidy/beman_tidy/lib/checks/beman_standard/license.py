@@ -44,7 +44,7 @@ class LicenseApprovedCheck(LicenseBaseCheck):
             ):
                 has_approved_license_header = True
 
-        if has_approved_license_header == False:
+        if not has_approved_license_header:
             self.log(
                 "Incorrect header for LICENSE. "
                 "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
