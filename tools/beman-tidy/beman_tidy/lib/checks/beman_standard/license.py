@@ -2,7 +2,9 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import re
+import filecmp
 import textwrap
+from pathlib import Path
 
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
@@ -70,7 +72,29 @@ class LicenseApprovedCheck(LicenseBaseCheck):
         )
 
 
-# TODO LICENSE.APACHE_LLVM
+@register_beman_standard_check("LICENSE.APACHE_LLVM")
+class LicenseApacheLLVMCheck(LicenseBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        # Compare LICENSE file stored at self.path with the reference one.
+        target_license = self.path
+        ref_license = Path(__file__).parents[6] / "LICENSE"
+        if not filecmp.cmp(target_license, ref_license, shallow=False):
+            self.log(
+                "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapache_llvm for more information."
+            )
+            return False
+
+        return True
+
+    def fix(self):
+        self.log(
+            "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapache_llvm for more information."
+        )
 
 
 # TODO LICENSE.CRITERIA
