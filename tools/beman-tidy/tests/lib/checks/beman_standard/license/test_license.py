@@ -11,6 +11,7 @@ from tests.utils.path_runners import (
 # Actual tested checks.
 from beman_tidy.lib.checks.beman_standard.license import (
     LicenseApprovedCheck,
+    LicenseApacheLLVMCheck
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/license/data"
@@ -68,4 +69,47 @@ def test__LICENSE_APPROVED__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__LICENSE_APPROVED__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+def test__LICENSE_APACHE_LLVM__valid(repo_info, beman_standard_check_config):
+    """
+    Test that a LICENSE file with Apache LLVM passes the check.
+    """
+    valid_license_paths = [
+        # Apache License v2.0 with LLVM Exceptions
+        Path(f"{valid_prefix}/valid-LICENSE-v1"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_license_paths,
+        LicenseApacheLLVMCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that a LICENSE file without Apache LLVM fails the check.
+    """
+    invalid_license_paths = [
+        # Boost Software License 1.0
+        Path(f"{invalid_prefix}/invalid-LICENSE-v6"),
+        # MIT License
+        Path(f"{invalid_prefix}/invalid-LICENSE-v7"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_license_paths,
+        LicenseApacheLLVMCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_config):
     pass

@@ -70,7 +70,33 @@ class LicenseApprovedCheck(LicenseBaseCheck):
         )
 
 
-# TODO LICENSE.APACHE_LLVM
+@register_beman_standard_check("LICENSE.APACHE_LLVM")
+class LicenseApacheLLVMCheck(LicenseBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        # path/to/repo/LICENSE content
+        content = self.read()
+
+        # infra LICENSE content
+        with open("../../LICENSE", "r") as f:
+            infra_license = f.read()
+
+        if content != infra_license:
+            self.log(
+                "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapache_llvm for more information."
+            )
+            return False
+
+        return True
+
+    def fix(self):
+        self.log(
+            "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapache_llvm for more information."
+        )
 
 
 # TODO LICENSE.CRITERIA
