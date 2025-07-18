@@ -81,7 +81,6 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
         # Compare LICENSE file stored at self.path with the reference one.
         target_license = self.path
         ref_license = Path(__file__).parents[6] / "LICENSE"
-
         if not filecmp.cmp(target_license, ref_license, shallow=False):
             self.log(
                 "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
