@@ -12,6 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.license import (
     LicenseApprovedCheck,
     LicenseApacheLLVMCheck,
+    LicenseCriteriaCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/license/data"
@@ -116,13 +117,39 @@ def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_confi
 
 
 def test__LICENSE_CRITERIA__valid(repo_info, beman_standard_check_config):
-    pass
+    valid_license_paths = [
+        # Apache License v2.0 with LLVM Exceptions
+        Path(f"{valid_prefix}/valid-LICENSE-v1"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_license_paths,
+        LicenseCriteriaCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
 
 
+@pytest.mark.skip(reason="NOT implemented")
 def test__LICENSE_CRITERIA__invalid(repo_info, beman_standard_check_config):
+    # LICENSE.CRITERIA cannot be invalid. Check license.py.
+    invalid_license_paths = [
+        # Almost valid LICENSE, but without header
+        Path(f"{invalid_prefix}/invalid-LICENSE-v1"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_license_paths,
+        LicenseCriteriaCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
     pass
 
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__LICENSE_CRITERIA__fix_inplace(repo_info, beman_standard_check_config):
+    # LICENSE.CRITERIA cannot be invalid, so no need for fix inplace. Check license.py.
     pass
