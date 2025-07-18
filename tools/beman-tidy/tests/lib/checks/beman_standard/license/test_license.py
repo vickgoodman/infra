@@ -12,6 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.license import (
     LicenseApprovedCheck,
     LicenseApacheLLVMCheck,
+    LicenseCriteriaCheck
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/license/data"
@@ -112,4 +113,17 @@ def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+def test__LICENSE_CRITERIA__valid(repo_info, beman_standard_check_config):
+    pass
+
+
+def test__LICENSE_CRITERIA__invalid(repo_info, beman_standard_check_config):
+    pass
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__LICENSE_CRITERIA__fix_inplace(repo_info, beman_standard_check_config):
     pass
