@@ -28,12 +28,17 @@ class LicenseApprovedCheck(LicenseBaseCheck):
         content = self.read()
 
         # Regex for LICENSE check
+        # - fixed header matching
+        # - non empty body matching
+        # - fixed footer matching
         regex = re.compile(
             textwrap.dedent(r"""
                 ^={78}
                 The Beman Project is under the (Apache License v2\.0 with LLVM Exceptions|Boost Software License 1\.0|MIT License):
                 ={78}
+
                 (.+?)
+
                 ={78}
                 Software from third parties included in the Beman Project:
                 ={78}
