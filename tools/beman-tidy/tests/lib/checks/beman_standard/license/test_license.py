@@ -11,7 +11,7 @@ from tests.utils.path_runners import (
 # Actual tested checks.
 from beman_tidy.lib.checks.beman_standard.license import (
     LicenseApprovedCheck,
-    LicenseApacheLLVMCheck
+    LicenseApacheLLVMCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/license/data"
