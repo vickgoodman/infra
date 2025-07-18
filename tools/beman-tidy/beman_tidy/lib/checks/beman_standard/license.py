@@ -27,8 +27,8 @@ class LicenseApprovedCheck(LicenseBaseCheck):
     def check(self):
         content = self.read()
 
-        # Regex pattern for LICENSE check
-        pattern = re.compile(
+        # Regex for LICENSE check
+        regex = re.compile(
             textwrap.dedent(r"""
                 ^={78}
                 The Beman Project is under the (Apache License v2\.0 with LLVM Exceptions|Boost Software License 1\.0|MIT License):
@@ -49,7 +49,7 @@ class LicenseApprovedCheck(LicenseBaseCheck):
             re.DOTALL,
         )
 
-        if not pattern.match(content):
+        if not regex.match(content):
             self.log(
                 "LICENSE file does not match the required format. "
                 "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
