@@ -9,7 +9,6 @@ from pathlib import Path
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
 
-
 # [LICENSE.*] checks category.
 # All checks in this file extend the LicenseBaseCheck class.
 #
@@ -97,4 +96,20 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
         )
 
 
-# TODO LICENSE.CRITERIA
+@register_beman_standard_check("LICENSE.CRITERIA")
+class LicenseCriteriaCheck(LicenseBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        self.log(
+            "beman-tidy cannot actually check LICENSE.CRITERIA. Please ignore this message if LICENSE.APPROVED has passed. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
+        )
+        return True
+
+    def fix(self):
+        self.log(
+            "beman-tidy cannot actually check LICENSE.CRITERIA. Please ignore this message if LICENSE.APPROVED has passed. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
+        )
