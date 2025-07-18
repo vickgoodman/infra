@@ -8,7 +8,6 @@ from pathlib import Path
 
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
-from ....lib.utils.git import load_beman_standard_config, get_repo_info
 
 # [LICENSE.*] checks category.
 # All checks in this file extend the LicenseBaseCheck class.
