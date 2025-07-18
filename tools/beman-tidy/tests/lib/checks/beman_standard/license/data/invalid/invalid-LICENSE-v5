@@ -1,8 +1,12 @@
+==============================================================================
+The Beman Project is under the Apache License v2.0 with LLVM Exceptions:
+==============================================================================
+
 # Dummy LICENSE lines.
 # beman-tidy does not actually check the content between the header and the footer.
 
 ==============================================================================
-Software from third parties included in the Beman Project:
+"Extra" Software from third parties included in the Beman Project:
 ==============================================================================
 The Beman Project contains third party software which is under different license
 terms. All such code will be identified clearly using at least one of two
