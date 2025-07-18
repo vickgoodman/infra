@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import re
-import textwrap
 
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
@@ -66,7 +65,9 @@ mechanisms:
    which apply to that software, or
 2\) It will contain specific license and restriction terms at the top of every
    file\.
-""", re.DOTALL)
+""",
+            re.DOTALL,
+        )
         # """
 
         if not pattern.match(content):
