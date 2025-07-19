@@ -32,6 +32,23 @@ class ReleaseGithubCheck(BaseCheck):
 
 
 # TODO RELEASE.NOTES
+@register_beman_standard_check("RELEASE.NOTES")
+class ReleaseNotesCheck(BaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        # Need to always return True, as beman-tidy is an offline tool
+        # that does not have access to the GitHub API.
+        self.log(
+            "beman-tidy cannot check this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasenotes."
+        )
+        return True
+
+    def fix(self):
+        self.log(
+            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasenotes."
+        )
 
 
 @register_beman_standard_check("RELEASE.GODBOLT_TRUNK_VERSION")

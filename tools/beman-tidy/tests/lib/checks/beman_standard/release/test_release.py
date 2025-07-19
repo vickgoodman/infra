@@ -12,6 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.release import (
     ReleaseGithubCheck,
     ReleaseGodboltTrunkVersionCheck,
+    ReleaseNotesCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/release/data"
@@ -50,6 +51,43 @@ def test__RELEASE_GITHUB__invalid(repo_info, beman_standard_check_config):
 @pytest.mark.skip(reason="NOT implemented")
 def test__RELEASE_GITHUB__fix_inplace(repo_info, beman_standard_check_config):
     # RELEASE.GITHUB always passes, as beman-tidy is an offline tool.
+    pass
+
+
+def test__RELEASE_NOTES__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with release notes pass the check.
+    """
+    valid_repo_paths = [
+        # RELEASE.NOTES always passes, as beman-tidy is an offline tool.
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+        Path(f"{invalid_prefix}/repo-exemplar-v1/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_repo_paths,
+        ReleaseNotesCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__RELEASE_NOTES__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with missing release notes fail the check.
+    """
+    # RELEASE.NOTES always passes, as beman-tidy is an offline tool.
+    pass
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__RELEASE_NOTES__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with missing release notes fail the check.
+    """
+    # RELEASE.NOTES always passes, as beman-tidy is an offline tool.
     pass
 
 
