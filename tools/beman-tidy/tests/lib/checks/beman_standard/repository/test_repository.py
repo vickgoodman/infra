@@ -3,6 +3,8 @@
 
 import pytest
 from pathlib import Path
+from git.objects.submodule.base import Submodule
+from unittest.mock import Mock
 
 from tests.utils.path_runners import (
     run_check_for_each_path,
