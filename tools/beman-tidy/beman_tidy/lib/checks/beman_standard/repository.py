@@ -91,7 +91,7 @@ class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
             regex = re.compile(
                 textwrap.dedent(r"""
                     ^\[submodule \"(?:.+?/)?wg21\"]
-                    \tpath = (?:.+?/)?wg21
+                    \tpath = (.+?)
                     \turl = https://github.com/mpark/wg21.git$
                 """).strip()
             )
@@ -109,7 +109,6 @@ class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
 
     def fix(self):
         self.log(
-            "Please remove git submodules. "
-            "Known exception: wg21. "
+            "beman-tidy can't automatically fix the repository submodules. "
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydisallow_git_submodules for more information."
         )
