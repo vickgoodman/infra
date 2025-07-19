@@ -2,15 +2,33 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 import re
+from beman_tidy.lib.checks.base.base_check import BaseCheck
 from beman_tidy.lib.checks.beman_standard.readme import ReadmeBaseCheck
 from ..system.registry import register_beman_standard_check
 
 # [RELEASE.*] checks category.
 # Note: Data is stored online - e.g. https://github.com/bemanproject/exemplar/releases
-# TBD - Do we want to implement these checks?
+# beman-tidy is an offline tool, so it cannot check these issues,
+# but for some of them it will try some heuristics.
 
 
-# TODO RELEASE.GITHUB
+@register_beman_standard_check("RELEASE.GITHUB")
+class ReleaseGithubCheck(BaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        # Need to always return True, as beman-tidy is an offline tool
+        # that does not have access to the GitHub API.
+        self.log(
+            "beman-tidy cannot check this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegithub."
+        )
+        return True
+
+    def fix(self):
+        self.log(
+            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegithub."
+        )
 
 
 # TODO RELEASE.NOTES
