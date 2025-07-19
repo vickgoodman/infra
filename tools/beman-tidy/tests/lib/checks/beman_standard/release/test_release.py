@@ -133,4 +133,8 @@ def test__RELEASE_GODBOLT_TRUNK_VERSION__invalid(
 def test__RELEASE_GODBOLT_TRUNK_VERSION__fix_inplace(
     repo_info, beman_standard_check_config
 ):
+    """
+    Test that the fix method corrects an invalid README.md Godbolt trunk version.
+    """
+    # Cannot determine what Godbolt trunk version to create. fix() is not implemented.
     pass
