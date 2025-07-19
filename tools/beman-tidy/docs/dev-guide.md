@@ -127,6 +127,7 @@ Requirements:
 * `beman-tidy` must have `verbose` and `non-verbose` modes. Default is `non-verbose`.
 * `beman-tidy` must have `dry-run` and `fix-inplace` modes. Default is `dry-run`.
 * `beman-tidy` must detect types of checks: failed, passed, skipped (not implemented) and print the summary/coverage.
+* `beman-tidy` can access configuration files shipped with the tool itself (e.g., `.beman-standard.yml` or `LICENSE`). All such files must be in the `beman_tidy/` directory to be automatically available in exported packages. It cannot access files from the repository itself (e.g., `infra/LICENSE` or `infra/tools/beman-tidy/README.md`).
 
 Limitations:
 

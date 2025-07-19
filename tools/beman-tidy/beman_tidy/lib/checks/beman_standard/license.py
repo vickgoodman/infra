@@ -4,10 +4,10 @@
 import re
 import filecmp
 import textwrap
-from pathlib import Path
 
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
+from beman_tidy.lib.utils.git import get_beman_recommendated_license_path
 
 # [LICENSE.*] checks category.
 # All checks in this file extend the LicenseBaseCheck class.
@@ -79,7 +79,7 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
     def check(self):
         # Compare LICENSE file stored at self.path with the reference one.
         target_license = self.path
-        ref_license = Path(__file__).parents[6] / "LICENSE"
+        ref_license = get_beman_recommendated_license_path()
         if not filecmp.cmp(target_license, ref_license, shallow=False):
             self.log(
                 "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
