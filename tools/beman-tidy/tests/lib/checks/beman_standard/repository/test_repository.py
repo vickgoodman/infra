@@ -177,10 +177,12 @@ def test__REPOSITORY_DISALLOW_GIT_SUBMODULES__valid(
     Test that repositories with valid git submodules pass the check.
     """
     valid_submodules_paths = [
-        # Repo with no .gitsubmodules
+        # Repo with no .gitsubmodules file
         Path(f"{valid_prefix}/repo-exemplar-v1/"),
         # Repo with wg21 git submodule
         Path(f"{valid_prefix}/repo-exemplar-v2/"),
+        # Repo with wg21 submodule but different path
+        Path(f"{valid_prefix}/repo-exemplar-v3/"),
     ]
 
     run_check_for_each_path(

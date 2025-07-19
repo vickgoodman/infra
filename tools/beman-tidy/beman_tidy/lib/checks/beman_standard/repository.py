@@ -75,26 +75,26 @@ class RepositoryDefaultBranchCheck(BaseCheck):
 
 
 @register_beman_standard_check("REPOSITORY.DISALLOW_GIT_SUBMODULES")
-class RepositoryDisallowGitSubmodulesCheck(BaseCheck):
+class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
-        super().__init__(repo_info, beman_standard_check_config)
+        super().__init__(repo_info, beman_standard_check_config, ".gitmodules")
+
+    def pre_check(self):
+        # Need to override this, because REPOSITORY.DISALLOW_GIT_SUBMODULES is conditional
+        return True
 
     def check(self):
-        # Regex pattern to match "wg21" submodule
-        regex = re.compile(
-            textwrap.dedent(r"""
-                ^\[submodule \"wg21\"]
-                \tpath = wg21
-                \turl = https://github.com/mpark/wg21.git$
-            """).strip()
-        )
+        if self.path.exists():
+            content = self.read()
 
-        gitsubmodules_path = self.repo_path / ".gitmodules"
-
-        # Check if .gitmodules file exists and is different from wg21
-        if gitsubmodules_path.exists():
-            with open(gitsubmodules_path, "r") as f:
-                content = f.read()
+            # Regex pattern to match "wg21" submodule
+            regex = re.compile(
+                textwrap.dedent(r"""
+                    ^\[submodule \"(?:.+?/)?wg21\"]
+                    \tpath = (?:.+?/)?wg21
+                    \turl = https://github.com/mpark/wg21.git$
+                """).strip()
+            )
 
             if not regex.match(content):
                 self.log(
@@ -104,7 +104,7 @@ class RepositoryDisallowGitSubmodulesCheck(BaseCheck):
                 )
                 return False
 
-        # Check passes if .gitmodules file doesn't exist
+        # Check passes if .gitmodules file doesn't exist or if it only contains wg21 submodule.
         return True
 
     def fix(self):

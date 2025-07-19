@@ -1,9 +1,9 @@
-[submodule "dummy"]
-	path = dummy
-	url = https://github.com/dummy.git
+[submodule "dummy1"]
+	path = dummy1
+	url = https://github.com/dummy1.git
 [submodule "wg21"]
 	path = wg21
 	url = https://github.com/mpark/wg21.git
-[submodule "papers"]
-	path = papers
-	url = https://github.com/cplusplus/papers
+[submodule "dummy2"]
+	path = dummy2
+	url = https://github.com/cplusplus/dummy2
