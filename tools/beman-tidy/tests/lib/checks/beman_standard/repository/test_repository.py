@@ -30,6 +30,9 @@ def test__REPOSITORY_NAME__valid(repo_info, beman_standard_check_config):
         repo_info.copy() | {"name": "exemplar"},
         repo_info.copy() | {"name": "optional"},
         repo_info.copy() | {"name": "smart_pointer"},
+        repo_info.copy() | {"name": "execution"},
+        repo_info.copy() | {"name": "utf_view"},
+        repo_info.copy() | {"name": "net"},
     ]
 
     run_check_for_each_repo_info(
@@ -51,6 +54,9 @@ def test__REPOSITORY_NAME__invalid(repo_info, beman_standard_check_config):
         repo_info.copy() | {"name": "beman.exemplar26"},
         repo_info.copy() | {"name": "exemplar_"},
         repo_info.copy() | {"name": "_exemplar"},
+        repo_info.copy() | {"name": "optional26"},
+        repo_info.copy() | {"name": "execution26"},
+        repo_info.copy() | {"name": "net29"},
     ]
 
     run_check_for_each_repo_info(
