@@ -15,9 +15,7 @@ def is_beman_snake_case(name):
     """
 
     return (
-        name[:6] != "beman."
-        and is_snake_case(name)
-        and not re.match(".*[0-9]+$", name)
+        name[:6] != "beman." and is_snake_case(name) and not re.match(".*[0-9]+$", name)
     )
 
 
