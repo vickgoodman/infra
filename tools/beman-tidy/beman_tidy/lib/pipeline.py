@@ -175,10 +175,9 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
     print(
         f"Summary    REQUIREMENT: {green_color} {cnt_passed_checks['REQUIREMENT']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['REQUIREMENT']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['REQUIREMENT']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['REQUIREMENT']} checks NOT IMPLEMENTED."
     )
-    if not args.require_all:
-        print(
-            f"Summary RECOMMENDATION: {green_color} {cnt_passed_checks['RECOMMENDATION']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['RECOMMENDATION']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['RECOMMENDATION']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['RECOMMENDATION']} checks NOT IMPLEMENTED."
-        )
+    print(
+        f"Summary RECOMMENDATION: {green_color} {cnt_passed_checks['RECOMMENDATION']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['RECOMMENDATION']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['RECOMMENDATION']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['RECOMMENDATION']} checks NOT IMPLEMENTED."
+    )
 
     # Always print the coverage.
     cnt_passed_requirement = (
