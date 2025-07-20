@@ -91,7 +91,7 @@ class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
             regex = re.compile(
                 textwrap.dedent(r"""
                     ^\[submodule \"(?:.+?/)?wg21\"]
-                    \tpath = (.+?)
+                    \tpath = papers/(.+?)
                     \turl = https://github.com/mpark/wg21.git$
                 """).strip()
             )
