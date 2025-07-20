@@ -1,18 +1,19 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-name: beman-tidy lint, testing and installing
+name: beman-tidy tests
 
 on:
   push:
     branches:
       - main
   pull_request:
+  workflow_call:
   workflow_dispatch:
   schedule:
     - cron: '0 5 * * *' #  08:00AM EEST (@neatudarius' timezone) -> 05:00AM UTC
 
 jobs:
-  run_tests:
+  run_linter:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,11 +33,50 @@ jobs:
         run: |
           uv run ruff check --diff
 
+  run_tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/beman-tidy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync environment
+        run: |
+          uv sync
+
       - name: Run tests
         run: |
           uv run pytest tests/ -v
 
   build_and_install:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/beman-tidy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync environment
+        run: |
+          uv sync
+
+      - name: Build and install beman-tidy
+        run: |
+         uv clean
+         uv build
+         python3 -m pip install dist/beman_tidy-0.1.0-py3-none-any.whl --force-reinstall
+         beman-tidy --help
+
+  run_on_exemplar:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -66,6 +106,6 @@ jobs:
           beman-tidy --verbose --require-all .
 
   create-issue-when-fault:
-    needs: [run_tests, build_and_install]
-    if: failure() && github.event.schedule == '0 5 * * *' # 08:00AM EEST (@neatudarius' timezone) -> 05:00AM UTC
+    needs: [run_linter, run_tests, build_and_install, run_on_exemplar]
+    if: failure() && (github.event_name == 'workflow_call' || github.event_name == 'schedule')
     uses: ./.github/workflows/reusable-beman-create-issue-when-fault.yml
