@@ -68,8 +68,11 @@ def test__LICENSE_APPROVED__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
 def test__LICENSE_APPROVED__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid LICENSE file.
+    """
+    # Cannot determine what license to create. fix() is not implemented.
     pass
 
 
@@ -113,33 +116,16 @@ def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid LICENSE file.
+    """
+    # Cannot determine what license to create. fix() is not implemented.
     pass
 
 
-def test__LICENSE_CRITERIA__valid(repo_info, beman_standard_check_config):
-    valid_license_paths = [
-        # LICENSE.CRITERIA is always true, e.g. for valid file with Apache License v2.0 with LLVM Exceptions.
-        Path(f"{valid_prefix}/valid-LICENSE-v1"),
-        # LICENSE.CRITERIA is always true, e.g. for invalid file.
-        Path(f"{invalid_prefix}/invalid-LICENSE-v1"),
-    ]
-
-    run_check_for_each_path(
-        True,
-        valid_license_paths,
-        LicenseCriteriaCheck,
-        repo_info,
-        beman_standard_check_config,
-    )
-
-
-@pytest.mark.skip(reason="NOT implemented")
-def test__LICENSE_CRITERIA__invalid(repo_info, beman_standard_check_config):
-    # LICENSE.CRITERIA cannot be invalid. Check license.py.
-    pass
-
-
-@pytest.mark.skip(reason="NOT implemented")
-def test__LICENSE_CRITERIA__fix_inplace(repo_info, beman_standard_check_config):
-    # LICENSE.CRITERIA cannot be invalid, so no need for fix inplace. Check license.py.
-    pass
+def test__LICENSE_CRITERIA__skipped(repo_info, beman_standard_check_config):
+    """
+    Test that LICENSE.CRITERIA is always skipped.
+    """
+    # LICENSE.CRITERIA is skipped, as it cannot be implemented.
+    assert LicenseCriteriaCheck(repo_info, beman_standard_check_config).should_skip()

@@ -87,9 +87,24 @@ tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_inplace SKI
   check.
   * e.g., for `check_category = "readme"` the test file is `tests/lib/checks/beman_standard/readme/test_readme.py`.
 * `test__<check_category>__<test_case_name>()` function inside the test file.
-  * e.g., for `check_category = "readme"` and `test_case_name = "valid"` the function is `test__README_TITLE__valid()`.
-  * e.g., for `check_category = "readme"` and `test_case_name = "invalid"` the function is
-    `test__README_TITLE__invalid()`.
+  * `test_case_name` can be `valid`, `invalid`, `fix_inplace` or `skipped`.
+  * If the check is implemented and must be run, add the 3 functions: `valid`, `invalid` and `fix_inplace` (some of them can be a
+    `@pytest.mark.skip(reason="NOT implemented")` decorator).
+  * If the check is implemented as a dummy (e.g., cannot be properly implemented), add the `skipped` function.
+    `should_skip()` must log a reason why it is skipped.
+  * Examples:
+    * Runnable check - `README.TITLE`:
+      * for `check_category = "readme"` and `test_case_name = "valid"` the function is `test__README_TITLE__valid()`.
+      * for `check_category = "readme"` and `test_case_name = "invalid"` the function is
+        `test__README_TITLE__invalid()`.
+      * for `check_category = "readme"` and `test_case_name = "fix_inplace"` the function is
+        `test__README_TITLE__fix_inplace()`.
+    * Skippable check - `LICENSE.CRITERIA`:
+      * for `check_category = "license"` and `test_case_name = "skipped"` the function is
+        `test__LICENSE_CRITERIA__skipped()`.
+      * `should_skip()` must log a reason why it is skipped.
+      * `should_skip()` must return `True`.
+      * `check()` and `fix()` must provide a `return True` implementation.
 * `tests/beman_standard/<check_category>/data/`: The data for the tests (e.g., files, directories, etc.).
   * e.g., for `check_category = "readme"` and `test_case_name = "valid"` the data is in
     `tests/lib/checks/beman_standard/readme/data/valid/`.
