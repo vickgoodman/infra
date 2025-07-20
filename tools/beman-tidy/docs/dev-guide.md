@@ -88,10 +88,10 @@ tests/beman_standard/readme/test_readme.py::test__README_BADGES__fix_inplace SKI
   * e.g., for `check_category = "readme"` the test file is `tests/lib/checks/beman_standard/readme/test_readme.py`.
 * `test__<check_category>__<test_case_name>()` function inside the test file.
   * `test_case_name` can be `valid`, `invalid`, `fix_inplace` or `skipped`.
-  * If the check is implemented and must be run, add the 3 functions: `valid`, `invalid` and `fix_inplace` (some of them can be a
-    `@pytest.mark.skip(reason="NOT implemented")` decorator).
+  * If the check is implemented and must be run, add 3 test functions: `valid`, `invalid` and `fix_inplace` (some of them can be a `@pytest.mark.skip(reason="NOT implemented")` decorator, but at least one must be actually implemented).
   * If the check is implemented as a dummy (e.g., cannot be properly implemented), add the `skipped` function.
     `should_skip()` must log a reason why it is skipped.
+  * Note: The number of tests is already enforced by a unit test in `tests/lib/checks/system/test_registry.py`, which is looking for the test functions for new added checks!
   * Examples:
     * Runnable check - `README.TITLE`:
       * for `check_category = "readme"` and `test_case_name = "valid"` the function is `test__README_TITLE__valid()`.
