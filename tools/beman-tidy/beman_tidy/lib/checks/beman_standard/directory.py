@@ -109,21 +109,24 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
 
     def check(self):
         repo_path = Path(self.repo_path)
-        root_readme = repo_path / 'README.md'
+        root_readme = repo_path / "README.md"
 
         # Exclude directories that are not part of the documentation.
-        exclude_dirs = ['papers', '.github']
+        exclude_dirs = ["papers", ".github"]
 
         if self.path.exists():
-            exclude_dirs.append('docs')
+            exclude_dirs.append("docs")
 
-        if self.repo_name == 'exemplar':
-            exclude_dirs.extend(['cookiecutter', 'infra'])
+        if self.repo_name == "exemplar":
+            exclude_dirs.extend(["cookiecutter", "infra"])
 
         # Find all markdown files in the repository.
         misplaced_md_files = [
-            p for p in repo_path.rglob('*.md')
-            if not any(excluded in p.parts for excluded in exclude_dirs)  # exclude files in excluded directories
+            p
+            for p in repo_path.rglob("*.md")
+            if not any(
+                excluded in p.parts for excluded in exclude_dirs
+            )  # exclude files in excluded directories
             and p != root_readme  # exclude root README.md
         ]
 
