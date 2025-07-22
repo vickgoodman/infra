@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from pathlib import Path
-from itertools import chain
-
 from ..base.directory_base_check import DirectoryBaseCheck
 from ..system.registry import register_beman_standard_check
 
@@ -175,7 +172,16 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
             exclude_dirs.append("cookiecutter")
 
         # File extensions that are considered "paper-related"
-        paper_extensions = [".bib", ".pdf", ".tex", ".png", ".jpg", ".jpeg", ".svg", ".bst"]
+        paper_extensions = [
+            ".bib",
+            ".pdf",
+            ".tex",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".svg",
+            ".bst",
+        ]
         misplaced_paper_files = []
         # Find all paper-related files in the repository.
         for extension in paper_extensions:
@@ -189,8 +195,8 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
                 self.log(f"Misplaced paper file found: {misplaced_paper_file}")
 
             self.log(
-            "Please move all paper related files (and directories if applicable) within the papers/ directory. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+                "Please move all paper related files (and directories if applicable) within the papers/ directory. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
             )
 
             return False

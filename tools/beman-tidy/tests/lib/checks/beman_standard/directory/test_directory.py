@@ -12,7 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.directory import (
     DirectorySourcesCheck,
     DirectoryDocsCheck,
-    DirectoryPapersCheck
+    DirectoryPapersCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/directory/data"
