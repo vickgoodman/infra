@@ -12,6 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.directory import (
     DirectorySourcesCheck,
     DirectoryInterfaceHeadersCheck,
+    DirectoryDocsCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/directory/data"
@@ -120,4 +121,55 @@ def test__DIRECTORY_SOURCES__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__DIRECTORY_SOURCES__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+def test__DIRECTORY_DOCS__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with valid documentation structure pass the check.
+    """
+    valid_docs_paths = [
+        # exemplar/ repo without docs/ dir and with root README.md.
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+        # exemplar/ repo with docs/ dir and root README.md.
+        Path(f"{valid_prefix}/repo-exemplar-v2/"),
+        # exemplar/ repo with papers/ dir and root README.md.
+        Path(f"{valid_prefix}/repo-exemplar-v3/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_docs_paths,
+        DirectoryDocsCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__DIRECTORY_DOCS__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with invalid documentation structure fail the check.
+    """
+    invalid_docs_paths = [
+        # Misplaced MD files in root directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v1"),
+        # Misplaced MD files in root subdirectories.
+        Path(f"{invalid_prefix}/repo-exemplar-v2"),
+        # Misplaced MD files in root directory and root subdirectories.
+        Path(f"{invalid_prefix}/repo-exemplar-v3"),
+        # Wrong name for docs/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v4"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_docs_paths,
+        DirectoryDocsCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__DIRECTORY_DOCS__fix_inplace(repo_info, beman_standard_check_config):
     pass
