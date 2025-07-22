@@ -164,35 +164,42 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
         return True
 
     def check(self):
-        # Check for misplaced paper files.
+        """
+        Check if all paper related files are within the papers/ directory.
+        """
+        # Exclude directories that are not part of the papers.
+        exclude_dirs = ["src"]
         if self.path.exists():
-            repo_path = Path(self.repo_path)
+            exclude_dirs.append("papers")
+        if self.repo_name == "exemplar":
+            exclude_dirs.append("cookiecutter")
 
-            # File extensions that are considered "paper-related"
-            paper_extensions = ["*.bib", "*.pdf", "*.tex", "*.png", "*.jpg", "*.jpeg", "*.svg", "*.bst"]
+        # File extensions that are considered "paper-related"
+        paper_extensions = [".bib", ".pdf", ".tex", ".png", ".jpg", ".jpeg", ".svg", ".bst"]
+        misplaced_paper_files = []
+        # Find all paper-related files in the repository.
+        for extension in paper_extensions:
+            for p in self.repo_path.rglob(f"*{extension}"):
+                # Exclude files that are already in the papers/ directory.
+                if not any(excluded in str(p) for excluded in exclude_dirs):
+                    misplaced_paper_files.append(p)
 
-            # Find all paper-related files in the repository.
-            misplaced_paper_files = [
-                p for p in chain.from_iterable(repo_path.rglob(ext) for ext in paper_extensions)
-                if "papers" not in p.parts
-            ]
+        if len(misplaced_paper_files) > 0:
+            for misplaced_paper_file in misplaced_paper_files:
+                self.log(f"Misplaced paper file found: {misplaced_paper_file}")
 
-            if len(misplaced_paper_files) > 0:
-                for misplaced_paper_file in misplaced_paper_files:
-                    self.log(f"Misplaced paper file found: {misplaced_paper_file}")
+            self.log(
+            "Please move all paper related files (and directories if applicable) within the papers/ directory. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+            )
 
-                self.log(
-                "Please move all paper related files (and directories if applicable) within the papers/ directory. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
-                )
+            return False
 
-                return False
-
-        # Check passes if there is no papers/ directory or no misplaced paper files are found
+        # Check passes if there is no papers/ directory and no misplaced paper files are found
         return True
 
     def fix(self):
         self.log(
-            "Please move all paper related files to papers/ directory. "
+            "Please move all paper related files (and directories if applicable) to papers/ directory. "
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
         )
