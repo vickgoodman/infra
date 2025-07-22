@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+import re
+import textwrap
+
 from ..base.file_base_check import FileBaseCheck
 from ..base.base_check import BaseCheck
 from ..system.registry import register_beman_standard_check
+from ...utils.string import is_beman_snake_case
 
 # [REPOSITORY.*] checks category.
 # All checks in this file extend the FileBaseCheck class.
@@ -11,7 +15,28 @@ from ..system.registry import register_beman_standard_check
 # Note: FileBaseCheck is not a registered check!
 
 
-# TODO REPOSITORY.NAME
+@register_beman_standard_check("REPOSITORY.NAME")
+class RepositoryNameCheck(BaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        repo_name = self.repo_info["name"]
+        if not is_beman_snake_case(repo_name):
+            self.log(
+                "The repository should be named after the library name excluding the 'beman.' prefix. It should not contain a target C++ version. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositoryname for more information."
+            )
+            return False
+
+        return True
+
+    def fix(self):
+        self.log(
+            "beman-tidy can't automatically fix the repository name. "
+            "Please see https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositoryname for more information."
+        )
+        pass
 
 
 @register_beman_standard_check("REPOSITORY.CODEOWNERS")
@@ -49,4 +74,41 @@ class RepositoryDefaultBranchCheck(BaseCheck):
         )
 
 
-# TODO REPOSITORY.DISALLOW_GIT_SUBMODULES
+@register_beman_standard_check("REPOSITORY.DISALLOW_GIT_SUBMODULES")
+class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config, ".gitmodules")
+
+    def pre_check(self):
+        # Need to override this, because REPOSITORY.DISALLOW_GIT_SUBMODULES is conditional
+        return True
+
+    def check(self):
+        if self.path.exists():
+            content = self.read()
+
+            # Regex pattern to match "wg21" submodule
+            regex = re.compile(
+                textwrap.dedent(r"""
+                    ^\[submodule \"(?:.+?/)?wg21\"]
+                    \tpath = papers/(.+?)
+                    \turl = https://github.com/mpark/wg21.git$
+                """).strip()
+            )
+
+            if not regex.match(content):
+                self.log(
+                    "The repository should not use git submodules. Please remove them. "
+                    "Known exception: wg21. "
+                    "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydisallow_git_submodules for more information."
+                )
+                return False
+
+        # Check passes if .gitmodules file doesn't exist or if it only contains wg21 submodule.
+        return True
+
+    def fix(self):
+        self.log(
+            "beman-tidy can't automatically fix the repository submodules. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydisallow_git_submodules for more information."
+        )
