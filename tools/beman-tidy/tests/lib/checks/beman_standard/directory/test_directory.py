@@ -101,11 +101,11 @@ def test__DIRECTORY_DOCS__invalid(repo_info, beman_standard_check_config):
     Test that repositories with invalid documentation structure fail the check.
     """
     invalid_docs_paths = [
-        # Misplaced markdown files in root directory.
+        # Misplaced MD files in root directory.
         Path(f"{invalid_prefix}/repo-exemplar-v1"),
-        # Misplaced markdown files in root subdirectories.
+        # Misplaced MD files in root subdirectories.
         Path(f"{invalid_prefix}/repo-exemplar-v2"),
-        # Misplaced markdown files in root directory and root subdirectories.
+        # Misplaced MD files in root directory and root subdirectories.
         Path(f"{invalid_prefix}/repo-exemplar-v3"),
         # Wrong name for docs/ directory.
         Path(f"{invalid_prefix}/repo-exemplar-v4"),

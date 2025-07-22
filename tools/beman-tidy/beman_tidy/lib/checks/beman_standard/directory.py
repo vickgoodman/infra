@@ -104,36 +104,31 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
 
     def pre_check(self):
         # Need to override this, because DIRECTORY.DOCS is conditional
-        # (a repo without any documentation is still valid)
+        # (a repo without any documentation is still valid).
         return True
 
     def check(self):
-        repo_path = Path(self.repo_path)
-        root_readme = repo_path / "README.md"
-
         # Exclude directories that are not part of the documentation.
         exclude_dirs = ["papers", ".github"]
-
         if self.path.exists():
             exclude_dirs.append("docs")
-
         if self.repo_name == "exemplar":
             exclude_dirs.extend(["cookiecutter", "infra"])
 
-        # Find all markdown files in the repository.
+        # Find all MD files in the repository.
         misplaced_md_files = [
             p
-            for p in repo_path.rglob("*.md")
+            for p in self.repo_path.rglob("*.md")
             if not any(
                 excluded in p.parts for excluded in exclude_dirs
             )  # exclude files in excluded directories
-            and p != root_readme  # exclude root README.md
+            and p != self.repo_path / "README.md"  # exclude root README.md
         ]
 
-        # Check if any markdown files are misplaced.
+        # Check if any MD files are misplaced.
         if len(misplaced_md_files) > 0:
             for misplaced_md_file in misplaced_md_files:
-                self.log(f"Misplaced markdown file found: {misplaced_md_file}")
+                self.log(f"Misplaced MD file found: {misplaced_md_file}")
 
             self.log(
                 "Please move all documentation files within the docs/ directory, except for the root README.md file. "
@@ -142,7 +137,7 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
 
             return False
 
-        # Check passes if there is no docs/ directory or no misplaced markdown files are found
+        # Check passes if there is no docs/ directory or no misplaced MD files are found
         return True
 
     def fix(self):
