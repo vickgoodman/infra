@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+from pathlib import Path
+from itertools import chain
+
 from ..base.directory_base_check import DirectoryBaseCheck
 from ..system.registry import register_beman_standard_check
 
@@ -94,3 +97,50 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
 
 
 # TODO DIRECTORY.PAPERS
+@register_beman_standard_check("DIRECTORY.PAPERS")
+class DirectoryPapersCheck(DirectoryBaseCheck):
+    """
+    Check if the all paper related files reside within papers/ directory.
+    """
+
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config, "papers")
+
+    def pre_check(self):
+        # Need to override this, because DIRECTORY.PAPERS is conditional
+        # (a repo without any paper files is still valid - no papers/ directory required)
+        return True
+
+    def check(self):
+        # Check for misplaced paper files.
+        if self.path.exists():
+            repo_path = Path(self.repo_path)
+
+            # File extensions that are considered "paper-related"
+            paper_extensions = ["*.bib", "*.pdf", "*.tex", "*.png", "*.jpg", "*.jpeg", "*.svg", "*.bst"]
+
+            # Find all paper-related files in the repository.
+            misplaced_paper_files = [
+                p for p in chain.from_iterable(repo_path.rglob(ext) for ext in paper_extensions)
+                if "papers" not in p.parts
+            ]
+
+            if len(misplaced_paper_files) > 0:
+                for misplaced_paper_file in misplaced_paper_files:
+                    self.log(f"Misplaced paper file found: {misplaced_paper_file}")
+
+                self.log(
+                "Please move all paper related files (and directories if applicable) within the papers/ directory. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+                )
+
+                return False
+
+        # Check passes if there is no papers/ directory or no misplaced paper files are found
+        return True
+
+    def fix(self):
+        self.log(
+            "Please move all paper related files to papers/ directory. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+        )
