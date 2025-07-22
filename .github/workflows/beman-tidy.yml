@@ -10,7 +10,7 @@ on:
   workflow_call:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *' #  08:00AM EEST (@neatudarius' timezone) -> 05:00AM UTC
+    - cron: '0 6 * * *' #  09:00AM EEST (@neatudarius' timezone)
 
 jobs:
   run_linter:
