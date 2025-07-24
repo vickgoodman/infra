@@ -12,6 +12,7 @@ from tests.utils.path_runners import (
 from beman_tidy.lib.checks.beman_standard.directory import (
     DirectorySourcesCheck,
     DirectoryDocsCheck,
+    DirectoryTestsCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/directory/data"
@@ -71,6 +72,56 @@ def test__DIRECTORY_SOURCES__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__DIRECTORY_SOURCES__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+
+def test__DIRECTORY_TESTS__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with valid tests/ directory pass the check.
+    """
+    valid_tests_paths = [
+        # exemplar/ repo with valid tests/ dir.
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_tests_paths,
+        DirectoryTestsCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__DIRECTORY_TESTS__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with invalid tests/ directory fail the check.
+    """
+    invalid_tests_paths = [
+        # Missing tests/beman/<short_name> directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v1"),
+        # Misplaced test files in tests/beman/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v2"),
+        # Misplaced test files in tests/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v3"),
+        # Misplaced test files in root directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v4"),
+        # Wrong name for tests/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v5"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_tests_paths,
+        DirectoryTestsCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__DIRECTORY_TESTS__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
 

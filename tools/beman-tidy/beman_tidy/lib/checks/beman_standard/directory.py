@@ -84,7 +84,77 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
             )
 
 
-# TODO DIRECTORY.TESTS
+@register_beman_standard_check("DIRECTORY.TESTS")
+class DirectoryTestsCheck(BemanTreeDirectoryCheck):
+    """
+    Check if all test files reside within tests/beman/<short_name> directory.
+    Examples:
+    tests
+    └── beman
+        └── exemplar
+            └── identity.test.cpp
+
+    tests
+    └── beman
+        └── optional
+            ├── CMakeLists.txt
+            ├── detail
+            |   └── iterator.test.cpp
+            ├── optional.test.cpp
+            ├── optional_constexpr.test.cpp
+            ├── optional_monadic.test.cpp
+            ├── optional_range_support.test.cpp
+            ├── test_types.cpp
+            ├── test_types.hpp
+            ├── test_utilities.cpp
+            └── test_utilities.hpp
+    """
+
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config, "tests")
+
+    def check(self):
+        # Exclude directories that are not part of the tests.
+        exclude_dirs = [f"tests/beman/{self.repo_name}"]
+        if self.repo_name == "exemplar":
+            exclude_dirs.extend(["cookiecutter", "infra"])
+
+        # Find all test files in the repository outside the excluded directories.
+        misplaced_test_files = []
+        for p in self.repo_path.rglob("*.test.*"):
+            if not any(excluded in str(p) for excluded in exclude_dirs):
+                misplaced_test_files.append(p)
+
+        # Check if any test files are misplaced outside the excluded directories.
+        if len(misplaced_test_files) > 0:
+            for misplaced_test_file in misplaced_test_files:
+                self.log(f"Misplaced test file found: {misplaced_test_file}")
+
+            self.log(
+                "Please move all test files within the tests/ directory. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorytests for more information."
+            )
+            return False
+
+        # Check if the repository has at least one relevant test inside tests/beman/<short_name>.
+        relevant_test_files = list(self.path.rglob("*.test.*"))
+        relevant_cmake_files = list(self.path.rglob("CMakeLists.txt"))
+
+        if len(relevant_test_files) == 0 or len(relevant_cmake_files) == 0:
+            self.log(
+                "Missing relevant test files in tests/ directory. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorytests for more information."
+            )
+            return False
+
+        # Check passes if tests/ directory exists and contains relevant test files.
+        return True
+
+    def fix(self):
+        self.log(
+            "Please manually move test files to the tests/beman/<short_name> directory. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorytests for more information."
+        )
 
 
 # TODO DIRECTORY.EXAMPLES
