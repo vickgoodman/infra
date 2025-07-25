@@ -5,6 +5,7 @@ import re
 import filecmp
 import textwrap
 
+from ..base.base_check import BaseCheck
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
 from beman_tidy.lib.utils.git import get_beman_recommendated_license_path
@@ -97,19 +98,23 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
 
 
 @register_beman_standard_check("LICENSE.CRITERIA")
-class LicenseCriteriaCheck(LicenseBaseCheck):
+class LicenseCriteriaCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
-    def check(self):
+    def should_skip(self):
+        # Cannot actually implement LICENSE.CRITERIA, so skip it.
+        # No need to run pre_check() and check() as well, as they are not implemented.
         self.log(
             "beman-tidy cannot actually check LICENSE.CRITERIA. Please ignore this message if LICENSE.APPROVED has passed. "
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
         )
         return True
 
+    def check(self):
+        # Check should_skip(). Stub provided to be able to instantiate the check.
+        return True
+
     def fix(self):
-        self.log(
-            "beman-tidy cannot actually check LICENSE.CRITERIA. Please ignore this message if LICENSE.APPROVED has passed. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
-        )
+        # Check should_skip().
+        return True
