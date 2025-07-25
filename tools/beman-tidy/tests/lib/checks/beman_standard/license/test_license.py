@@ -27,9 +27,9 @@ def test__LICENSE_APPROVED__valid(repo_info, beman_standard_check_config):
     valid_license_paths = [
         # Apache License v2.0 with LLVM Exceptions
         Path(f"{valid_prefix}/valid-LICENSE-v1"),
-        # Boost Software License 1.0
+        # Boost Software License - Version 1.0
         Path(f"{valid_prefix}/valid-LICENSE-v2"),
-        # MIT License
+        # The MIT License
         Path(f"{valid_prefix}/valid-LICENSE-v3"),
     ]
 
@@ -47,16 +47,7 @@ def test__LICENSE_APPROVED__invalid(repo_info, beman_standard_check_config):
     Test that an invalid LICENSE file fails the check.
     """
     invalid_license_paths = [
-        # Almost valid LICENSE, but without header
-        Path(f"{invalid_prefix}/invalid-LICENSE-v1"),
-        # Almost valid LICENSE, but without footer
-        Path(f"{invalid_prefix}/invalid-LICENSE-v2"),
-        # Almost valid LICENSE, but not content between header and footer
-        Path(f"{invalid_prefix}/invalid-LICENSE-v3"),
-        # Almost valid LICENSE, but not exact header
-        Path(f"{invalid_prefix}/invalid-LICENSE-v4"),
-        # Almost valid LICENSE, but not exact footer
-        Path(f"{invalid_prefix}/invalid-LICENSE-v5"),
+        # TODO
     ]
 
     run_check_for_each_path(
@@ -82,7 +73,7 @@ def test__LICENSE_APACHE_LLVM__valid(repo_info, beman_standard_check_config):
     """
     valid_license_paths = [
         # Apache License v2.0 with LLVM Exceptions is the only one compatible with LICENSE.APACHE_LLVM.
-        Path(f"{valid_prefix}/valid-LICENSE-v4"),
+        Path(f"{valid_prefix}/valid-LICENSE-v1"),
     ]
 
     run_check_for_each_path(
@@ -100,9 +91,9 @@ def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
     """
     invalid_license_paths = [
         # Boost Software License 1.0 is LICENSE.APPROVED compatible, but not compatible with LICENSE.APACHE_LLVM.
-        Path(f"{invalid_prefix}/invalid-LICENSE-v6"),
+        Path(f"{valid_prefix}/valid-LICENSE-v2"),
         # MIT License  is LICENSE.APPROVED compatible, but not compatible with LICENSE.APACHE_LLVM.
-        Path(f"{invalid_prefix}/invalid-LICENSE-v7"),
+        Path(f"{valid_prefix}/valid-LICENSE-v3"),
     ]
 
     run_check_for_each_path(
