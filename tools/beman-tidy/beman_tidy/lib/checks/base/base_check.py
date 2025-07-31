@@ -54,9 +54,15 @@ class BaseCheck(ABC):
         )
         assert self.full_text_body is not None
 
-        # set log level - e.g. "ERROR" or "WARNING"
-        self.log_level = "ERROR" if self.type == "REQUIREMENT" else "WARNING"
+        # set log level - e.g. "ERROR" or "WARNING" or "SKIPPED"
         self.log_enabled = False
+        self.log_level = (
+            "SKIPPED"
+            if self.should_skip()
+            else "ERROR"
+            if self.type == "REQUIREMENT"
+            else "WARNING"
+        )
 
         # set repo info
         self.repo_info = repo_info
@@ -75,6 +81,13 @@ class BaseCheck(ABC):
         assert "values" in beman_library_maturity_model
         assert len(beman_library_maturity_model["values"]) == 4
         self.beman_library_maturity_model = beman_library_maturity_model["values"]
+
+    def should_skip(self):
+        """
+        Returns True if the check should be skipped.
+        If should_skip(), the pipeline will skip the check and not run pre_check(), check() and fix().
+        """
+        return False
 
     def pre_check(self):
         """
@@ -119,6 +132,16 @@ class BaseCheck(ABC):
         is too difficult to implement or does not make sense.
         """
         pass
+
+    def convert_to_requirement(self):
+        """
+        Converts the check from RECOMMENDATION to REQUIREMENT.
+        """
+        assert self.type == "RECOMMENDATION", (
+            f"Cannot convert check {self.name} to REQUIREMENT."
+        )
+        self.type = "REQUIREMENT"
+        self.log_level = "ERROR"
 
     def log(self, message, enabled=True):
         """
