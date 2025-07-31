@@ -94,20 +94,24 @@ class DirectoryExamplesCheck(DirectoryBaseCheck):
 
     def check(self):
         """
-        Check if the all example files reside within examples/ directory.
-        Each project must have at least one relevant example.
-        Example:
-        examples
+        All example files must reside within the top-level examples/ directory. Each project must have at least one relevant example.
+        Tree Example:
+        examples/
         ├── CMakeLists.txt
         ├── identity_as_default_projection.cpp
         └── identity_direct_usage.cpp
         """
         # Check if the examples/ directory contains at least one relevant example.
-        cpp_files = list(self.path.glob("*.cpp"))
-        cmake_files = list(self.path.glob("CMakeLists.txt"))
-        if len(cpp_files) == 0 or len(cmake_files) == 0:
+        if len(list(self.path.glob("**/*.cpp"))) == 0:
             self.log(
-                "Missing relevant example files in examples/ directory. "
+                "Missing one relevant example - cannot find examples/**/*.cpp. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directoryexamples for more information."
+            )
+            return False
+
+        if len(list(self.path.glob("**/*CMakeLists.txt"))) == 0:
+            self.log(
+                "Missing CMakeLists.txt for examples - cannot find examples/**/*CMakeLists.txt. "
                 "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directoryexamples for more information."
             )
             return False
