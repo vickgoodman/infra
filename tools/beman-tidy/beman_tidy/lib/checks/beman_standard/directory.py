@@ -162,9 +162,15 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
 
     def check(self):
         """
-        Check if all paper related files are within the papers/ directory.
+        If present, all paper related files (e.g., WIP LaTeX/Markdown projects for ISO Standardization), must reside within the top-level papers/ directory.
+        Tree Example:
+        papers/
+        └── P2988
+            ├── Makefile
+            ├── README.md
+            └── abstract.bst
         """
-        # Exclude directories that are not part of the papers.
+        # Exclude directories that are not part of the papers/ directory.
         exclude_dirs = ["src"]
         if self.path.exists():
             exclude_dirs.append("papers")
@@ -174,19 +180,32 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
         # File extensions that are considered "paper-related"
         paper_extensions = [
             ".bib",
-            ".pdf",
-            ".tex",
-            ".png",
-            ".jpg",
-            ".jpeg",
-            ".svg",
             ".bst",
+            ".tex",
+            ".sty",
+            ".cls",
+            ".pdf",
+            ".docx",
+            ".org",
+            ".html",
+            ".css",
+            ".js",
+            ".asciidoc",
+            ".asc",
+            ".ad",
+            ".ascdoc",
+            ".rst",
+            ".wip",
+            ".draft",
+            ".proposal",
+            ".standard",
         ]
+
+        # Find all misplaced paper-related files in the repository.
         misplaced_paper_files = []
-        # Find all paper-related files in the repository.
         for extension in paper_extensions:
             for p in self.repo_path.rglob(f"*{extension}"):
-                # Exclude files that are already in the papers/ directory.
+                # Exclude files that are already in excluded directories.
                 if not any(excluded in str(p) for excluded in exclude_dirs):
                     misplaced_paper_files.append(p)
 
