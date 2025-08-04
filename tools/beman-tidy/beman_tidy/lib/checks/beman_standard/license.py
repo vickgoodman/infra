@@ -71,12 +71,51 @@ class LicenseApprovedCheck(LicenseBaseCheck):
             return True
 
         def match_boost_software_license_v1_0(content):
-            regex = rf"Boost Software License - Version 1\.0"  # noqa: F541
-            return re.search(regex, content, re.IGNORECASE)
+            # beman/LICENSE contains the following text (multiple lines)
+            # - Boost Software License
+            # - Version 1.0
+            #
+            # We also check for variations.
+            #
+            license_regex = [
+                rf"Boost Software License",  # noqa: F541
+                rf"Boost License",  # noqa: F541
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in license_regex
+            ):
+                return False
+
+            version_regex = [
+                rf"Version 1\.0",  # noqa: F541,
+                rf"V1\.0",  # noqa: F541,
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in version_regex
+            ):
+                return False
+
+            return True
 
         def match_the_mit_license(content):
-            regex = rf"The MIT License"  # noqa: F541
-            return re.search(regex, content, re.IGNORECASE)
+            # beman/LICENSE contains the following text (multiple lines)
+            # - The MIT License
+            #
+            # We also check for variations.
+            #
+            license_regex = [
+                rf"The MIT License",  # noqa: F541
+                rf"MIT License",  # noqa: F541
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in license_regex
+            ):
+                return False
+
+            return True
 
         if match_apache_license_v2_with_llvm_exceptions(content):
             self.log(
