@@ -3,7 +3,6 @@
 
 import re
 import filecmp
-import textwrap
 
 from ..base.base_check import BaseCheck
 from ..base.file_base_check import FileBaseCheck
@@ -33,7 +32,7 @@ class LicenseApprovedCheck(LicenseBaseCheck):
             # beman/LICENSE contains the following text (multiple lines)
             # - Apache License
             # - Version 2.0
-            # - LLVM Exceptions to the Apache 2.0 License 
+            # - LLVM Exceptions to the Apache 2.0 License
             #
             # We also check for variations.
             #
@@ -41,40 +40,50 @@ class LicenseApprovedCheck(LicenseBaseCheck):
                 rf"Apache License",  # noqa: F541
                 rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541
             ]
-            if not any(re.search(regex, content) is not None for regex in license_regex):
-                self.log(f"Cannot find Apache License in LICENSE file.")
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in license_regex
+            ):
+                self.log("Cannot find Apache License in LICENSE file.")
                 return False
 
             version_regex = [
-                rf"Version 2\.0"  # noqa: F541,
-                rf"Version 2\.0 with LLVM Exceptions"  # noqa: F541,
-                rf"Version 2\.0 with LLVM Exceptions"  # noqa: F541,
-                rf"Apache 2\.0"  # noqa: F541,
+                rf"Version 2\.0",  # noqa: F541,
+                rf"Version 2\.0 with LLVM Exceptions",  # noqa: F541,
+                rf"Apache 2\.0",  # noqa: F541,
             ]
-            if not any(re.search(regex, content) is not None for regex in version_regex):
-                self.log(f"Cannot find Version 2.0 in LICENSE file.")
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in version_regex
+            ):
+                self.log("Cannot find Version 2.0 in LICENSE file.")
                 return False
 
             llvm_exceptions_regex = [
-                rf"LLVM Exceptions"  # noqa: F541,
-                rf"Apache License 2\.0 with LLVM Exceptions"  # noqa: F541,
-                rf"LLVM Exceptions to the Apache 2\.0 License"  # noqa: F541,
+                rf"LLVM Exceptions",  # noqa: F541,
+                rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541,
+                rf"LLVM Exceptions to the Apache 2\.0 License",  # noqa: F541,
             ]
-            if not any(re.search(regex, content) is not None for regex in llvm_exceptions_regex):
-                self.log(f"Cannot find LLVM Exceptions in LICENSE file.")
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in llvm_exceptions_regex
+            ):
+                self.log("Cannot find LLVM Exceptions in LICENSE file.")
                 return False
 
             return True
 
         def match_boost_software_license_v1_0(content):
             regex = rf"Boost Software License - Version 1\.0"  # noqa: F541
-            return re.match(regex, content)
+            return re.search(regex, content, re.IGNORECASE)
 
         def match_the_mit_license(content):
             regex = rf"The MIT License"  # noqa: F541
-            return re.match(regex, content)
+            return re.search(regex, content, re.IGNORECASE)
 
-        if not match_apache_license_v2_with_llvm_exceptions(content): # and not match_boost_software_license_v1_0(content) and not match_the_mit_license(content):
+        if not match_apache_license_v2_with_llvm_exceptions(
+            content
+        ):  # and not match_boost_software_license_v1_0(content) and not match_the_mit_license(content):
             self.log(
                 "Invalid license - cannot find approved license in LICENSE file. "
                 "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
