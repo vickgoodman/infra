@@ -13,7 +13,7 @@ from beman_tidy.lib.checks.beman_standard.directory import (
     DirectoryDocsCheck,
     DirectoryExamplesCheck,
     DirectoryPapersCheck,
-    DirectorySourcesCheck
+    DirectorySourcesCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/directory/data"
