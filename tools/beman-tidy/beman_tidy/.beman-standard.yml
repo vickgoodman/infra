@@ -75,6 +75,8 @@ README.LIBRARY_STATUS:
             "**Status**: [Production ready. Stable API.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#production-ready-stable-api)",
             "**Status**: [Retired. No longer maintained or actively developed.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#retired-no-longer-maintained-or-actively-developed)",
         ]
+README.LICENSE:
+    - type: REQUIREMENT
 
 # CMAKE
 CMAKE.DEFAULT:

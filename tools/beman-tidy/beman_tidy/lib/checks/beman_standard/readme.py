@@ -152,3 +152,6 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
             "Please write a Status line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelibrary_status for the desired format."
         )
         return True
+
+
+# TODO README.LICENSE
