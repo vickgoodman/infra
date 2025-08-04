@@ -1,21 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-# TODO: 2025-06-07: This file is a partial stable snapshot of the standard.
-# TODOs and placeholders will be solved in follow-up PRs when implementing the checks.
+# 2025-08-04: Latest Beman Standard (https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md)
+# snapshot made by neatudarius.
+# Please report any issue related to this file to https://github.com/bemanproject/infra/issues.
 
 # LICENSE
 LICENSE.APPROVED:
     - type: REQUIREMENT
-    - licenses:
-        - apache-v2:
-            - spdx: "Apache License v2.0 with LLVM Exceptions"
-            - path: "docs/licenses/apache-v2.txt"
-        - boost-v1:
-            - spdx: "Boost Software License 1.0"
-            - path: "docs/licenses/boost-v1.txt"
-        - mit:
-            - spdx: "The MIT License"
-            - path: "docs/licenses/mit.txt"
 LICENSE.APACHE_LLVM:
     - type: RECOMMENDATION
 LICENSE.CRITERIA:
@@ -24,13 +15,15 @@ LICENSE.CRITERIA:
 # GENERAL
 LIBRARY.NAMES:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible>
+
+# REPOSITORY
 REPOSITORY.NAME:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible>
+REPOSITORY.DEFAULT_BRANCH:
+    - type: REQUIREMENT
 REPOSITORY.CODEOWNERS:
     - type: REQUIREMENT
-REPOSITORY.DEFAULT_BRANCH:
+REPOSITORY.CODE_REVIEW_RULES:
     - type: REQUIREMENT
 REPOSITORY.DISALLOW_GIT_SUBMODULES:
     - type: RECOMMENDATION
@@ -42,6 +35,7 @@ RELEASE.NOTES:
     - type: RECOMMENDATION
 RELEASE.GODBOLT_TRUNK_VERSION:
     - type: RECOMMENDATION
+
 # TOP LEVEL
 TOPLEVEL.CMAKE:
     - type: REQUIREMENT
@@ -93,24 +87,18 @@ CMAKE.PASSIVE_PROJECTS:
     - type: RECOMMENDATION
 CMAKE.LIBRARY_NAME:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible>
 CMAKE.LIBRARY_ALIAS:
     - type: REQUIREMENT
-    - regex: <put a regex here if possible>
 CMAKE.TARGET_NAMES:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible>
 CMAKE.PASSIVE_TARGETS:
     - type: REQUIREMENT
-    - regex: <put a regex here if possible>
 CMAKE.CONFIG:
     - type: REQUIREMENT
 CMAKE.SKIP_TESTS:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible>
 CMAKE.SKIP_EXAMPLES:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible>
 CMAKE.AVOID_PASSTHROUGHS:
     - type: RECOMMENDATION
 
@@ -133,20 +121,12 @@ DIRECTORY.PAPERS:
 # FILE
 FILE.CPP_NAMES:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible - e.g. ${snake_case}.cpp, ${snake_case}.test.cpp>
 FILE.TEST_NAMES:
     - type: REQUIREMENT
-    - regex: <put a regex here if possible - e.g. ${snake_case}.test.cpp>
 FILE.LICENSE_ID:
     - type: REQUIREMENT
-    - regex: [
-            "// SPDX-License-Identifier: <SPDX License Expression>",
-            "# SPDX-License-Identifier: <SPDX License Expression>",
-            "<!-- SPDX-License-Identifier: <SPDX License Expression> -->"
-        ]
 FILE.COPYRIGHT:
     - type: RECOMMENDATION
-    - regex: <put a regex here if possible - exclude copyright lines>
 
 # CPP
 CPP.NAMESPACE:
