@@ -44,7 +44,6 @@ class LicenseApprovedCheck(LicenseBaseCheck):
                 re.search(regex, content, re.IGNORECASE) is not None
                 for regex in license_regex
             ):
-                self.log("Cannot find Apache License in LICENSE file.")
                 return False
 
             version_regex = [
@@ -56,7 +55,6 @@ class LicenseApprovedCheck(LicenseBaseCheck):
                 re.search(regex, content, re.IGNORECASE) is not None
                 for regex in version_regex
             ):
-                self.log("Cannot find Version 2.0 in LICENSE file.")
                 return False
 
             llvm_exceptions_regex = [
@@ -68,7 +66,6 @@ class LicenseApprovedCheck(LicenseBaseCheck):
                 re.search(regex, content, re.IGNORECASE) is not None
                 for regex in llvm_exceptions_regex
             ):
-                self.log("Cannot find LLVM Exceptions in LICENSE file.")
                 return False
 
             return True
@@ -81,16 +78,29 @@ class LicenseApprovedCheck(LicenseBaseCheck):
             regex = rf"The MIT License"  # noqa: F541
             return re.search(regex, content, re.IGNORECASE)
 
-        if not match_apache_license_v2_with_llvm_exceptions(
-            content
-        ):  # and not match_boost_software_license_v1_0(content) and not match_the_mit_license(content):
+        if match_apache_license_v2_with_llvm_exceptions(content):
             self.log(
-                "Invalid license - cannot find approved license in LICENSE file. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
+                "Valid Apache License - Version 2.0 with LLVM Exceptions found in LICENSE file.",
+                log_level="INFO",
             )
-            return False
+            return True
 
-        return True
+        if match_boost_software_license_v1_0(content):
+            self.log(
+                "Valid Boost Software License - Version 1.0 found in LICENSE file.",
+                log_level="INFO",
+            )
+            return True
+
+        if match_the_mit_license(content):
+            self.log("Valid MIT License found in LICENSE file.", log_level="INFO")
+            return True
+
+        self.log(
+            "Invalid license - cannot find approved license in LICENSE file. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
+        )
+        return False
 
     def fix(self):
         self.log(

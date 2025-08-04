@@ -143,7 +143,7 @@ class BaseCheck(ABC):
         self.type = "REQUIREMENT"
         self.log_level = "ERROR"
 
-    def log(self, message, enabled=True):
+    def log(self, message, enabled=True, log_level=None):
         """
         Logs a message with the check's log level.
         e.g. [WARN][REPOSITORY.NAME]: The name "${name}" should be snake_case.'
@@ -151,4 +151,6 @@ class BaseCheck(ABC):
         """
 
         if self.log_enabled and enabled:
-            print(f"[{self.log_level:<15}][{self.name:<25}]: {message}")
+            print(
+                f"[{log_level if log_level else self.log_level:<15}][{self.name:<25}]: {message}"
+            )
