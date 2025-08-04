@@ -182,3 +182,85 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
 
 
 # TODO DIRECTORY.PAPERS
+@register_beman_standard_check("DIRECTORY.PAPERS")
+class DirectoryPapersCheck(DirectoryBaseCheck):
+    """
+    Check if the all paper related files reside within papers/ directory.
+    """
+
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config, "papers")
+
+    def pre_check(self):
+        # Need to override this, because DIRECTORY.PAPERS is conditional
+        # (a repo without any paper files is still valid - no papers/ directory required)
+        return True
+
+    def check(self):
+        """
+        If present, all paper related files (e.g., WIP LaTeX/Markdown projects for ISO Standardization), must reside within the top-level papers/ directory.
+        Tree Example:
+        papers/
+        └── P2988
+            ├── Makefile
+            ├── README.md
+            └── abstract.bst
+        """
+        # Exclude directories that are not part of the papers/ directory.
+        exclude_dirs = ["src"]
+        if self.path.exists():
+            exclude_dirs.append("papers")
+        if self.repo_name == "exemplar":
+            exclude_dirs.append("cookiecutter")
+
+        # File extensions that are considered "paper-related"
+        paper_extensions = [
+            ".bib",
+            ".bst",
+            ".tex",
+            ".sty",
+            ".cls",
+            ".pdf",
+            ".docx",
+            ".org",
+            ".html",
+            ".css",
+            ".js",
+            ".asciidoc",
+            ".asc",
+            ".ad",
+            ".ascdoc",
+            ".rst",
+            ".wip",
+            ".draft",
+            ".proposal",
+            ".standard",
+        ]
+
+        # Find all misplaced paper-related files in the repository.
+        misplaced_paper_files = []
+        for extension in paper_extensions:
+            for p in self.repo_path.rglob(f"*{extension}"):
+                # Exclude files that are already in excluded directories.
+                if not any(excluded in str(p) for excluded in exclude_dirs):
+                    misplaced_paper_files.append(p)
+
+        if len(misplaced_paper_files) > 0:
+            for misplaced_paper_file in misplaced_paper_files:
+                self.log(f"Misplaced paper file found: {misplaced_paper_file}")
+
+            self.log(
+                "Please move all paper related files (and directories if applicable) within the papers/ directory. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+            )
+
+            return False
+
+        # Check passes if there is no papers/ directory and no misplaced paper files are found
+        return True
+
+    def fix(self):
+        self.log(
+            "Please move all paper related files (and directories if applicable) to papers/ directory. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+        )
