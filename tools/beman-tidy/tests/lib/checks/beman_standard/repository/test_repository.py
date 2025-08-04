@@ -70,6 +70,10 @@ def test__REPOSITORY_NAME__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__REPOSITORY_NAME__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid repository name.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -115,6 +119,10 @@ def test__REPOSITORY_CODEOWNERS__invalid(repo_info, beman_standard_check_config)
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__REPOSITORY_CODEOWNERS__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid CODEOWNERS file.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -167,6 +175,10 @@ def test__REPOSITORY_DEFAULT_BRANCH__invalid(repo_info, beman_standard_check_con
 def test__REPOSITORY_DEFAULT_BRANCH__fix_inplace(
     repo_info, beman_standard_check_config
 ):
+    """
+    Test that the fix method corrects an invalid default branch.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -222,4 +234,8 @@ def test__REPOSITORY_DISALLOW_GIT_SUBMODULES__invalid(
 def test__REPOSITORY_DISALLOW_GIT_SUBMODULES__fix_inplace(
     repo_info, beman_standard_check_config
 ):
+    """
+    Test that the fix method corrects an invalid git submodules file.
+    Note: Skipping this test as it is not implemented.
+    """
     pass

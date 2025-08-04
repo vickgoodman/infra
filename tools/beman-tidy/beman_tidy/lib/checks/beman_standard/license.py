@@ -186,11 +186,3 @@ class LicenseCriteriaCheck(BaseCheck):
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
         )
         return True
-
-    def check(self):
-        # Check should_skip(). Required to have a stub here. TODO add stub to base check.
-        return True
-
-    def fix(self):
-        # Check should_skip(). Required to have a stub here.
-        return True

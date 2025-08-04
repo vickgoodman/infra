@@ -146,8 +146,8 @@ def test__README_BADGES__invalid(repo_info, beman_standard_check_config):
 def test__README_BADGES__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md badges.
+    Note: Skipping this test as it is not implemented.
     """
-    # Cannot determine what badges to create. fix() is not implemented.
     pass
 
 
@@ -196,8 +196,8 @@ def test__README_IMPLEMENTS__invalid(repo_info, beman_standard_check_config):
 def test__README_IMPLEMENTS__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md "Implements".
+    Note: Skipping this test as it is not implemented.
     """
-    # Cannot determine what implements to create. fix() is not implemented.
     pass
 
 
@@ -245,6 +245,6 @@ def test__README_LIBRARY_STATUS__invalid(repo_info, beman_standard_check_config)
 def test__README_LIBRARY_STATUS__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md library status.
+    Note: Skipping this test as it is not implemented.
     """
-    # Cannot determine what library status to create. fix() is not implemented.
     pass

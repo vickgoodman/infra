@@ -109,14 +109,13 @@ def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
 def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid LICENSE file.
+    Note: Skipping this test as it is not implemented.
     """
-    # Cannot determine what license to create. fix() is not implemented.
     pass
 
 
-def test__LICENSE_CRITERIA__skipped(repo_info, beman_standard_check_config):
+def test__LICENSE_CRITERIA__is_always_skipped(repo_info, beman_standard_check_config):
     """
-    Test that LICENSE.CRITERIA is always skipped.
+    Test that LICENSE.CRITERIA is always skipped, as it cannot be implemented.
     """
-    # LICENSE.CRITERIA is skipped, as it cannot be implemented.
     assert LicenseCriteriaCheck(repo_info, beman_standard_check_config).should_skip()
