@@ -3,7 +3,6 @@
 
 import re
 import filecmp
-import textwrap
 
 from ..base.base_check import BaseCheck
 from ..base.file_base_check import FileBaseCheck
@@ -29,41 +28,118 @@ class LicenseApprovedCheck(LicenseBaseCheck):
     def check(self):
         content = self.read()
 
-        # Regex for LICENSE check
-        # - fixed header matching
-        # - non empty body matching
-        # - fixed footer matching
-        regex = re.compile(
-            textwrap.dedent(r"""
-                ^={78}
-                The Beman Project is under the (Apache License v2\.0 with LLVM Exceptions|Boost Software License 1\.0|MIT License):
-                ={78}
+        def match_apache_license_v2_with_llvm_exceptions(content):
+            # beman/LICENSE contains the following text (multiple lines)
+            # - Apache License
+            # - Version 2.0
+            # - LLVM Exceptions to the Apache 2.0 License
+            #
+            # We also check for variations.
+            #
+            license_regex = [
+                rf"Apache License",  # noqa: F541
+                rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in license_regex
+            ):
+                return False
 
-                (.+?)
+            version_regex = [
+                rf"Version 2\.0",  # noqa: F541,
+                rf"Version 2\.0 with LLVM Exceptions",  # noqa: F541,
+                rf"Apache 2\.0",  # noqa: F541,
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in version_regex
+            ):
+                return False
 
-                ={78}
-                Software from third parties included in the Beman Project:
-                ={78}
-                The Beman Project contains third party software which is under different license
-                terms\. All such code will be identified clearly using at least one of two
-                mechanisms:
-                1\) It will be in a separate directory tree with its own `LICENSE\.txt` or
-                   `LICENSE` file at the top containing the specific license and restrictions
-                   which apply to that software, or
-                2\) It will contain specific license and restriction terms at the top of every
-                   file\.
-                """).strip(),
-            re.DOTALL,
-        )
+            llvm_exceptions_regex = [
+                rf"LLVM Exceptions",  # noqa: F541,
+                rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541,
+                rf"LLVM Exceptions to the Apache 2\.0 License",  # noqa: F541,
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in llvm_exceptions_regex
+            ):
+                return False
 
-        if not regex.match(content):
+            return True
+
+        def match_boost_software_license_v1_0(content):
+            # beman/LICENSE contains the following text (multiple lines)
+            # - Boost Software License
+            # - Version 1.0
+            #
+            # We also check for variations.
+            #
+            license_regex = [
+                rf"Boost Software License",  # noqa: F541
+                rf"Boost License",  # noqa: F541
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in license_regex
+            ):
+                return False
+
+            version_regex = [
+                rf"Version 1\.0",  # noqa: F541,
+                rf"V1\.0",  # noqa: F541,
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in version_regex
+            ):
+                return False
+
+            return True
+
+        def match_the_mit_license(content):
+            # beman/LICENSE contains the following text (multiple lines)
+            # - The MIT License
+            #
+            # We also check for variations.
+            #
+            license_regex = [
+                rf"The MIT License",  # noqa: F541
+                rf"MIT License",  # noqa: F541
+            ]
+            if not any(
+                re.search(regex, content, re.IGNORECASE) is not None
+                for regex in license_regex
+            ):
+                return False
+
+            return True
+
+        if match_apache_license_v2_with_llvm_exceptions(content):
             self.log(
-                "LICENSE file does not match the required format. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
+                "Valid Apache License - Version 2.0 with LLVM Exceptions found in LICENSE file.",
+                log_level="INFO",
             )
-            return False
+            return True
 
-        return True
+        if match_boost_software_license_v1_0(content):
+            self.log(
+                "Valid Boost Software License - Version 1.0 found in LICENSE file.",
+                log_level="INFO",
+            )
+            return True
+
+        if match_the_mit_license(content):
+            self.log("Valid MIT License found in LICENSE file.", log_level="INFO")
+            return True
+
+        self.log(
+            "Invalid license - cannot find approved license in LICENSE file. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
+        )
+        return False
 
     def fix(self):
         self.log(
@@ -112,9 +188,9 @@ class LicenseCriteriaCheck(BaseCheck):
         return True
 
     def check(self):
-        # Check should_skip(). Stub provided to be able to instantiate the check.
+        # Check should_skip(). Required to have a stub here. TODO add stub to base check.
         return True
 
     def fix(self):
-        # Check should_skip().
+        # Check should_skip(). Required to have a stub here.
         return True

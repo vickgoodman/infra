@@ -28,9 +28,6 @@ def test__get_registered_beman_standard_checks__valid(
 
         # Find the filename for the check class.
         filename = find_filename_for_check(check_name)
-        assert filename is not None, (
-            f"Missing filename for {check_name} in beman_tidy/lib/checks/beman_standard/"
-        )
         expected_function_path = (
             Path(__file__).parent.parent.parent.parent
             / "lib"
@@ -38,6 +35,9 @@ def test__get_registered_beman_standard_checks__valid(
             / "beman_standard"
             / filename
             / f"test_{filename}.py"
+        )
+        assert filename is not None and expected_function_path.exists(), (
+            f"[{check_name}] Missing file {expected_function_path}"
         )
 
         # Find all test functions that match the check name.
@@ -49,17 +49,17 @@ def test__get_registered_beman_standard_checks__valid(
             # Skipped checks have exactly one test function.
             expected_function_name = f"test__{check_pattern}__skipped"
             assert len(test_functions) == 1, (
-                f"Expected exactly one test function for {check_name}: {expected_function_name} at {expected_function_path}"
+                f"[{check_name}] Expected exactly one test function for {check_name}: {expected_function_name} at {expected_function_path}"
             )
 
             actual_function_path = Path(test_functions[0]["file"])
             actual_function_name = test_functions[0]["function"]
 
             assert expected_function_path == actual_function_path, (
-                f"Test function path should match the expected pattern: {actual_function_path} != {expected_function_path}"
+                f"[{check_name}] Test function path should match the expected pattern: {actual_function_path} != {expected_function_path}"
             )
             assert expected_function_name == actual_function_name, (
-                f"Test function name should match the expected pattern: {actual_function_name} != {expected_function_name}"
+                f"[{check_name}] Test function name should match the expected pattern: {actual_function_name} != {expected_function_name}"
             )
         else:
             # Runnable checks have exactly three test functions.
@@ -69,20 +69,20 @@ def test__get_registered_beman_standard_checks__valid(
                 f"test__{check_pattern}__fix_inplace",
             ]
             assert len(test_functions) == len(expected_function_names), (
-                f"Expected exactly three test functions for runnable check {check_name}: {expected_function_names} at {expected_function_path}"
+                f"[{check_name}] Expected exactly three test functions for runnable check {check_name}: {expected_function_names} at {expected_function_path}"
             )
 
             for test_function in test_functions:
                 actual_function_path = Path(test_function["file"])
                 actual_function_name = test_function["function"]
                 assert expected_function_path == actual_function_path, (
-                    f"Test function path should match the expected pattern: {actual_function_path} != {expected_function_path}"
+                    f"[{check_name}] Test function path should match the expected pattern: {actual_function_path} != {expected_function_path}"
                 )
                 assert any(
                     expected_function_name == actual_function_name
                     for expected_function_name in expected_function_names
                 ), (
-                    f"Test function name should match the expected pattern: {actual_function_name} != {expected_function_name}"
+                    f"[{check_name}] Test function name should match the expected pattern: {actual_function_name} != {expected_function_name}"
                 )
 
 
