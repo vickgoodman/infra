@@ -73,6 +73,10 @@ def test__DIRECTORY_SOURCES__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__DIRECTORY_SOURCES__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid source tree.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -122,6 +126,10 @@ def test__DIRECTORY_EXAMPLES__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__DIRECTORY_EXAMPLES__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid examples directory.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -173,6 +181,10 @@ def test__DIRECTORY_DOCS__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__DIRECTORY_DOCS__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid documentation structure.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -222,4 +234,8 @@ def test__DIRECTORY_PAPERS__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="NOT implemented")
 def test__DIRECTORY_PAPERS__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid paper structure.
+    Note: Skipping this test as it is not implemented.
+    """
     pass

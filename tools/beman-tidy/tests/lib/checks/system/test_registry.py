@@ -47,7 +47,7 @@ def test__get_registered_beman_standard_checks__valid(
         check_instance = check_class(repo_info, beman_standard_check_config)
         if check_instance.should_skip():
             # Skipped checks have exactly one test function.
-            expected_function_name = f"test__{check_pattern}__skipped"
+            expected_function_name = f"test__{check_pattern}__is_always_skipped"
             assert len(test_functions) == 1, (
                 f"[{check_name}] Expected exactly one test function for {check_name}: {expected_function_name} at {expected_function_path}"
             )

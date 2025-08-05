@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-from abc import ABC, abstractmethod
+from abc import ABC
 from pathlib import Path
 
 from ..system.registry import get_beman_standard_check_name_by_class
@@ -12,6 +12,10 @@ class BaseCheck(ABC):
     Base class for checks.
     This class is not meant to be used directly, it's meant to be subclassed.
     e.g., check for repository name, check for changelog, check for license, etc.
+
+
+    Notes: If should_skip() is True, check()/fix() are not called,
+    thus an implementation is not required in the derived class.
     """
 
     def __init__(self, repo_info, beman_standard_check_config, name=None):
@@ -110,28 +114,31 @@ class BaseCheck(ABC):
 
         return True
 
-    @abstractmethod
     def check(self):
         """
         Checks if the Beman Standard check is already applied.
         - If it's applied, this method should return True.
         - Otherwise, it returns False and self.fix() must be able to fix the issue.
 
-        Note: This methods must be always implemented.
+        Note: This method must be implemented in the derived class only if should_skip() is False.
         """
-        pass
+        assert False, (
+            "This method must be implemented in the derived class if should_skip() is False."
+        )
 
-    @abstractmethod
     def fix(self):
         """
         Fixes the issue if the Beman Standard is not applied.
         - If check already applied, this method is a no-op and should return True.
         - Otherwise, it will try to apply the check inplace. Returns the status of the fix attempt.
 
-        Note: The subclasses might not implement more than a stub if the fix method
+        Note: This method must be implemented in the derived class only if should_skip() is False.
+        The subclasses might not implement more than a stub if the fix method
         is too difficult to implement or does not make sense.
         """
-        pass
+        assert False, (
+            "This method must be implemented in the derived class if should_skip() is False."
+        )
 
     def convert_to_requirement(self):
         """
