@@ -43,6 +43,7 @@ def match_apache_license_v2_with_llvm_exceptions(content):
     license_regex = [
         rf"Apache License",  # noqa: F541
         rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541
+        rf"Apache License v2\.0 with LLVM Exceptions",  # noqa: F541,
     ]
     if not any(
         re.search(regex, content, re.IGNORECASE) is not None for regex in license_regex
@@ -51,9 +52,13 @@ def match_apache_license_v2_with_llvm_exceptions(content):
 
     version_regex = [
         rf"Version 2\.0",  # noqa: F541,
+        rf"Version v2\.0",  # noqa: F541,
         rf"Version 2\.0 with LLVM Exceptions",  # noqa: F541,
+        rf"Version v2\.0 with LLVM Exceptions",  # noqa: F541,
         rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541
+        rf"Apache License v2\.0 with LLVM Exceptions",  # noqa: F541,
         rf"Apache 2\.0",  # noqa: F541,
+        rf"Apache v2\.0",  # noqa: F541,
     ]
     if not any(
         re.search(regex, content, re.IGNORECASE) is not None for regex in version_regex
@@ -63,6 +68,7 @@ def match_apache_license_v2_with_llvm_exceptions(content):
     llvm_exceptions_regex = [
         rf"LLVM Exceptions",  # noqa: F541,
         rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541,
+        rf"Apache License v2\.0 with LLVM Exceptions",  # noqa: F541,
         rf"LLVM Exceptions to the Apache 2\.0 License",  # noqa: F541,
     ]
     if not any(
