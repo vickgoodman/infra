@@ -15,6 +15,7 @@ from beman_tidy.lib.checks.beman_standard.readme import (
     ReadmeBadgesCheck,
     ReadmeImplementsCheck,
     ReadmeLibraryStatusCheck,
+    ReadmeLicenseCheck,
 )
 
 test_data_prefix = "tests/lib/checks/beman_standard/readme/data"
@@ -245,6 +246,61 @@ def test__README_LIBRARY_STATUS__invalid(repo_info, beman_standard_check_config)
 def test__README_LIBRARY_STATUS__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md library status.
+    Note: Skipping this test as it is not implemented.
+    """
+    pass
+
+
+def test__README_LICENSE__valid(repo_info, beman_standard_check_config):
+    """
+    Test that a valid README.md license passes the check.
+    """
+    valid_readme_paths = [
+        # License: Apache License 2.0 with LLVM Exceptions
+        Path(f"{valid_prefix}/README-v1.md"),
+        # License: Boost Software License 1.0
+        Path(f"{valid_prefix}/README-v2.md"),
+        # License: MIT License
+        Path(f"{valid_prefix}/README-v3.md"),
+        # License: Apache License 2.0 with LLVM Exceptions and MIT License
+        Path(f"{valid_prefix}/README-v4.md"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_readme_paths,
+        ReadmeLicenseCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__README_LICENSE__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that an invalid README.md license fails the check.
+    """
+    invalid_readme_paths = [
+        # License: Missing license section
+        Path(f"{invalid_prefix}/invalid-license-section-v1.md"),
+        # License: Empty license section
+        Path(f"{invalid_prefix}/invalid-license-section-v2.md"),
+        # License: Invalid license
+        Path(f"{invalid_prefix}/invalid-license-section-v3.md"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_readme_paths,
+        ReadmeLicenseCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__README_LICENSE__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid README.md license.
     Note: Skipping this test as it is not implemented.
     """
     pass

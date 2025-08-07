@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-import re
 import filecmp
 
 from ..base.base_check import BaseCheck
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
 from beman_tidy.lib.utils.git import get_beman_recommendated_license_path
+from beman_tidy.lib.utils.string import (
+    match_apache_license_v2_with_llvm_exceptions,
+    match_boost_software_license_v1_0,
+    match_the_mit_license,
+)
 
 # [LICENSE.*] checks category.
 # All checks in this file extend the LicenseBaseCheck class.
@@ -27,95 +31,6 @@ class LicenseApprovedCheck(LicenseBaseCheck):
 
     def check(self):
         content = self.read()
-
-        def match_apache_license_v2_with_llvm_exceptions(content):
-            # beman/LICENSE contains the following text (multiple lines)
-            # - Apache License
-            # - Version 2.0
-            # - LLVM Exceptions to the Apache 2.0 License
-            #
-            # We also check for variations.
-            #
-            license_regex = [
-                rf"Apache License",  # noqa: F541
-                rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541
-            ]
-            if not any(
-                re.search(regex, content, re.IGNORECASE) is not None
-                for regex in license_regex
-            ):
-                return False
-
-            version_regex = [
-                rf"Version 2\.0",  # noqa: F541,
-                rf"Version 2\.0 with LLVM Exceptions",  # noqa: F541,
-                rf"Apache 2\.0",  # noqa: F541,
-            ]
-            if not any(
-                re.search(regex, content, re.IGNORECASE) is not None
-                for regex in version_regex
-            ):
-                return False
-
-            llvm_exceptions_regex = [
-                rf"LLVM Exceptions",  # noqa: F541,
-                rf"Apache License 2\.0 with LLVM Exceptions",  # noqa: F541,
-                rf"LLVM Exceptions to the Apache 2\.0 License",  # noqa: F541,
-            ]
-            if not any(
-                re.search(regex, content, re.IGNORECASE) is not None
-                for regex in llvm_exceptions_regex
-            ):
-                return False
-
-            return True
-
-        def match_boost_software_license_v1_0(content):
-            # beman/LICENSE contains the following text (multiple lines)
-            # - Boost Software License
-            # - Version 1.0
-            #
-            # We also check for variations.
-            #
-            license_regex = [
-                rf"Boost Software License",  # noqa: F541
-                rf"Boost License",  # noqa: F541
-            ]
-            if not any(
-                re.search(regex, content, re.IGNORECASE) is not None
-                for regex in license_regex
-            ):
-                return False
-
-            version_regex = [
-                rf"Version 1\.0",  # noqa: F541,
-                rf"V1\.0",  # noqa: F541,
-            ]
-            if not any(
-                re.search(regex, content, re.IGNORECASE) is not None
-                for regex in version_regex
-            ):
-                return False
-
-            return True
-
-        def match_the_mit_license(content):
-            # beman/LICENSE contains the following text (multiple lines)
-            # - The MIT License
-            #
-            # We also check for variations.
-            #
-            license_regex = [
-                rf"The MIT License",  # noqa: F541
-                rf"MIT License",  # noqa: F541
-            ]
-            if not any(
-                re.search(regex, content, re.IGNORECASE) is not None
-                for regex in license_regex
-            ):
-                return False
-
-            return True
 
         if match_apache_license_v2_with_llvm_exceptions(content):
             self.log(

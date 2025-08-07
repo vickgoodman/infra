@@ -12,6 +12,12 @@
 
 **Status**: [Production ready. API may undergo changes.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#production-ready-api-may-undergo-changes)
 
+## License
+
+This project is licensed under the Boost Software License 1.0.
+
+## Other
+
 <!-- markdownlint-disable-next-line line-length -->
 This is a valid README.md file that follows the Beman Standard: the title is properly formatted with the library name and a short description.
 
@@ -24,3 +30,5 @@ This is a valid README.md file that follows the Beman Standard: the implements i
 This is a valid README.md file that follows the Beman Standard: the library status is properly formatted.
 
 This is a valid README.md file that follows the Beman Standard: the license is properly formatted.
+
+This is a valid README.md file that follows the Beman Standard: the license is properly formatted - Boost Software License 1.0.

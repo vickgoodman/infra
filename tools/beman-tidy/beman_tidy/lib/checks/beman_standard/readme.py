@@ -5,6 +5,11 @@ import re
 
 from ..base.file_base_check import FileBaseCheck
 from ..system.registry import register_beman_standard_check
+from beman_tidy.lib.utils.string import (
+    match_apache_license_v2_with_llvm_exceptions,
+    match_boost_software_license_v1_0,
+    match_the_mit_license,
+)
 
 
 # [README.*] checks category.
@@ -154,4 +159,41 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
         return True
 
 
-# TODO README.LICENSE
+@register_beman_standard_check("README.LICENSE")
+class ReadmeLicenseCheck(ReadmeBaseCheck):
+    def __init__(self, repo_info, beman_standard_check_config):
+        super().__init__(repo_info, beman_standard_check_config)
+
+    def check(self):
+        # Extract ## License section from the file.
+        content = self.read()
+        license_section = re.search(
+            r"^## License\n(.*?)\n##", content, re.DOTALL | re.MULTILINE
+        )
+        if license_section is None:
+            self.log(
+                f"The file '{self.path}' does not contain a `## License` section. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelicense."
+            )
+            return False
+
+        # Check if the license section contains at least one of the required licenses.
+        license_text = license_section.group(1).strip()
+        if (
+            not match_apache_license_v2_with_llvm_exceptions(license_text)
+            and not match_boost_software_license_v1_0(license_text)
+            and not match_the_mit_license(license_text)
+        ):
+            self.log(
+                f"The file '{self.path}' does not contain the required license. "
+                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelicense for the desired format."
+            )
+            return False
+
+        return True
+
+    def fix(self):
+        self.log(
+            "Please write a License section in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelicense for the desired format."
+        )
+        return True

@@ -14,21 +14,4 @@
 
 ## License
 
-This project is licensed under the Apache License 2.0 with LLVM Exceptions.
-
-## Other
-
-<!-- markdownlint-disable-next-line line-length -->
-This is a valid README.md file that follows the Beman Standard: the title is properly formatted with the library name and a short description.
-
-This is a valid README.md file that follows the Beman Standard: the badges are properly formatted.
-
-This is a valid README.md file that follows the Beman Standard: the purpose is properly formatted.
-
-This is a valid README.md file that follows the Beman Standard: the implements is properly formatted.
-
-This is a valid README.md file that follows the Beman Standard: the library status is properly formatted.
-
-This is a valid README.md file that follows the Beman Standard: the license is properly formatted.
-
-This is a valid README.md file that follows the Beman Standard: the license is properly formatted - Apache License 2.0 with LLVM Exceptions.
+This is NOT a valid README.md according to the Beman Standard: empty license section.

@@ -12,6 +12,12 @@
 
 **Status**: [Retired. No longer maintained or actively developed.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#retired-no-longer-maintained-or-actively-developed)
 
+## License
+
+This project is licensed under the Apache License 2.0 with LLVM Exceptions blah blah, and for tooling, the docs are under the MIT License.
+
+## Other
+
 <!-- markdownlint-disable-next-line line-length -->
 This is a valid README.md file that follows the Beman Standard: the title is properly formatted with the library name and a short description.
 
@@ -23,4 +29,4 @@ This is a valid README.md file that follows the Beman Standard: the implements i
 
 This is a valid README.md file that follows the Beman Standard: the library status is properly formatted.
 
-This is a valid README.md file that follows the Beman Standard: the license is properly formatted.
+This is a valid README.md file that follows the Beman Standard: the license is properly formatted - contains multiple valid licenses.
