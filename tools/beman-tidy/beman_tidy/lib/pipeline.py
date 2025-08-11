@@ -5,6 +5,13 @@ import sys
 
 from .checks.system.registry import get_registered_beman_standard_checks
 from .checks.system.git import DisallowFixInplaceAndUnstagedChangesCheck
+from .utils.string import (
+    red_color,
+    green_color,
+    yellow_color,
+    gray_color,
+    no_color,
+)
 
 # import all the implemented checks.
 # TODO: Consider removing F403 from ignored lint checks
@@ -18,12 +25,6 @@ from .checks.beman_standard.readme import *  # noqa: F401, F403
 from .checks.beman_standard.release import *  # noqa: F401, F403
 from .checks.beman_standard.repository import *  # noqa: F401, F403
 from .checks.beman_standard.toplevel import *  # noqa: F401, F403
-
-red_color = "\033[91m"
-green_color = "\033[92m"
-yellow_color = "\033[93m"
-gray_color = "\033[90m"
-no_color = "\033[0m"
 
 
 def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
@@ -59,9 +60,9 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
             check_instance.log_enabled = log_enabled
             check_instance.should_skip()  # Run should_skip() again, with logging enabled.
             log(
-                f"Running check [{check_instance.type}][{check_instance.name}] ... {gray_color}SKIPPED{no_color}\n"
+                f"Running check [{check_instance.type}][{check_instance.name}] ... {gray_color}skipped{no_color}\n"
             )
-            return check_instance.type, "SKIPPED"
+            return check_instance.type, "skipped"
 
         # Run the check on normal mode.
         log(f"Running check [{check_instance.type}][{check_instance.name}] ... ")
@@ -70,14 +71,14 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
             args.fix_inplace and check_instance.fix()
         ):
             log(
-                f"\tcheck [{check_instance.type}][{check_instance.name}] ... {green_color}PASSED{no_color}\n"
+                f"\tcheck [{check_instance.type}][{check_instance.name}] ... {green_color}passed{no_color}\n"
             )
-            return check_instance.type, "PASSED"
+            return check_instance.type, "passed"
         else:
             log(
-                f"\tcheck [{check_instance.type}][{check_instance.name}] ... {red_color}FAILED{no_color}\n"
+                f"\tcheck [{check_instance.type}][{check_instance.name}] ... {red_color}failed{no_color}\n"
             )
-            return check_instance.type, "FAILED"
+            return check_instance.type, "failed"
 
     def run_pipeline_helper():
         """
@@ -128,11 +129,11 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
                 continue
 
             check_type, status = run_check(implemented_checks[check_name])
-            if status == "PASSED":
+            if status == "passed":
                 cnt_passed_checks[check_type] += 1
-            elif status == "FAILED":
+            elif status == "failed":
                 cnt_failed_checks[check_type] += 1
-            elif status == "SKIPPED":
+            elif status == "skipped":
                 cnt_skipped_checks[check_type] += 1
             else:
                 raise ValueError(f"Invalid status: {status}")
@@ -173,10 +174,10 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
 
     # Always print the summary.
     print(
-        f"Summary    Requirement: {green_color} {cnt_passed_checks['Requirement']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['Requirement']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['Requirement']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['Requirement']} checks NOT IMPLEMENTED."
+        f"Summary    Requirement: {green_color} {cnt_passed_checks['Requirement']} checks passed{no_color}, {red_color}{cnt_failed_checks['Requirement']} checks failed{no_color}, {gray_color}{cnt_skipped_checks['Requirement']} checks skipped, {no_color} {cnt_not_implemented_checks['Requirement']} checks not implemented."
     )
     print(
-        f"Summary Recommendation: {green_color} {cnt_passed_checks['Recommendation']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['Recommendation']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['Recommendation']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['Recommendation']} checks NOT IMPLEMENTED."
+        f"Summary Recommendation: {green_color} {cnt_passed_checks['Recommendation']} checks passed{no_color}, {red_color}{cnt_failed_checks['Recommendation']} checks failed{no_color}, {gray_color}{cnt_skipped_checks['Recommendation']} checks skipped, {no_color} {cnt_not_implemented_checks['Recommendation']} checks not implemented."
     )
 
     # Always print the coverage.

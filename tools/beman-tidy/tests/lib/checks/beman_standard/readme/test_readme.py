@@ -143,7 +143,7 @@ def test__readme_badges__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__readme_badges__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md badges.
@@ -193,7 +193,7 @@ def test__readme_implements__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__readme_implements__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md "Implements".
@@ -242,7 +242,7 @@ def test__readme_library_status__invalid(repo_info, beman_standard_check_config)
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__readme_library_status__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md library status.
@@ -297,7 +297,7 @@ def test__readme_license__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__readme_license__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid README.md license.

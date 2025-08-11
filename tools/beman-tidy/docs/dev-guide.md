@@ -71,12 +71,12 @@ rootdir: /Users/dariusn/dev/dn/git/Beman/infra/tools/beman-tidy
 configfile: pyproject.toml
 collected 6 items
 
-tests/beman_standard/readme/test_readme.py::test__readme_title__valid PASSED                                                                                                                                                                  [ 16%]
-tests/beman_standard/readme/test_readme.py::test__readme_title__invalid PASSED                                                                                                                                                                [ 33%]
-tests/beman_standard/readme/test_readme.py::test__readme_title__fix_inplace PASSED                                                                                                                                                            [ 50%]
-tests/beman_standard/readme/test_readme.py::test__readme_badges__valid PASSED                                                                                                                                                                 [ 66%]
-tests/beman_standard/readme/test_readme.py::test__readme_badges__invalid PASSED                                                                                                                                                               [ 83%]
-tests/beman_standard/readme/test_readme.py::test__readme_badges__fix_inplace SKIPPED (NOT implemented)                                                                                                                                        [100%]
+tests/beman_standard/readme/test_readme.py::test__readme_title__valid passed                                                                                                                                                                  [ 16%]
+tests/beman_standard/readme/test_readme.py::test__readme_title__invalid passed                                                                                                                                                                [ 33%]
+tests/beman_standard/readme/test_readme.py::test__readme_title__fix_inplace passed                                                                                                                                                            [ 50%]
+tests/beman_standard/readme/test_readme.py::test__readme_badges__valid passed                                                                                                                                                                 [ 66%]
+tests/beman_standard/readme/test_readme.py::test__readme_badges__invalid passed                                                                                                                                                               [ 83%]
+tests/beman_standard/readme/test_readme.py::test__readme_badges__fix_inplace skipped (not implemented)                                                                                                                                        [100%]
 
 =========================================================================================================== 5 passed, 1 skipped in 0.07s ============================================================================================================
 ```
@@ -88,7 +88,7 @@ tests/beman_standard/readme/test_readme.py::test__readme_badges__fix_inplace SKI
   * e.g., for `check_category = "readme"` the test file is `tests/lib/checks/beman_standard/readme/test_readme.py`.
 * `test__<check_category>__<test_case_name>()` function inside the test file.
   * `test_case_name` can be `valid`, `invalid`, `fix_inplace` or `skipped`.
-  * If the check is implemented and must be run, add 3 test functions: `valid`, `invalid` and `fix_inplace` (some of them can be a `@pytest.mark.skip(reason="NOT implemented")` decorator, but at least one must be actually implemented).
+  * If the check is implemented and must be run, add 3 test functions: `valid`, `invalid` and `fix_inplace` (some of them can be a `@pytest.mark.skip(reason="not implemented")` decorator, but at least one must be actually implemented).
   * If the check is implemented as a dummy (e.g., cannot be properly implemented), add the `skipped` function.
     `should_skip()` must log a reason why it is skipped.
   * Note: The number of tests is already enforced by a unit test in `tests/lib/checks/system/test_registry.py`, which is looking for the test functions for new added checks!
@@ -121,7 +121,7 @@ tests/beman_standard/readme/test_readme.py::test__readme_badges__fix_inplace SKI
   * `valid`: The test case for the valid case.
   * `invalid`: The test case for the invalid case.
   * `fix_inplace`: The test case for the fix invalid case. If the fix is not (yet) implementable, add a
-    `@pytest.mark.skip(reason="NOT implemented")` decorator to track the progress.
+    `@pytest.mark.skip(reason="not implemented")` decorator to track the progress.
 
 ## Changing dependencies
 

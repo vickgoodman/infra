@@ -105,7 +105,7 @@ def test__license_apache_llvm__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__license_apache_llvm__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid LICENSE file.

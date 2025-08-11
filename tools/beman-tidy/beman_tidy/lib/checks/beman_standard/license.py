@@ -35,19 +35,19 @@ class LicenseApprovedCheck(LicenseBaseCheck):
         if match_apache_license_v2_with_llvm_exceptions(content):
             self.log(
                 "Valid Apache License - Version 2.0 with LLVM Exceptions found in LICENSE file.",
-                log_level="INFO",
+                log_level="info",
             )
             return True
 
         if match_boost_software_license_v1_0(content):
             self.log(
                 "Valid Boost Software License - Version 1.0 found in LICENSE file.",
-                log_level="INFO",
+                log_level="info",
             )
             return True
 
         if match_the_mit_license(content):
-            self.log("Valid MIT License found in LICENSE file.", log_level="INFO")
+            self.log("Valid MIT License found in LICENSE file.", log_level="info")
             return True
 
         self.log(

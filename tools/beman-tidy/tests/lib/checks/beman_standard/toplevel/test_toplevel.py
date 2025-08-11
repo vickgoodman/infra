@@ -60,7 +60,7 @@ def test__toplevel_cmake__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__toplevel_cmake__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
@@ -105,7 +105,7 @@ def test__toplevel_license__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__toplevel_license__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
@@ -150,6 +150,6 @@ def test__toplevel_readme__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__toplevel_readme__fix_inplace(repo_info, beman_standard_check_config):
     pass

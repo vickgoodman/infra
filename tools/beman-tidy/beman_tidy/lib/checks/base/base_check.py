@@ -5,6 +5,12 @@ from abc import ABC
 from pathlib import Path
 
 from ..system.registry import get_beman_standard_check_name_by_class
+from ...utils.string import (
+    red_color,
+    yellow_color,
+    gray_color,
+    no_color,
+)
 
 
 class BaseCheck(ABC):
@@ -58,14 +64,14 @@ class BaseCheck(ABC):
         )
         assert self.full_text_body is not None
 
-        # set log level - e.g. "ERROR" or "WARNING" or "SKIPPED"
+        # set log level - e.g. "error" or "warning" or "skipped"
         self.log_enabled = False
         self.log_level = (
-            "SKIPPED"
+            "skipped"
             if self.should_skip()
-            else "ERROR"
+            else "error"
             if self.type == "Requirement"
-            else "WARNING"
+            else "warning"
         )
 
         # set repo info
@@ -148,16 +154,25 @@ class BaseCheck(ABC):
             f"Cannot convert check {self.name} to Requirement."
         )
         self.type = "Requirement"
-        self.log_level = "ERROR"
+        self.log_level = "error"
 
     def log(self, message, enabled=True, log_level=None):
         """
         Logs a message with the check's log level.
         e.g. [WARN][repository.name]: The name "${name}" should be snake_case.'
-        e.g. [ERROR][toplevel.cmake]: Missing top level CMakeLists.txt.'
+        e.g. [error][toplevel.cmake]: Missing top level CMakeLists.txt.'
         """
 
         if self.log_enabled and enabled:
-            print(
-                f"[{log_level if log_level else self.log_level:<15}][{self.name:<25}]: {message}"
+            log_level = log_level if log_level else self.log_level
+            color = (
+                red_color
+                if log_level == "error"
+                else yellow_color
+                if log_level == "warning"
+                else gray_color
+                if log_level == "skipped"
+                else no_color
             )
+
+            print(f"[{color}{log_level:<15}{no_color}][{self.name:<25}]: {message}")

@@ -69,7 +69,7 @@ def test__repository_name__invalid(repo_info, beman_standard_check_config):
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__repository_name__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid repository name.
@@ -123,7 +123,7 @@ def test__repository_default_branch__invalid(repo_info, beman_standard_check_con
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__repository_default_branch__fix_inplace(
     repo_info, beman_standard_check_config
 ):
@@ -174,7 +174,7 @@ def test__repository_codeowners__invalid(repo_info, beman_standard_check_config)
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__repository_codeowners__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid CODEOWNERS file.
@@ -242,7 +242,7 @@ def test__repository_disallow_git_submodules__invalid(
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__repository_disallow_git_submodules__fix_inplace(
     repo_info, beman_standard_check_config
 ):

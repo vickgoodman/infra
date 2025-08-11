@@ -72,7 +72,7 @@ def test__release_godbolt_trunk_version__invalid(
     )
 
 
-@pytest.mark.skip(reason="NOT implemented")
+@pytest.mark.skip(reason="not implemented")
 def test__release_godbolt_trunk_version__fix_inplace(
     repo_info, beman_standard_check_config
 ):
