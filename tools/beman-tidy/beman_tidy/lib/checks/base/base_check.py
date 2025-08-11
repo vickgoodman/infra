@@ -42,14 +42,14 @@ class BaseCheck(ABC):
         # save the check config
         self.config = (
             beman_standard_check_config[self.name]
-            if "INTERNAL." not in self.name
+            if "internal." not in self.name
             else None
         )
 
         # set type - e.g. "Requirement" or "Recommendation"
         self.type = (
             beman_standard_check_config[self.name]["type"]
-            if "INTERNAL." not in self.name
+            if "internal." not in self.name
             else "Requirement"
         )
         assert self.type in ["Requirement", "Recommendation"], (
@@ -59,7 +59,7 @@ class BaseCheck(ABC):
         # set full text body - e.g. "The README.md should begin ..."
         self.full_text_body = (
             beman_standard_check_config[self.name]["full_text_body"]
-            if "INTERNAL." not in self.name
+            if "internal." not in self.name
             else ""
         )
         assert self.full_text_body is not None
