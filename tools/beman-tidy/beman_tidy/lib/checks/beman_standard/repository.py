@@ -25,7 +25,7 @@ class RepositoryNameCheck(BaseCheck):
         if not is_beman_snake_case(repo_name):
             self.log(
                 "The repository should be named after the library name excluding the 'beman.' prefix. It should not contain a target C++ version. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositoryname for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositoryname for more information."
             )
             return False
 
@@ -34,7 +34,7 @@ class RepositoryNameCheck(BaseCheck):
     def fix(self):
         self.log(
             "beman-tidy can't automatically fix the repository name. "
-            "Please see https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositoryname for more information."
+            "Please see https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositoryname for more information."
         )
         pass
 
@@ -54,7 +54,7 @@ class RepositoryDefaultBranchCheck(BaseCheck):
 
     def fix(self):
         self.log(
-            "Please set `main` as default branch in the repository. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydefault_branch for more information."
+            "Please set `main` as default branch in the repository. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositorydefault_branch for more information."
         )
 
 
@@ -70,7 +70,7 @@ class RepositoryCodeownersCheck(FileBaseCheck):
 
     def fix(self):
         self.log(
-            "Please add a CODEOWNERS file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorycodeowners for more information."
+            "Please add a CODEOWNERS file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositorycodeowners for more information."
         )
 
 
@@ -83,7 +83,7 @@ class RepositoryCodeReviewRulesCheck(BaseCheck):
         # Cannot actually implement repository.code_review_rules, thus skip it.
         self.log(
             "beman-tidy cannot actually check repository.code_review_rules. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorycode_review_rules."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositorycode_review_rules."
         )
         return True
 
@@ -114,7 +114,7 @@ class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
                 self.log(
                     "The repository should not use git submodules. Please remove them. "
                     "Known exception: wg21. "
-                    "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydisallow_git_submodules for more information."
+                    "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositorydisallow_git_submodules for more information."
                 )
                 return False
 
@@ -124,5 +124,5 @@ class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
     def fix(self):
         self.log(
             "beman-tidy can't automatically fix the repository submodules. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorydisallow_git_submodules for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#repositorydisallow_git_submodules for more information."
         )

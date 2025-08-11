@@ -24,7 +24,7 @@ class ToplevelCmakeCheck(CMakeBaseCheck):
 
     def fix(self):
         self.log(
-            "Please add a CMakeLists.txt file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#toplevelcmake for the desired format."
+            "Please add a CMakeLists.txt file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#toplevelcmake for the desired format."
         )
 
 
@@ -40,7 +40,7 @@ class ToplevelLicenseCheck(LicenseBaseCheck):
 
     def fix(self):
         self.log(
-            "Please add a LICENSE file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#toplevellicense for more information."
+            "Please add a LICENSE file to the repository. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#toplevellicense for more information."
         )
 
 
@@ -56,5 +56,5 @@ class ToplevelReadmeCheck(ReadmeBaseCheck):
 
     def fix(self):
         self.log(
-            "Please write a README file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#toplevelreadme for the desired format."
+            "Please write a README file. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#toplevelreadme for the desired format."
         )

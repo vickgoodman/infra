@@ -21,7 +21,7 @@ class ReleaseGithubCheck(BaseCheck):
         # Cannot actually implement release.github, thus skip it.
         self.log(
             "beman-tidy cannot actually check release.github. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegithub."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#releasegithub."
         )
         return True
 
@@ -35,7 +35,7 @@ class ReleaseNotesCheck(BaseCheck):
         # Cannot actually implement release.notes, thus skip it.
         self.log(
             "beman-tidy cannot actually check release.notes. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasenotes."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#releasenotes."
         )
         return True
 
@@ -68,5 +68,5 @@ class ReleaseGodboltTrunkVersionCheck(ReadmeBaseCheck):
 
     def fix(self):
         self.log(
-            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegodbolt_trunk_version."
+            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#releasegodbolt_trunk_version."
         )

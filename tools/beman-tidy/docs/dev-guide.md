@@ -16,7 +16,7 @@
 
 ## Adding a new check
 
-Find an unimplemented check in the [BEMAN_STANDARD.md](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md) file and check that is not already assigned in [Planning for beman-tidy: The Codebase Bemanification Tool](https://github.com/orgs/bemanproject/projects/8/views/1).
+Find an unimplemented check in the [beman_standard.md](https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md) file and check that is not already assigned in [Planning for beman-tidy: The Codebase Bemanification Tool](https://github.com/orgs/bemanproject/projects/8/views/1).
 
 
 Check this PR example: [beman-tidy: add check - readme.library_status](https://github.com/bemanproject/infra/pull/35).
@@ -24,7 +24,7 @@ Check this PR example: [beman-tidy: add check - readme.library_status](https://g
 <details>
 <summary>Step by step tutorial: add a new check</summary>
 
-* `[mandatory]` Make sure `beman_tidy/.beman-standard.yml` reflects your check metadata (latest status from [BEMAN_STANDARD.md](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md)).
+* `[mandatory]` Make sure `beman_tidy/.beman-standard.yml` reflects your check metadata (latest status from [beman_standard.md](https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md)).
   * `[optional]` New syntax / keys from yml config can be added in
     [infra/tools/beman-tidy/beman_tidy/lib/utils_git.py:load_beman_standard_config()](https://github.com/bemanproject/infra/blob/main/tools/beman-tidy/beman_tidy/lib/utils/git.py)
     if not already implemented. Checks for TODOs in `load_beman_standard_config()`.

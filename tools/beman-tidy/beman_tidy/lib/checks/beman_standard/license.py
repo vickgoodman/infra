@@ -52,14 +52,14 @@ class LicenseApprovedCheck(LicenseBaseCheck):
 
         self.log(
             "Invalid license - cannot find approved license in LICENSE file. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#licenseapproved for more information."
         )
         return False
 
     def fix(self):
         self.log(
             "Please update the LICENSE file to include an approved license. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapproved for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#licenseapproved for more information."
         )
 
 
@@ -75,7 +75,7 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
         if not filecmp.cmp(target_license, ref_license, shallow=False):
             self.log(
                 "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapache_llvm for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#licenseapache_llvm for more information."
             )
             return False
 
@@ -84,7 +84,7 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
     def fix(self):
         self.log(
             "Please update the LICENSE file to include the Apache License v2.0 with LLVM Exceptions. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licenseapache_llvm for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#licenseapache_llvm for more information."
         )
 
 
@@ -98,6 +98,6 @@ class LicenseCriteriaCheck(BaseCheck):
         # No need to run pre_check() and check() as well, as they are not implemented.
         self.log(
             "beman-tidy cannot actually check license.criteria. Please ignore this message if license.approved has passed. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#licensecriteria for more information."
         )
         return True

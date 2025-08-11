@@ -21,6 +21,6 @@ class LibraryNameCheck(BaseCheck):
         # No need to run pre_check() and check() as well, as they are not implemented.
         self.log(
             "beman-tidy cannot actually check library.name. Please ignore this message if cmake.library_name and repository.name have passed. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#libraryname for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#libraryname for more information."
         )
         return True

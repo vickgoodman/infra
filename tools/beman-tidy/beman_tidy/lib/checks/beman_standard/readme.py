@@ -87,7 +87,7 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
 
     def fix(self):
         self.log(
-            "Please add required badges in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmebadges for the desired format."
+            "Please add required badges in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmebadges for the desired format."
         )
         return True
 
@@ -119,13 +119,13 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
 
         # Invalid/missing/duplicate "Implements:" line
         self.log(
-            f"Invalid/missing/duplicate 'Implements:' line in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for more information."
+            f"Invalid/missing/duplicate 'Implements:' line in '{self.path}'. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmeimplements for more information."
         )
         return False
 
     def fix(self):
         self.log(
-            "Please write a Implements line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmeimplements for the desired format."
+            "Please write a Implements line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmeimplements for the desired format."
         )
         return True
 
@@ -154,7 +154,7 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
 
     def fix(self):
         self.log(
-            "Please write a Status line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelibrary_status for the desired format."
+            "Please write a Status line in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmelibrary_status for the desired format."
         )
         return True
 
@@ -173,7 +173,7 @@ class ReadmeLicenseCheck(ReadmeBaseCheck):
         if license_section is None:
             self.log(
                 f"The file '{self.path}' does not contain a `## License` section. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelicense."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmelicense."
             )
             return False
 
@@ -186,7 +186,7 @@ class ReadmeLicenseCheck(ReadmeBaseCheck):
         ):
             self.log(
                 f"The file '{self.path}' does not contain the required license. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelicense for the desired format."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmelicense for the desired format."
             )
             return False
 
@@ -194,6 +194,6 @@ class ReadmeLicenseCheck(ReadmeBaseCheck):
 
     def fix(self):
         self.log(
-            "Please write a License section in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#readmelicense for the desired format."
+            "Please write a License section in README.md file. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#readmelicense for the desired format."
         )
         return True

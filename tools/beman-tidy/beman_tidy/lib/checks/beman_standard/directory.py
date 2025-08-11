@@ -61,14 +61,14 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
             forbidden_prefix = self.repo_path / forbidden_prefix
             if forbidden_prefix.exists():
                 self.log(
-                    f"Please move source files from {forbidden_prefix} to src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorysources for more information."
+                    f"Please move source files from {forbidden_prefix} to src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorysources for more information."
                 )
                 return False
 
         # If `src/` exists, src/beman/<short_name> also should exist.
         if (self.repo_path / "src/").exists() and not self.path.exists():
             self.log(
-                f"Please use the required source files location: src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorysources for more information."
+                f"Please use the required source files location: src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorysources for more information."
             )
             return False
 
@@ -80,7 +80,7 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
         # we cannot do a proper implementation for fix().
         if not self.check():
             self.log(
-                f"Please manually move sources to src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorysources for more information."
+                f"Please manually move sources to src/beman/{self.repo_name}. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorysources for more information."
             )
 
 
@@ -105,14 +105,14 @@ class DirectoryExamplesCheck(DirectoryBaseCheck):
         if len(list(self.path.glob("**/*.cpp"))) == 0:
             self.log(
                 "Missing one relevant example - cannot find examples/**/*.cpp. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directoryexamples for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directoryexamples for more information."
             )
             return False
 
         if len(list(self.path.glob("**/*CMakeLists.txt"))) == 0:
             self.log(
                 "Missing CMakeLists.txt for examples - cannot find examples/**/*CMakeLists.txt. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directoryexamples for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directoryexamples for more information."
             )
             return False
 
@@ -122,7 +122,7 @@ class DirectoryExamplesCheck(DirectoryBaseCheck):
     def fix(self):
         self.log(
             "Please add a relevant example to the examples/ directory. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directoryexamples for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directoryexamples for more information."
         )
 
 
@@ -166,7 +166,7 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
 
             self.log(
                 "Please move all documentation files within the docs/ directory, except for the root README.md file. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorydocs for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorydocs for more information."
             )
 
             return False
@@ -177,7 +177,7 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
     def fix(self):
         self.log(
             "Please manually move documentation files to the docs/ directory, except for the root README.md file. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorydocs for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorydocs for more information."
         )
 
 
@@ -250,7 +250,7 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
 
             self.log(
                 "Please move all paper related files (and directories if applicable) within the papers/ directory. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorypapers for more information."
             )
 
             return False
@@ -261,5 +261,5 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
     def fix(self):
         self.log(
             "Please move all paper related files (and directories if applicable) to papers/ directory. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorypapers for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorypapers for more information."
         )

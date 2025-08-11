@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 ## Description
 
 `beman-tidy` is a tool used to check and apply
-[The Beman Standard](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md).
+[The Beman Standard](https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md).
 
 Purpose: The tool is used to `check` (`--dry-run`) and `apply` (`--fix-inplace`) the Beman Standard to a repository.
 Note: `2025-06-07`: In order to make the best and quickly use of the tool in the entire organization, most of the
