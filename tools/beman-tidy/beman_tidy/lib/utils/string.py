@@ -3,6 +3,12 @@
 
 import re
 
+red_color = "\033[91m"
+green_color = "\033[92m"
+yellow_color = "\033[93m"
+gray_color = "\033[90m"
+no_color = "\033[0m"
+
 
 def is_snake_case(name):
     return re.match("(^[a-z0-9]+$)|(^[a-z0-9][a-z0-9_.]+[a-z0-9]$)", name)

@@ -7,7 +7,7 @@ from beman_tidy.lib.checks.beman_standard.general import (
 )
 
 
-def test__LIBRARY_NAME__is_always_skipped(repo_info, beman_standard_check_config):
+def test__library_name__is_always_skipped(repo_info, beman_standard_check_config):
     """
     Test that LIBRARY.NAME is always skipped, as it cannot be implemented.
     """

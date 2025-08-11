@@ -23,7 +23,7 @@ def test__get_registered_beman_standard_checks__valid(
     all_registered_checks = get_registered_beman_standard_checks()
     for check_name, check_class in all_registered_checks.items():
         # Convert check name to test function pattern.
-        # e.g., "README.TITLE" -> "README_TITLE"
+        # e.g., "readme.title" -> "readme_title"
         check_pattern = check_name.replace(".", "_")
 
         # Find the filename for the check class.
