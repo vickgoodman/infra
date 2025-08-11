@@ -51,8 +51,6 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         @return: True if the check passed, False otherwise.
         """
         check_instance = check_class(args.repo_info, beman_standard_check_config)
-        if require_all and check_instance.type == "Recommendation":
-            check_instance.convert_to_requirement()
 
         # Check if the check should be skipped, with logging disabled (by default).
         if check_instance.should_skip():
@@ -63,6 +61,9 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
                 f"Running check [{check_instance.type}][{check_instance.name}] ... {gray_color}skipped{no_color}\n"
             )
             return check_instance.type, "skipped"
+        elif require_all and check_instance.type == "Recommendation":
+            # Convert the check to a requirement because --require-all is set.
+            check_instance.convert_to_requirement()
 
         # Run the check on normal mode.
         log(f"Running check [{check_instance.type}][{check_instance.name}] ... ")
