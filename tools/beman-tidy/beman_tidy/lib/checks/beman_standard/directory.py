@@ -207,7 +207,7 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
             └── abstract.bst
         """
         # Exclude directories that are not part of the papers/ directory.
-        exclude_dirs = ["src"]
+        exclude_dirs = ["src", "docs", "examples"]
         if self.path.exists():
             exclude_dirs.append("papers")
         if self.repo_name == "exemplar":
@@ -215,6 +215,7 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
 
         # File extensions that are considered "paper-related"
         paper_extensions = [
+            ".md",
             ".bib",
             ".bst",
             ".tex",
@@ -242,7 +243,7 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
         for extension in paper_extensions:
             for p in self.repo_path.rglob(f"*{extension}"):
                 # Exclude files that are already in excluded directories.
-                if not any(excluded in str(p) for excluded in exclude_dirs):
+                if not any(excluded in str(p) for excluded in exclude_dirs) and p != self.repo_path / "README.md":
                     misplaced_paper_files.append(p)
 
         if len(misplaced_paper_files) > 0:
