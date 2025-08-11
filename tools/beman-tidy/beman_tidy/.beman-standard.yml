@@ -6,52 +6,52 @@
 
 # LICENSE
 LICENSE.APPROVED:
-    - type: REQUIREMENT
+    - type: Requirement
 LICENSE.APACHE_LLVM:
-    - type: RECOMMENDATION
+    - type: Recommendation
 LICENSE.CRITERIA:
-    - type: REQUIREMENT
+    - type: Requirement
 
 # GENERAL
 LIBRARY.NAME:
-    - type: RECOMMENDATION
+    - type: Recommendation
 
 # REPOSITORY
 REPOSITORY.NAME:
-    - type: REQUIREMENT
+    - type: Requirement
 REPOSITORY.DEFAULT_BRANCH:
-    - type: REQUIREMENT
+    - type: Requirement
 REPOSITORY.CODEOWNERS:
-    - type: REQUIREMENT
+    - type: Requirement
 REPOSITORY.CODE_REVIEW_RULES:
-    - type: REQUIREMENT
+    - type: Requirement
 REPOSITORY.DISALLOW_GIT_SUBMODULES:
-    - type: RECOMMENDATION
+    - type: Recommendation
 
 # RELEASE
 RELEASE.GITHUB:
-    - type: REQUIREMENT
+    - type: Requirement
 RELEASE.NOTES:
-    - type: RECOMMENDATION
+    - type: Recommendation
 RELEASE.GODBOLT_TRUNK_VERSION:
-    - type: RECOMMENDATION
+    - type: Recommendation
 
 # TOP LEVEL
 TOPLEVEL.CMAKE:
-    - type: REQUIREMENT
+    - type: Requirement
     - value: CMakeLists.txt
 TOPLEVEL.LICENSE:
-    - type: REQUIREMENT
+    - type: Requirement
     - file_name: LICENSE
 TOPLEVEL.README:
-    - type: REQUIREMENT
+    - type: Requirement
     - file_name: README.md
 
 # README
 README.TITLE:
-    - type: RECOMMENDATION
+    - type: Recommendation
 README.BADGES:
-    - type: REQUIREMENT
+    - type: Requirement
     - values:
         - library_status: [
             "![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg)",
@@ -64,11 +64,11 @@ README.BADGES:
             "![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp29.svg)"
         ]
 README.PURPOSE:
-    - type: RECOMMENDATION
+    - type: Recommendation
 README.IMPLEMENTS:
-    - type: RECOMMENDATION
+    - type: Recommendation
 README.LIBRARY_STATUS:
-    - type: REQUIREMENT
+    - type: Requirement
     - values: [
             "**Status**: [Under development and not yet ready for production use.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#under-development-and-not-yet-ready-for-production-use)",
             "**Status**: [Production ready. API may undergo changes.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#production-ready-api-may-undergo-changes)",
@@ -76,64 +76,64 @@ README.LIBRARY_STATUS:
             "**Status**: [Retired. No longer maintained or actively developed.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#retired-no-longer-maintained-or-actively-developed)",
         ]
 README.LICENSE:
-    - type: REQUIREMENT
+    - type: Requirement
 
 # CMAKE
 CMAKE.DEFAULT:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.USE_FETCH_CONTENT:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.PROJECT_NAME:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.PASSIVE_PROJECTS:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.LIBRARY_NAME:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.LIBRARY_ALIAS:
-    - type: REQUIREMENT
+    - type: Requirement
 CMAKE.TARGET_NAMES:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.PASSIVE_TARGETS:
-    - type: REQUIREMENT
+    - type: Requirement
 CMAKE.CONFIG:
-    - type: REQUIREMENT
+    - type: Requirement
 CMAKE.SKIP_TESTS:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.SKIP_EXAMPLES:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CMAKE.AVOID_PASSTHROUGHS:
-    - type: RECOMMENDATION
+    - type: Recommendation
 
 # DIRECTORY
 DIRECTORY.INTERFACE_HEADERS:
-    - type: REQUIREMENT
+    - type: Requirement
 DIRECTORY.IMPLEMENTATION_HEADERS:
-    - type: REQUIREMENT
+    - type: Requirement
 DIRECTORY.SOURCES:
-    - type: REQUIREMENT
+    - type: Requirement
 DIRECTORY.TESTS:
-    - type: REQUIREMENT
+    - type: Requirement
 DIRECTORY.EXAMPLES:
-    - type: REQUIREMENT
+    - type: Requirement
 DIRECTORY.DOCS:
-    - type: REQUIREMENT
+    - type: Requirement
 DIRECTORY.PAPERS:
-    - type: REQUIREMENT
+    - type: Requirement
 
 # FILE
 FILE.CPP_NAMES:
-    - type: RECOMMENDATION
+    - type: Recommendation
 FILE.TEST_NAMES:
-    - type: REQUIREMENT
+    - type: Requirement
 FILE.LICENSE_ID:
-    - type: REQUIREMENT
+    - type: Requirement
 FILE.COPYRIGHT:
-    - type: RECOMMENDATION
+    - type: Recommendation
 
 # CPP
 CPP.NAMESPACE:
-    - type: RECOMMENDATION
+    - type: Recommendation
 CPP.NO_FLAG_FORKING:
-    - type: REQUIREMENT
+    - type: Requirement
 CPP.EXTENSION_IDENTIFIERS:
-    - type: RECOMMENDATION
+    - type: Recommendation

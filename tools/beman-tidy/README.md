@@ -67,7 +67,7 @@ options:
   --verbose, --no-verbose
                         print verbose output for each check
   --require-all, --no-require-all
-                        all checks are required regardless of the check type (e.g., RECOMMENDATION becomes REQUIREMENT)
+                        all checks are required regardless of the check type (e.g., Recommendation becomes Requirement)
   --checks CHECKS       array of checks to run
 ```
 
@@ -76,18 +76,18 @@ options:
 ```shell
 # dry-run, require-all, non-verbose
 $ uv run beman-tidy /path/to/exemplar --require-all
-Summary    REQUIREMENT:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
-Summary RECOMMENDATION:  2 checks PASSED, 1 checks FAILED, 35 skipped (NOT implemented).
+Summary    Requirement:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
+Summary Recommendation:  2 checks PASSED, 1 checks FAILED, 35 skipped (NOT implemented).
 
-Coverage    REQUIREMENT: 100.0% (1/1 checks passed).
-Coverage RECOMMENDATION: 66.67% (2/3 checks passed).
+Coverage    Requirement: 100.0% (1/1 checks passed).
+Coverage Recommendation: 66.67% (2/3 checks passed).
 
 # dry-run, non-require-all, non-verbose
 $ uv run beman-tidy /path/to/exemplar
-Summary    REQUIREMENT:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
-Summary RECOMMENDATION:  2 checks PASSED, 1 checks FAILED, 35 skipped (NOT implemented).
+Summary    Requirement:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
+Summary Recommendation:  2 checks PASSED, 1 checks FAILED, 35 skipped (NOT implemented).
 
-Coverage    REQUIREMENT: 100.0% (1/1 checks passed).
+Coverage    Requirement: 100.0% (1/1 checks passed).
 Note: RECOMMENDATIONs are not included (--require-all NOT set).
 
 ```
@@ -99,27 +99,27 @@ or verbose mode:
 $ uv run beman-tidy /path/to/exemplar --require-all --verbose
 beman-tidy pipeline started ...
 
-Running check [RECOMMENDATION][README.TITLE] ...
-    check [RECOMMENDATION][README.TITLE] ... PASSED
+Running check [Recommendation][README.TITLE] ...
+    check [Recommendation][README.TITLE] ... PASSED
 
-Running check [REQUIREMENT][README.BADGES] ...
-    check [REQUIREMENT][README.BADGES] ... PASSED
+Running check [Requirement][README.BADGES] ...
+    check [Requirement][README.BADGES] ... PASSED
 
-Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
-    check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
+Running check [Recommendation][README.LIBRARY_STATUS] ...
+    check [Recommendation][README.LIBRARY_STATUS] ... PASSED
 
-Running check [RECOMMENDATION][DIRECTORY.SOURCES] ...
+Running check [Recommendation][DIRECTORY.SOURCES] ...
 [WARNING        ][DIRECTORY.SOURCES        ]: The directory '/Users/dariusn/dev/dn/git/Beman/exemplar/src/beman/exemplar' does not exist.
-    check [RECOMMENDATION][DIRECTORY.SOURCES] ... FAILED
+    check [Recommendation][DIRECTORY.SOURCES] ... FAILED
 
 
 beman-tidy pipeline finished.
 
-Summary    REQUIREMENT:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
-Summary RECOMMENDATION:  2 checks PASSED, 1 checks FAILED, 35 skipped (NOT implemented).
+Summary    Requirement:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
+Summary Recommendation:  2 checks PASSED, 1 checks FAILED, 35 skipped (NOT implemented).
 
-Coverage    REQUIREMENT: 100.0% (1/1 checks passed).
-Coverage RECOMMENDATION: 66.67% (2/3 checks passed).
+Coverage    Requirement: 100.0% (1/1 checks passed).
+Coverage Recommendation: 66.67% (2/3 checks passed).
 ```
 
 ```shell
@@ -127,26 +127,26 @@ Coverage RECOMMENDATION: 66.67% (2/3 checks passed).
 $ uv run beman-tidy /path/to/exemplar --require-all --verbose
 beman-tidy pipeline started ...
 
-Running check [RECOMMENDATION][README.TITLE] ...
-    check [RECOMMENDATION][README.TITLE] ... PASSED
+Running check [Recommendation][README.TITLE] ...
+    check [Recommendation][README.TITLE] ... PASSED
 
-Running check [REQUIREMENT][README.BADGES] ...
-    check [REQUIREMENT][README.BADGES] ... PASSED
+Running check [Requirement][README.BADGES] ...
+    check [Requirement][README.BADGES] ... PASSED
 
-Running check [RECOMMENDATION][README.LIBRARY_STATUS] ...
-    check [RECOMMENDATION][README.LIBRARY_STATUS] ... PASSED
+Running check [Recommendation][README.LIBRARY_STATUS] ...
+    check [Recommendation][README.LIBRARY_STATUS] ... PASSED
 
-Running check [RECOMMENDATION][DIRECTORY.SOURCES] ...
-    check [RECOMMENDATION][DIRECTORY.SOURCES] ... PASSED
+Running check [Recommendation][DIRECTORY.SOURCES] ...
+    check [Recommendation][DIRECTORY.SOURCES] ... PASSED
 
 
 beman-tidy pipeline finished.
 
-Summary    REQUIREMENT:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
-Summary RECOMMENDATION:  3 checks PASSED, 0 checks FAILED, 35 skipped (NOT implemented).
+Summary    Requirement:  1 checks PASSED, 0 checks FAILED, 4 skipped (NOT implemented).
+Summary Recommendation:  3 checks PASSED, 0 checks FAILED, 35 skipped (NOT implemented).
 
-Coverage    REQUIREMENT: 100.0% (1/1 checks passed).
-Coverage RECOMMENDATION: 100.0% (3/3 checks passed).
+Coverage    Requirement: 100.0% (1/1 checks passed).
+Coverage Recommendation: 100.0% (3/3 checks passed).
 ```
 
 - Run beman-tidy on the exemplar repository (fix issues in-place):

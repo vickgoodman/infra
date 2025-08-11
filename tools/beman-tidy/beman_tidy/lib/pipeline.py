@@ -50,7 +50,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         @return: True if the check passed, False otherwise.
         """
         check_instance = check_class(args.repo_info, beman_standard_check_config)
-        if require_all and check_instance.type == "RECOMMENDATION":
+        if require_all and check_instance.type == "Recommendation":
             check_instance.convert_to_requirement()
 
         # Check if the check should be skipped, with logging disabled (by default).
@@ -92,34 +92,34 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
 
         # All checks from the Beman Standard.
         cnt_all_beman_standard_checks = {
-            "REQUIREMENT": 0,
-            "RECOMMENDATION": 0,
+            "Requirement": 0,
+            "Recommendation": 0,
         }
         # All checks from the Beman Standard that are implemented.
         cnt_implemented_checks = {
-            "REQUIREMENT": 0,
-            "RECOMMENDATION": 0,
+            "Requirement": 0,
+            "Recommendation": 0,
         }
         # All checks from the Beman Standard that are not implemented.
         cnt_not_implemented_checks = {
-            "REQUIREMENT": 0,
-            "RECOMMENDATION": 0,
+            "Requirement": 0,
+            "Recommendation": 0,
         }
         # All implemented checks that passed.
         cnt_passed_checks = {
-            "REQUIREMENT": 0,
-            "RECOMMENDATION": 0,
+            "Requirement": 0,
+            "Recommendation": 0,
         }
         # All implemented checks that failed.
         cnt_failed_checks = {
-            "REQUIREMENT": 0,
-            "RECOMMENDATION": 0,
+            "Requirement": 0,
+            "Recommendation": 0,
         }
         # All implemented checks that were skipped (e.g., dummy implementation
         # or it cannot be implemented).
         cnt_skipped_checks = {
-            "REQUIREMENT": 0,
-            "RECOMMENDATION": 0,
+            "Requirement": 0,
+            "Recommendation": 0,
         }
 
         # Run the checks.
@@ -142,7 +142,7 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
             check_type = (
                 all_checks[check_name]["type"]
                 if not args.require_all
-                else "REQUIREMENT"
+                else "Requirement"
             )
             cnt_all_beman_standard_checks[check_type] += 1
 
@@ -173,37 +173,37 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
 
     # Always print the summary.
     print(
-        f"Summary    REQUIREMENT: {green_color} {cnt_passed_checks['REQUIREMENT']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['REQUIREMENT']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['REQUIREMENT']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['REQUIREMENT']} checks NOT IMPLEMENTED."
+        f"Summary    Requirement: {green_color} {cnt_passed_checks['Requirement']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['Requirement']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['Requirement']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['Requirement']} checks NOT IMPLEMENTED."
     )
     print(
-        f"Summary RECOMMENDATION: {green_color} {cnt_passed_checks['RECOMMENDATION']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['RECOMMENDATION']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['RECOMMENDATION']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['RECOMMENDATION']} checks NOT IMPLEMENTED."
+        f"Summary Recommendation: {green_color} {cnt_passed_checks['Recommendation']} checks PASSED{no_color}, {red_color}{cnt_failed_checks['Recommendation']} checks FAILED{no_color}, {gray_color}{cnt_skipped_checks['Recommendation']} checks SKIPPED, {no_color} {cnt_not_implemented_checks['Recommendation']} checks NOT IMPLEMENTED."
     )
 
     # Always print the coverage.
     cnt_passed_requirement = (
-        cnt_passed_checks["REQUIREMENT"] + cnt_skipped_checks["REQUIREMENT"]
+        cnt_passed_checks["Requirement"] + cnt_skipped_checks["Requirement"]
         if not args.require_all
-        else cnt_passed_checks["REQUIREMENT"]
-        + cnt_skipped_checks["REQUIREMENT"]
-        + cnt_passed_checks["RECOMMENDATION"]
-        + cnt_skipped_checks["RECOMMENDATION"]
+        else cnt_passed_checks["Requirement"]
+        + cnt_skipped_checks["Requirement"]
+        + cnt_passed_checks["Recommendation"]
+        + cnt_skipped_checks["Recommendation"]
     )
     total_implemented_requirement = (
-        cnt_implemented_checks["REQUIREMENT"] + cnt_implemented_checks["RECOMMENDATION"]
+        cnt_implemented_checks["Requirement"] + cnt_implemented_checks["Recommendation"]
         if not args.require_all
-        else cnt_implemented_checks["REQUIREMENT"]
+        else cnt_implemented_checks["Requirement"]
     )
     coverage_requirement = round(
         cnt_passed_requirement / total_implemented_requirement * 100,
         2,
     )
     cnt_passed_recommendation = (
-        cnt_passed_checks["RECOMMENDATION"] + cnt_skipped_checks["RECOMMENDATION"]
+        cnt_passed_checks["Recommendation"] + cnt_skipped_checks["Recommendation"]
         if not args.require_all
         else 0
     )
     total_implemented_recommendation = (
-        cnt_implemented_checks["RECOMMENDATION"] if not args.require_all else 0
+        cnt_implemented_checks["Recommendation"] if not args.require_all else 0
     )
     coverage_recommendation = (
         round(
@@ -214,26 +214,26 @@ def run_checks_pipeline(checks_to_run, args, beman_standard_check_config):
         else 0
     )
     total_passed = (
-        cnt_passed_checks["REQUIREMENT"]
-        + cnt_passed_checks["RECOMMENDATION"]
-        + cnt_skipped_checks["REQUIREMENT"]
-        + cnt_skipped_checks["RECOMMENDATION"]
+        cnt_passed_checks["Requirement"]
+        + cnt_passed_checks["Recommendation"]
+        + cnt_skipped_checks["Requirement"]
+        + cnt_skipped_checks["Recommendation"]
     )
     total_implemented = total_implemented_requirement + total_implemented_recommendation
     total_coverage = round((total_passed) / (total_implemented) * 100, 2)
     print(
-        f"\n{calculate_coverage_color(coverage_requirement)}Coverage    REQUIREMENT: {coverage_requirement:{6}.2f}% ({cnt_passed_requirement}/{total_implemented_requirement} checks passed).{no_color}"
+        f"\n{calculate_coverage_color(coverage_requirement)}Coverage    Requirement: {coverage_requirement:{6}.2f}% ({cnt_passed_requirement}/{total_implemented_requirement} checks passed).{no_color}"
     )
     print(
-        f"{calculate_coverage_color(coverage_recommendation, no_color=args.require_all)}Coverage RECOMMENDATION: {coverage_recommendation:{6}.2f}% ({cnt_passed_recommendation}/{total_implemented_recommendation} checks passed).{no_color}"
+        f"{calculate_coverage_color(coverage_recommendation, no_color=args.require_all)}Coverage Recommendation: {coverage_recommendation:{6}.2f}% ({cnt_passed_recommendation}/{total_implemented_recommendation} checks passed).{no_color}"
     )
     print(
         f"{calculate_coverage_color(total_coverage)}Coverage          TOTAL: {total_coverage:{6}.2f}% ({total_passed}/{total_implemented} checks passed).{no_color}"
     )
     # else:
     #     print("Note: RECOMMENDATIONs are not included (--require-all NOT set).")
-    total_cnt_failed = cnt_failed_checks["REQUIREMENT"] + (
-        cnt_failed_checks["RECOMMENDATION"] if args.require_all else 0
+    total_cnt_failed = cnt_failed_checks["Requirement"] + (
+        cnt_failed_checks["Recommendation"] if args.require_all else 0
     )
 
     sys.stdout.flush()

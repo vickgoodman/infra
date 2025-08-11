@@ -40,13 +40,13 @@ class BaseCheck(ABC):
             else None
         )
 
-        # set type - e.g. "REQUIREMENT" or "RECOMMENDATION"
+        # set type - e.g. "Requirement" or "Recommendation"
         self.type = (
             beman_standard_check_config[self.name]["type"]
             if "INTERNAL." not in self.name
-            else "REQUIREMENT"
+            else "Requirement"
         )
-        assert self.type in ["REQUIREMENT", "RECOMMENDATION"], (
+        assert self.type in ["Requirement", "Recommendation"], (
             f"Invalid check type: {self.type} for check = {self.name}."
         )
 
@@ -64,7 +64,7 @@ class BaseCheck(ABC):
             "SKIPPED"
             if self.should_skip()
             else "ERROR"
-            if self.type == "REQUIREMENT"
+            if self.type == "Requirement"
             else "WARNING"
         )
 
@@ -142,12 +142,12 @@ class BaseCheck(ABC):
 
     def convert_to_requirement(self):
         """
-        Converts the check from RECOMMENDATION to REQUIREMENT.
+        Converts the check from Recommendation to Requirement.
         """
-        assert self.type == "RECOMMENDATION", (
-            f"Cannot convert check {self.name} to REQUIREMENT."
+        assert self.type == "Recommendation", (
+            f"Cannot convert check {self.name} to Requirement."
         )
-        self.type = "REQUIREMENT"
+        self.type = "Requirement"
         self.log_level = "ERROR"
 
     def log(self, message, enabled=True, log_level=None):
