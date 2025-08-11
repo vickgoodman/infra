@@ -23,7 +23,7 @@ class BaseCheck(ABC):
         Create a new check instance.
         """
 
-        # check name -  e.g. "README.TITLE"
+        # check name -  e.g. "readme.title"
         self.name = (
             name
             if name is not None
@@ -80,7 +80,7 @@ class BaseCheck(ABC):
 
         # set beman library maturity model
         beman_library_maturity_model = beman_standard_check_config[
-            "README.LIBRARY_STATUS"
+            "readme.library_status"
         ]
         assert "values" in beman_library_maturity_model
         assert len(beman_library_maturity_model["values"]) == 4
@@ -153,8 +153,8 @@ class BaseCheck(ABC):
     def log(self, message, enabled=True, log_level=None):
         """
         Logs a message with the check's log level.
-        e.g. [WARN][REPOSITORY.NAME]: The name "${name}" should be snake_case.'
-        e.g. [ERROR][TOPLEVEL.CMAKE]: Missing top level CMakeLists.txt.'
+        e.g. [WARN][repository.name]: The name "${name}" should be snake_case.'
+        e.g. [ERROR][toplevel.cmake]: Missing top level CMakeLists.txt.'
         """
 
         if self.log_enabled and enabled:

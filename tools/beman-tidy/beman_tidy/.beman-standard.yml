@@ -5,52 +5,52 @@
 # Please report any issue related to this file to https://github.com/bemanproject/infra/issues.
 
 # LICENSE
-LICENSE.APPROVED:
+license.approved:
     - type: Requirement
-LICENSE.APACHE_LLVM:
+license.apache_llvm:
     - type: Recommendation
-LICENSE.CRITERIA:
+license.criteria:
     - type: Requirement
 
 # GENERAL
-LIBRARY.NAME:
+library.name:
     - type: Recommendation
 
 # REPOSITORY
-REPOSITORY.NAME:
+repository.name:
     - type: Requirement
-REPOSITORY.DEFAULT_BRANCH:
+repository.default_branch:
     - type: Requirement
-REPOSITORY.CODEOWNERS:
+repository.codeowners:
     - type: Requirement
-REPOSITORY.CODE_REVIEW_RULES:
+repository.code_review_rules:
     - type: Requirement
-REPOSITORY.DISALLOW_GIT_SUBMODULES:
+repository.disallow_git_submodules:
     - type: Recommendation
 
 # RELEASE
-RELEASE.GITHUB:
+release.github:
     - type: Requirement
-RELEASE.NOTES:
+release.notes:
     - type: Recommendation
-RELEASE.GODBOLT_TRUNK_VERSION:
+release.godbolt_trunk_version:
     - type: Recommendation
 
 # TOP LEVEL
-TOPLEVEL.CMAKE:
+toplevel.cmake:
     - type: Requirement
     - value: CMakeLists.txt
-TOPLEVEL.LICENSE:
+toplevel.license:
     - type: Requirement
     - file_name: LICENSE
-TOPLEVEL.README:
+toplevel.readme:
     - type: Requirement
     - file_name: README.md
 
 # README
-README.TITLE:
+readme.title:
     - type: Recommendation
-README.BADGES:
+readme.badges:
     - type: Requirement
     - values:
         - library_status: [
@@ -63,11 +63,11 @@ README.BADGES:
             "![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp26.svg)",
             "![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp29.svg)"
         ]
-README.PURPOSE:
+readme.purpose:
     - type: Recommendation
-README.IMPLEMENTS:
+readme.implements:
     - type: Recommendation
-README.LIBRARY_STATUS:
+readme.library_status:
     - type: Requirement
     - values: [
             "**Status**: [Under development and not yet ready for production use.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#under-development-and-not-yet-ready-for-production-use)",
@@ -75,65 +75,65 @@ README.LIBRARY_STATUS:
             "**Status**: [Production ready. Stable API.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#production-ready-stable-api)",
             "**Status**: [Retired. No longer maintained or actively developed.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#retired-no-longer-maintained-or-actively-developed)",
         ]
-README.LICENSE:
+readme.license:
     - type: Requirement
 
 # CMAKE
-CMAKE.DEFAULT:
+cmake.default:
     - type: Recommendation
-CMAKE.USE_FETCH_CONTENT:
+cmake.use_fetch_content:
     - type: Recommendation
-CMAKE.PROJECT_NAME:
+cmake.project_name:
     - type: Recommendation
-CMAKE.PASSIVE_PROJECTS:
+cmake.passive_projects:
     - type: Recommendation
-CMAKE.LIBRARY_NAME:
+cmake.library_name:
     - type: Recommendation
-CMAKE.LIBRARY_ALIAS:
+cmake.library_alias:
     - type: Requirement
-CMAKE.TARGET_NAMES:
+cmake.target_names:
     - type: Recommendation
-CMAKE.PASSIVE_TARGETS:
+cmake.passive_targets:
     - type: Requirement
-CMAKE.CONFIG:
+cmake.config:
     - type: Requirement
-CMAKE.SKIP_TESTS:
+cmake.skip_tests:
     - type: Recommendation
-CMAKE.SKIP_EXAMPLES:
+cmake.skip_examples:
     - type: Recommendation
-CMAKE.AVOID_PASSTHROUGHS:
+cmake.avoid_passthroughs:
     - type: Recommendation
 
 # DIRECTORY
-DIRECTORY.INTERFACE_HEADERS:
+directory.interface_headers:
     - type: Requirement
-DIRECTORY.IMPLEMENTATION_HEADERS:
+directory.implementation_headers:
     - type: Requirement
-DIRECTORY.SOURCES:
+directory.sources:
     - type: Requirement
-DIRECTORY.TESTS:
+directory.tests:
     - type: Requirement
-DIRECTORY.EXAMPLES:
+directory.examples:
     - type: Requirement
-DIRECTORY.DOCS:
+directory.docs:
     - type: Requirement
-DIRECTORY.PAPERS:
+directory.papers:
     - type: Requirement
 
 # FILE
-FILE.CPP_NAMES:
+file.cpp_names:
     - type: Recommendation
-FILE.TEST_NAMES:
+file.test_names:
     - type: Requirement
-FILE.LICENSE_ID:
+file.license_id:
     - type: Requirement
-FILE.COPYRIGHT:
+file.copyright:
     - type: Recommendation
 
 # CPP
-CPP.NAMESPACE:
+cpp.namespace:
     - type: Recommendation
-CPP.NO_FLAG_FORKING:
+cpp.no_flag_forking:
     - type: Requirement
-CPP.EXTENSION_IDENTIFIERS:
+cpp.extension_identifiers:
     - type: Recommendation

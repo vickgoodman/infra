@@ -13,7 +13,7 @@ from beman_tidy.lib.utils.string import (
     match_the_mit_license,
 )
 
-# [LICENSE.*] checks category.
+# [license.*] checks category.
 # All checks in this file extend the LicenseBaseCheck class.
 #
 # Note: LicenseBaseCheck is not a registered check!
@@ -24,7 +24,7 @@ class LicenseBaseCheck(FileBaseCheck):
         super().__init__(repo_info, beman_standard_check_config, "LICENSE")
 
 
-@register_beman_standard_check("LICENSE.APPROVED")
+@register_beman_standard_check("license.approved")
 class LicenseApprovedCheck(LicenseBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -63,7 +63,7 @@ class LicenseApprovedCheck(LicenseBaseCheck):
         )
 
 
-@register_beman_standard_check("LICENSE.APACHE_LLVM")
+@register_beman_standard_check("license.apache_llvm")
 class LicenseApacheLLVMCheck(LicenseBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -88,16 +88,16 @@ class LicenseApacheLLVMCheck(LicenseBaseCheck):
         )
 
 
-@register_beman_standard_check("LICENSE.CRITERIA")
+@register_beman_standard_check("license.criteria")
 class LicenseCriteriaCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
     def should_skip(self):
-        # Cannot actually implement LICENSE.CRITERIA, so skip it.
+        # Cannot actually implement license.criteria, so skip it.
         # No need to run pre_check() and check() as well, as they are not implemented.
         self.log(
-            "beman-tidy cannot actually check LICENSE.CRITERIA. Please ignore this message if LICENSE.APPROVED has passed. "
+            "beman-tidy cannot actually check license.criteria. Please ignore this message if license.approved has passed. "
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#licensecriteria for more information."
         )
         return True

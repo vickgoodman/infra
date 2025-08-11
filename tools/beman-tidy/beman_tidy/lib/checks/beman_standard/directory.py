@@ -5,7 +5,7 @@ from ..base.directory_base_check import DirectoryBaseCheck
 from ..system.registry import register_beman_standard_check
 
 
-# [DIRECTORY.*] checks category.
+# [directory.*] checks category.
 # All checks in this file extend the DirectoryBaseCheck class.
 #
 # Note: DirectoryBaseCheck is not a registered check!
@@ -30,13 +30,13 @@ class BemanTreeDirectoryCheck(DirectoryBaseCheck):
         )
 
 
-# TODO DIRECTORY.INTERFACE_HEADERS
+# TODO directory.interface_headers
 
 
-# TODO DIRECTORY.IMPLEMENTATION_HEADERS
+# TODO directory.implementation_headers
 
 
-@register_beman_standard_check("DIRECTORY.SOURCES")
+@register_beman_standard_check("directory.sources")
 class DirectorySourcesCheck(BemanTreeDirectoryCheck):
     """
     Check if the sources directory is src/beman/<short_name>.
@@ -84,10 +84,10 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
             )
 
 
-# TODO DIRECTORY.TESTS
+# TODO directory.tests
 
 
-@register_beman_standard_check("DIRECTORY.EXAMPLES")
+@register_beman_standard_check("directory.examples")
 class DirectoryExamplesCheck(DirectoryBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config, "examples")
@@ -126,7 +126,7 @@ class DirectoryExamplesCheck(DirectoryBaseCheck):
         )
 
 
-@register_beman_standard_check("DIRECTORY.DOCS")
+@register_beman_standard_check("directory.docs")
 class DirectoryDocsCheck(DirectoryBaseCheck):
     """
     Check if the all documentation files reside within docs/ directory.
@@ -181,8 +181,7 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
         )
 
 
-# TODO DIRECTORY.PAPERS
-@register_beman_standard_check("DIRECTORY.PAPERS")
+@register_beman_standard_check("directory.papers")
 class DirectoryPapersCheck(DirectoryBaseCheck):
     """
     Check if the all paper related files reside within papers/ directory.

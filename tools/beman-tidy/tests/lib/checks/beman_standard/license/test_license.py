@@ -20,7 +20,7 @@ valid_prefix = f"{test_data_prefix}/valid"
 invalid_prefix = f"{test_data_prefix}/invalid"
 
 
-def test__LICENSE_APPROVED__valid(repo_info, beman_standard_check_config):
+def test__license_approved__valid(repo_info, beman_standard_check_config):
     """
     Test that a valid LICENSE file passes the check.
     """
@@ -42,7 +42,7 @@ def test__LICENSE_APPROVED__valid(repo_info, beman_standard_check_config):
     )
 
 
-def test__LICENSE_APPROVED__invalid(repo_info, beman_standard_check_config):
+def test__license_approved__invalid(repo_info, beman_standard_check_config):
     """
     Test that an invalid LICENSE file fails the check.
     """
@@ -59,7 +59,7 @@ def test__LICENSE_APPROVED__invalid(repo_info, beman_standard_check_config):
     )
 
 
-def test__LICENSE_APPROVED__fix_inplace(repo_info, beman_standard_check_config):
+def test__license_approved__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid LICENSE file.
     """
@@ -67,7 +67,7 @@ def test__LICENSE_APPROVED__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
 
-def test__LICENSE_APACHE_LLVM__valid(repo_info, beman_standard_check_config):
+def test__license_apache_llvm__valid(repo_info, beman_standard_check_config):
     """
     Test that a LICENSE file with Apache LLVM passes the check.
     """
@@ -85,7 +85,7 @@ def test__LICENSE_APACHE_LLVM__valid(repo_info, beman_standard_check_config):
     )
 
 
-def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
+def test__license_apache_llvm__invalid(repo_info, beman_standard_check_config):
     """
     Test that a LICENSE file without Apache LLVM fails the check.
     """
@@ -106,7 +106,7 @@ def test__LICENSE_APACHE_LLVM__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_config):
+def test__license_apache_llvm__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid LICENSE file.
     Note: Skipping this test as it is not implemented.
@@ -114,7 +114,7 @@ def test__LICENSE_APACHE_LLVM__fix_inplace(repo_info, beman_standard_check_confi
     pass
 
 
-def test__LICENSE_CRITERIA__is_always_skipped(repo_info, beman_standard_check_config):
+def test__license_criteria__is_always_skipped(repo_info, beman_standard_check_config):
     """
     Test that LICENSE.CRITERIA is always skipped, as it cannot be implemented.
     """

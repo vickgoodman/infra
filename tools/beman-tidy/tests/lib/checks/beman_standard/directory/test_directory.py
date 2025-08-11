@@ -21,7 +21,7 @@ valid_prefix = f"{test_data_prefix}/valid"
 invalid_prefix = f"{test_data_prefix}/invalid"
 
 
-def test__DIRECTORY_SOURCES__valid(repo_info, beman_standard_check_config):
+def test__directory_sources__valid(repo_info, beman_standard_check_config):
     """
     Test that repositories with valid CMakeLists.txt.
     """
@@ -41,7 +41,7 @@ def test__DIRECTORY_SOURCES__valid(repo_info, beman_standard_check_config):
     )
 
 
-def test__DIRECTORY_SOURCES__invalid(repo_info, beman_standard_check_config):
+def test__directory_sources__invalid(repo_info, beman_standard_check_config):
     """
     Test that repositories with invalid CMakeLists.txt.
     """
@@ -72,7 +72,7 @@ def test__DIRECTORY_SOURCES__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__DIRECTORY_SOURCES__fix_inplace(repo_info, beman_standard_check_config):
+def test__directory_sources__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid source tree.
     Note: Skipping this test as it is not implemented.
@@ -80,7 +80,7 @@ def test__DIRECTORY_SOURCES__fix_inplace(repo_info, beman_standard_check_config)
     pass
 
 
-def test__DIRECTORY_EXAMPLES__valid(repo_info, beman_standard_check_config):
+def test__directory_examples__valid(repo_info, beman_standard_check_config):
     """
     Test that repositories with valid examples directory pass the check.
     """
@@ -98,7 +98,7 @@ def test__DIRECTORY_EXAMPLES__valid(repo_info, beman_standard_check_config):
     )
 
 
-def test__DIRECTORY_EXAMPLES__invalid(repo_info, beman_standard_check_config):
+def test__directory_examples__invalid(repo_info, beman_standard_check_config):
     """
     Test that repositories with invalid examples directory fail the check.
     """
@@ -125,7 +125,7 @@ def test__DIRECTORY_EXAMPLES__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__DIRECTORY_EXAMPLES__fix_inplace(repo_info, beman_standard_check_config):
+def test__directory_examples__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid examples directory.
     Note: Skipping this test as it is not implemented.
@@ -133,7 +133,7 @@ def test__DIRECTORY_EXAMPLES__fix_inplace(repo_info, beman_standard_check_config
     pass
 
 
-def test__DIRECTORY_DOCS__valid(repo_info, beman_standard_check_config):
+def test__directory_docs__valid(repo_info, beman_standard_check_config):
     """
     Test that repositories with valid documentation structure pass the check.
     """
@@ -155,7 +155,7 @@ def test__DIRECTORY_DOCS__valid(repo_info, beman_standard_check_config):
     )
 
 
-def test__DIRECTORY_DOCS__invalid(repo_info, beman_standard_check_config):
+def test__directory_docs__invalid(repo_info, beman_standard_check_config):
     """
     Test that repositories with invalid documentation structure fail the check.
     """
@@ -180,7 +180,7 @@ def test__DIRECTORY_DOCS__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__DIRECTORY_DOCS__fix_inplace(repo_info, beman_standard_check_config):
+def test__directory_docs__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid documentation structure.
     Note: Skipping this test as it is not implemented.
@@ -188,7 +188,7 @@ def test__DIRECTORY_DOCS__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
 
-def test__DIRECTORY_PAPERS__valid(repo_info, beman_standard_check_config):
+def test__directory_papers__valid(repo_info, beman_standard_check_config):
     """
     Test that repositories with valid paper structure pass the check.
     """
@@ -208,7 +208,7 @@ def test__DIRECTORY_PAPERS__valid(repo_info, beman_standard_check_config):
     )
 
 
-def test__DIRECTORY_PAPERS__invalid(repo_info, beman_standard_check_config):
+def test__directory_papers__invalid(repo_info, beman_standard_check_config):
     """
     Test that repositories with invalid paper structure fail the check.
     """
@@ -233,7 +233,7 @@ def test__DIRECTORY_PAPERS__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__DIRECTORY_PAPERS__fix_inplace(repo_info, beman_standard_check_config):
+def test__directory_papers__fix_inplace(repo_info, beman_standard_check_config):
     """
     Test that the fix method corrects an invalid paper structure.
     Note: Skipping this test as it is not implemented.

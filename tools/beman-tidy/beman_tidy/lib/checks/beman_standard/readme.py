@@ -12,7 +12,7 @@ from beman_tidy.lib.utils.string import (
 )
 
 
-# [README.*] checks category.
+# [readme.*] checks category.
 # All checks in this file extend the ReadmeBaseCheck class.
 #
 # Note: ReadmeBaseCheck is not a registered check!
@@ -21,7 +21,7 @@ class ReadmeBaseCheck(FileBaseCheck):
         super().__init__(repo_info, beman_standard_check_config, "README.md")
 
 
-@register_beman_standard_check("README.TITLE")
+@register_beman_standard_check("readme.title")
 class ReadmeTitleCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -49,7 +49,7 @@ class ReadmeTitleCheck(ReadmeBaseCheck):
         return True
 
 
-@register_beman_standard_check("README.BADGES")
+@register_beman_standard_check("readme.badges")
 class ReadmeBadgesCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -92,7 +92,7 @@ class ReadmeBadgesCheck(ReadmeBaseCheck):
         return True
 
 
-@register_beman_standard_check("README.IMPLEMENTS")
+@register_beman_standard_check("readme.implements")
 class ReadmeImplementsCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -130,7 +130,7 @@ class ReadmeImplementsCheck(ReadmeBaseCheck):
         return True
 
 
-@register_beman_standard_check("README.LIBRARY_STATUS")
+@register_beman_standard_check("readme.library_status")
 class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -159,7 +159,7 @@ class ReadmeLibraryStatusCheck(ReadmeBaseCheck):
         return True
 
 
-@register_beman_standard_check("README.LICENSE")
+@register_beman_standard_check("readme.license")
 class ReadmeLicenseCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)

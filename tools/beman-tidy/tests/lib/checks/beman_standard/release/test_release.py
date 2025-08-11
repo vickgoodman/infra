@@ -20,21 +20,21 @@ valid_prefix = f"{test_data_prefix}/valid"
 invalid_prefix = f"{test_data_prefix}/invalid"
 
 
-def test__RELEASE_GITHUB__is_always_skipped(repo_info, beman_standard_check_config):
+def test__release_github__is_always_skipped(repo_info, beman_standard_check_config):
     """
     Test that RELEASE.GITHUB is always skipped, as it cannot be implemented.
     """
     assert ReleaseGithubCheck(repo_info, beman_standard_check_config).should_skip()
 
 
-def test__RELEASE_NOTES__is_always_skipped(repo_info, beman_standard_check_config):
+def test__release_notes__is_always_skipped(repo_info, beman_standard_check_config):
     """
     Test that RELEASE.NOTES is always skipped, as it cannot be implemented.
     """
     assert ReleaseNotesCheck(repo_info, beman_standard_check_config).should_skip()
 
 
-def test__RELEASE_GODBOLT_TRUNK_VERSION__valid(repo_info, beman_standard_check_config):
+def test__release_godbolt_trunk_version__valid(repo_info, beman_standard_check_config):
     """
     Test that repositories with present Godbolt trunk version pass the check.
     """
@@ -52,7 +52,7 @@ def test__RELEASE_GODBOLT_TRUNK_VERSION__valid(repo_info, beman_standard_check_c
     )
 
 
-def test__RELEASE_GODBOLT_TRUNK_VERSION__invalid(
+def test__release_godbolt_trunk_version__invalid(
     repo_info, beman_standard_check_config
 ):
     """
@@ -73,7 +73,7 @@ def test__RELEASE_GODBOLT_TRUNK_VERSION__invalid(
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__RELEASE_GODBOLT_TRUNK_VERSION__fix_inplace(
+def test__release_godbolt_trunk_version__fix_inplace(
     repo_info, beman_standard_check_config
 ):
     """

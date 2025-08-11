@@ -9,13 +9,13 @@ from ..base.base_check import BaseCheck
 from ..system.registry import register_beman_standard_check
 from ...utils.string import is_beman_snake_case
 
-# [REPOSITORY.*] checks category.
+# [repository.*] checks category.
 # All checks in this file extend the FileBaseCheck class.
 #
 # Note: FileBaseCheck is not a registered check!
 
 
-@register_beman_standard_check("REPOSITORY.NAME")
+@register_beman_standard_check("repository.name")
 class RepositoryNameCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -39,7 +39,7 @@ class RepositoryNameCheck(BaseCheck):
         pass
 
 
-@register_beman_standard_check("REPOSITORY.DEFAULT_BRANCH")
+@register_beman_standard_check("repository.default_branch")
 class RepositoryDefaultBranchCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -58,7 +58,7 @@ class RepositoryDefaultBranchCheck(BaseCheck):
         )
 
 
-@register_beman_standard_check("REPOSITORY.CODEOWNERS")
+@register_beman_standard_check("repository.codeowners")
 class RepositoryCodeownersCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config, ".github/CODEOWNERS")
@@ -74,21 +74,21 @@ class RepositoryCodeownersCheck(FileBaseCheck):
         )
 
 
-@register_beman_standard_check("REPOSITORY.CODE_REVIEW_RULES")
+@register_beman_standard_check("repository.code_review_rules")
 class RepositoryCodeReviewRulesCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
     def should_skip(self):
-        # Cannot actually implement REPOSITORY.CODE_REVIEW_RULES, thus skip it.
+        # Cannot actually implement repository.code_review_rules, thus skip it.
         self.log(
-            "beman-tidy cannot actually check REPOSITORY.CODE_REVIEW_RULES. "
+            "beman-tidy cannot actually check repository.code_review_rules. "
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#repositorycode_review_rules."
         )
         return True
 
 
-@register_beman_standard_check("REPOSITORY.DISALLOW_GIT_SUBMODULES")
+@register_beman_standard_check("repository.disallow_git_submodules")
 class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config, ".gitmodules")

@@ -6,13 +6,13 @@ from .license import LicenseBaseCheck
 from .readme import ReadmeBaseCheck
 from ..system.registry import register_beman_standard_check
 
-# [TOPLEVEL.*] checks category.
+# [toplevel.*] checks category.
 # All checks in this file extend the ToplevelBaseCheck class.
 #
 # Note: ToplevelBaseCheck is not a registered check!
 
 
-@register_beman_standard_check("TOPLEVEL.CMAKE")
+@register_beman_standard_check("toplevel.cmake")
 class ToplevelCmakeCheck(CMakeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -28,7 +28,7 @@ class ToplevelCmakeCheck(CMakeBaseCheck):
         )
 
 
-@register_beman_standard_check("TOPLEVEL.LICENSE")
+@register_beman_standard_check("toplevel.license")
 class ToplevelLicenseCheck(LicenseBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -44,7 +44,7 @@ class ToplevelLicenseCheck(LicenseBaseCheck):
         )
 
 
-@register_beman_standard_check("TOPLEVEL.README")
+@register_beman_standard_check("toplevel.readme")
 class ToplevelReadmeCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)

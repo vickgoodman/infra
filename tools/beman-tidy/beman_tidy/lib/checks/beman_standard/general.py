@@ -11,16 +11,16 @@ from ..system.registry import register_beman_standard_check
 # Note: BaseCheck is not a registered check!
 
 
-@register_beman_standard_check("LIBRARY.NAME")
+@register_beman_standard_check("library.name")
 class LibraryNameCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
     def should_skip(self):
-        # Cannot actually implement LIBRARY.NAME, so skip it.
+        # Cannot actually implement library.name, so skip it.
         # No need to run pre_check() and check() as well, as they are not implemented.
         self.log(
-            "beman-tidy cannot actually check LIBRARY.NAME. Please ignore this message if CMAKE.LIBRARY_NAME and REPOSITORY.NAME have passed. "
+            "beman-tidy cannot actually check library.name. Please ignore this message if cmake.library_name and repository.name have passed. "
             "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#libraryname for more information."
         )
         return True

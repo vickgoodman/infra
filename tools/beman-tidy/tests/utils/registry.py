@@ -12,7 +12,7 @@ def find_pytest_test_functions_for_check(check_pattern):
     Find all pytest test functions that match the given check pattern.
 
     Args:
-        check_pattern: The check pattern (e.g., "README_TITLE")
+        check_pattern: The check pattern (e.g., "readme_title")
 
     Returns:
         List of dictionaries containing module and function information
@@ -67,7 +67,7 @@ def find_filename_for_check(check_name):
     Find the Python file that contains the check class for the given check name.
 
     Args:
-        check_name: The check name (e.g., "README.TITLE")
+        check_name: The check name (e.g., "readme.title")
 
     Returns:
         The filename of the check class
