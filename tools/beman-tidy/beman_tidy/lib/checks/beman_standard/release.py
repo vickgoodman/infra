@@ -6,52 +6,41 @@ from beman_tidy.lib.checks.base.base_check import BaseCheck
 from beman_tidy.lib.checks.beman_standard.readme import ReadmeBaseCheck
 from ..system.registry import register_beman_standard_check
 
-# [RELEASE.*] checks category.
+# [release.*] checks category.
 # Note: Data is stored online - e.g. https://github.com/bemanproject/exemplar/releases
 # beman-tidy is an offline tool, so it cannot check these issues,
 # but for some of them it will try some heuristics.
 
 
-@register_beman_standard_check("RELEASE.GITHUB")
+@register_beman_standard_check("release.github")
 class ReleaseGithubCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
-    def check(self):
-        # Need to always return True, as beman-tidy is an offline tool
-        # that does not have access to the GitHub API.
+    def should_skip(self):
+        # Cannot actually implement release.github, thus skip it.
         self.log(
-            "beman-tidy cannot check this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegithub."
+            "beman-tidy cannot actually check release.github. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#releasegithub."
         )
         return True
 
-    def fix(self):
-        self.log(
-            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegithub."
-        )
 
-
-# TODO RELEASE.NOTES
-@register_beman_standard_check("RELEASE.NOTES")
+@register_beman_standard_check("release.notes")
 class ReleaseNotesCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
 
-    def check(self):
-        # Need to always return True, as beman-tidy is an offline tool
-        # that does not have access to the GitHub API.
+    def should_skip(self):
+        # Cannot actually implement release.notes, thus skip it.
         self.log(
-            "beman-tidy cannot check this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasenotes."
+            "beman-tidy cannot actually check release.notes. "
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#releasenotes."
         )
         return True
 
-    def fix(self):
-        self.log(
-            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasenotes."
-        )
 
-
-@register_beman_standard_check("RELEASE.GODBOLT_TRUNK_VERSION")
+@register_beman_standard_check("release.godbolt_trunk_version")
 class ReleaseGodboltTrunkVersionCheck(ReadmeBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config)
@@ -79,5 +68,5 @@ class ReleaseGodboltTrunkVersionCheck(ReadmeBaseCheck):
 
     def fix(self):
         self.log(
-            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#releasegodbolt_trunk_version."
+            "beman-tidy cannot fix this issue. See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#releasegodbolt_trunk_version."
         )
