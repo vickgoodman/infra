@@ -20,6 +20,7 @@ class ReadmeBaseCheck(FileBaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
         super().__init__(repo_info, beman_standard_check_config, "README.md")
 
+
 @register_beman_standard_check("readme.purpose")
 class ReadmePurposeCheck(BaseCheck):
     def __init__(self, repo_info, beman_standard_check_config):
