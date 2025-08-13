@@ -73,11 +73,117 @@ def test__directory_sources__invalid(repo_info, beman_standard_check_config):
 
 
 @pytest.mark.skip(reason="NOT implemented")
-def test__DIRECTORY_SOURCES__fix_inplace(repo_info, beman_standard_check_config):
+def test__directory_sources__fix_inplace(repo_info, beman_standard_check_config):
     pass
 
 
-def test__DIRECTORY_DOCS__valid(repo_info, beman_standard_check_config):
+def test__directory_tests__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with test files within the top-level tests/ directory pass the check.
+    """
+    valid_tests_paths = [
+        # exemplar/ repo with correct tests/ dir and a relevant example.
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_tests_paths,
+        DirectoryTestsCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__directory_tests__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with test files outside the top-level tests/ directory fail the check.
+    """
+    invalid_tests_paths = [
+        # exemplar/ repo without tests/beman/<short_name> dir.
+        Path(f"{invalid_prefix}/repo-exemplar-v1"),
+        # Tests in tests/beman - Missing 3rd subdirectory.
+        Path(f"{invalid_prefix}/repo-exemplar-v2"),
+        # Tests in tests/ - Missing 2nd and 3rd subdirectories.
+        Path(f"{invalid_prefix}/repo-exemplar-v3"),
+        # Empty tests/beman/<short_name> dir.
+        Path(f"{invalid_prefix}/repo-exemplar-v4"),
+        # Test files outside tests/beman/<short_name> dir.
+        Path(f"{invalid_prefix}/repo-exemplar-v5"),
+        # Missing relevant example in tests/beman/<short_name> dir.
+        Path(f"{invalid_prefix}/repo-exemplar-v6"),
+        # Wrong name for tests/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v7"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_tests_paths,
+        DirectoryTestsCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__directory_examples__valid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with valid examples directory pass the check.
+    """
+    valid_examples_paths = [
+        # exemplar/ repo with correct examples/ dir.
+        Path(f"{valid_prefix}/repo-exemplar-v1/"),
+    ]
+
+    run_check_for_each_path(
+        True,
+        valid_examples_paths,
+        DirectoryExamplesCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+def test__directory_examples__invalid(repo_info, beman_standard_check_config):
+    """
+    Test that repositories with invalid examples directory fail the check.
+    """
+    invalid_examples_paths = [
+        # Missing examples/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v1"),
+        # Empty examples/ directory.
+        Path(f"{invalid_prefix}/repo-exemplar-v2"),
+        # examples/ directory without .cpp files.
+        Path(f"{invalid_prefix}/repo-exemplar-v3"),
+        # examples/ directory without CMakeLists.txt files.
+        Path(f"{invalid_prefix}/repo-exemplar-v4"),
+        # examples/ directory with no relevant example files.
+        Path(f"{invalid_prefix}/repo-exemplar-v5"),
+    ]
+
+    run_check_for_each_path(
+        False,
+        invalid_examples_paths,
+        DirectoryExamplesCheck,
+        repo_info,
+        beman_standard_check_config,
+    )
+
+
+@pytest.mark.skip(reason="NOT implemented")
+def test__directory_examples__fix_inplace(repo_info, beman_standard_check_config):
+    pass
+
+
+@pytest.mark.skip(reason="not implemented")
+def test__directory_tests__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid test directory structure.
+    Note: Skipping this test as it is not implemented.
+    """
+    pass
+
+
+def test__directory_docs__valid(repo_info, beman_standard_check_config):
     """
     Test that repositories with valid documentation structure pass the check.
     """

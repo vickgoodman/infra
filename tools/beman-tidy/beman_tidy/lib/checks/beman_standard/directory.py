@@ -84,7 +84,7 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
             )
 
 
-@register_beman_standard_check("DIRECTORY.TESTS")
+@register_beman_standard_check("directory.tests")
 class DirectoryTestsCheck(BemanTreeDirectoryCheck):
     """
     Check if all test files reside within tests/beman/<short_name> directory.
@@ -115,13 +115,13 @@ class DirectoryTestsCheck(BemanTreeDirectoryCheck):
 
     def check(self):
         # Exclude directories that are not part of the tests.
-        exclude_dirs = [f"tests/beman/{self.repo_name}"]
+        exclude_dirs = [".github", "tests"]
         if self.repo_name == "exemplar":
             exclude_dirs.extend(["cookiecutter", "infra"])
 
         # Find all test files in the repository outside the excluded directories.
         misplaced_test_files = []
-        for p in self.repo_path.rglob("*.test.*"):
+        for p in self.repo_path.rglob("*test*"):
             if not any(excluded in str(p) for excluded in exclude_dirs):
                 misplaced_test_files.append(p)
 
@@ -132,7 +132,7 @@ class DirectoryTestsCheck(BemanTreeDirectoryCheck):
 
             self.log(
                 "Please move all test files within the tests/ directory. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorytests for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorytests for more information."
             )
             return False
 
@@ -143,7 +143,7 @@ class DirectoryTestsCheck(BemanTreeDirectoryCheck):
         if len(relevant_test_files) == 0 or len(relevant_cmake_files) == 0:
             self.log(
                 "Missing relevant test files in tests/ directory. "
-                "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorytests for more information."
+                "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorytests for more information."
             )
             return False
 
@@ -153,12 +153,8 @@ class DirectoryTestsCheck(BemanTreeDirectoryCheck):
     def fix(self):
         self.log(
             "Please manually move test files to the tests/beman/<short_name> directory. "
-            "See https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md#directorytests for more information."
+            "See https://github.com/bemanproject/beman/blob/main/docs/beman_standard.md#directorytests for more information."
         )
-
-
-# TODO DIRECTORY.EXAMPLES
-# TODO directory.tests
 
 
 @register_beman_standard_check("directory.examples")
