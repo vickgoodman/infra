@@ -143,7 +143,7 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
 
     def check(self):
         # Exclude directories that are not part of the documentation.
-        exclude_dirs = ["papers", ".github"]
+        exclude_dirs = ["src", "papers", "examples", ".github"]
         if self.path.exists():
             exclude_dirs.append("docs")
         if self.repo_name == "exemplar":
