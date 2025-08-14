@@ -74,6 +74,10 @@ def test__directory_sources__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="not implemented")
 def test__directory_sources__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid sources directory structure.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
@@ -180,6 +184,10 @@ def test__directory_examples__invalid(repo_info, beman_standard_check_config):
 
 @pytest.mark.skip(reason="not implemented")
 def test__directory_examples__fix_inplace(repo_info, beman_standard_check_config):
+    """
+    Test that the fix method corrects an invalid examples directory structure.
+    Note: Skipping this test as it is not implemented.
+    """
     pass
 
 
