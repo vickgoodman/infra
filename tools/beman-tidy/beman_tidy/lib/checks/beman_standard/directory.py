@@ -49,7 +49,7 @@ class DirectorySourcesCheck(BemanTreeDirectoryCheck):
         super().__init__(repo_info, beman_standard_check_config, "src")
 
     def pre_check(self):
-        # Need to override this, because DIRECTORY.SOURCES is conditional
+        # Need to override this, because directory.sources is conditional
         # (a repo without any source files location is still valid - header only libraries)
         return True
 
@@ -137,7 +137,7 @@ class DirectoryDocsCheck(DirectoryBaseCheck):
         super().__init__(repo_info, beman_standard_check_config, "docs")
 
     def pre_check(self):
-        # Need to override this, because DIRECTORY.DOCS is conditional
+        # Need to override this, because directory.docs is conditional
         # (a repo without any documentation is still valid).
         return True
 
@@ -191,7 +191,7 @@ class DirectoryPapersCheck(DirectoryBaseCheck):
         super().__init__(repo_info, beman_standard_check_config, "papers")
 
     def pre_check(self):
-        # Need to override this, because DIRECTORY.PAPERS is conditional
+        # Need to override this, because directory.papers is conditional
         # (a repo without any paper files is still valid - no papers/ directory required)
         return True
 

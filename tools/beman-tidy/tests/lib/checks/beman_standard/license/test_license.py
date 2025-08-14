@@ -72,7 +72,7 @@ def test__license_apache_llvm__valid(repo_info, beman_standard_check_config):
     Test that a LICENSE file with Apache LLVM passes the check.
     """
     valid_license_paths = [
-        # Apache License v2.0 with LLVM Exceptions is the only one compatible with LICENSE.APACHE_LLVM.
+        # Apache License v2.0 with LLVM Exceptions is the only one compatible with license.apache_llvm.
         Path(f"{valid_prefix}/valid-LICENSE-v1"),
     ]
 
@@ -90,9 +90,9 @@ def test__license_apache_llvm__invalid(repo_info, beman_standard_check_config):
     Test that a LICENSE file without Apache LLVM fails the check.
     """
     invalid_license_paths = [
-        # Boost Software License 1.0 is LICENSE.APPROVED compatible, but not compatible with LICENSE.APACHE_LLVM.
+        # Boost Software License 1.0 is license.approved compatible, but not compatible with license.apache_llvm.
         Path(f"{valid_prefix}/valid-LICENSE-v2"),
-        # MIT License  is LICENSE.APPROVED compatible, but not compatible with LICENSE.APACHE_LLVM.
+        # MIT License  is license.approved compatible, but not compatible with license.apache_llvm.
         Path(f"{valid_prefix}/valid-LICENSE-v3"),
     ]
 
@@ -116,6 +116,6 @@ def test__license_apache_llvm__fix_inplace(repo_info, beman_standard_check_confi
 
 def test__license_criteria__is_always_skipped(repo_info, beman_standard_check_config):
     """
-    Test that LICENSE.CRITERIA is always skipped, as it cannot be implemented.
+    Test that license.criteria is always skipped, as it cannot be implemented.
     """
     assert LicenseCriteriaCheck(repo_info, beman_standard_check_config).should_skip()
