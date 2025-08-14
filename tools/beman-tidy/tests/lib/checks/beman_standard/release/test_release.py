@@ -22,14 +22,14 @@ invalid_prefix = f"{test_data_prefix}/invalid"
 
 def test__release_github__is_always_skipped(repo_info, beman_standard_check_config):
     """
-    Test that RELEASE.GITHUB is always skipped, as it cannot be implemented.
+    Test that release.github is always skipped, as it cannot be implemented.
     """
     assert ReleaseGithubCheck(repo_info, beman_standard_check_config).should_skip()
 
 
 def test__release_notes__is_always_skipped(repo_info, beman_standard_check_config):
     """
-    Test that RELEASE.NOTES is always skipped, as it cannot be implemented.
+    Test that release.notes is always skipped, as it cannot be implemented.
     """
     assert ReleaseNotesCheck(repo_info, beman_standard_check_config).should_skip()
 

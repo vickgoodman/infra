@@ -187,7 +187,7 @@ def test__repository_code_review_rules__is_always_skipped(
     repo_info, beman_standard_check_config
 ):
     """
-    Test that REPOSITORY.CODE_REVIEW_RULES is always skipped.
+    Test that repository.code_review_rules is always skipped.
     """
     assert RepositoryCodeReviewRulesCheck(
         repo_info, beman_standard_check_config

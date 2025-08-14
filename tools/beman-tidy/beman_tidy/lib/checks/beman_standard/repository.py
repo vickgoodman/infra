@@ -94,7 +94,7 @@ class RepositoryDisallowGitSubmodulesCheck(FileBaseCheck):
         super().__init__(repo_info, beman_standard_check_config, ".gitmodules")
 
     def pre_check(self):
-        # Need to override this, because REPOSITORY.DISALLOW_GIT_SUBMODULES is conditional
+        # Need to override this, because repository.disallow_git_submodules is conditional
         return True
 
     def check(self):
