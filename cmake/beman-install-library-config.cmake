@@ -81,11 +81,32 @@ function(beman_install_library name)
     string(TOUPPER "${name}" project_prefix)
     string(REPLACE "." "_" project_prefix "${project_prefix}")
 
-    if(
-        "${name}" IN_LIST BEMAN_INSTALL_CONFIG_FILE_PACKAGES
-        OR "${project_prefix}_INSTALL_CONFIG_FILE_PACKAGE"
+    option(
+        ${project_prefix}_INSTALL_CONFIG_FILE_PACKAGE
+        "Enable building examples. Default: ${PROJECT_IS_TOP_LEVEL}. Values: { ON, OFF }."
+        ${PROJECT_IS_TOP_LEVEL}
     )
-        set(install_config_package ON)
+
+    # By default, install the config package
+    set(install_config_package ON)
+
+    # Turn OFF installation of config package by default if,
+    # in order of precedence:
+    # 1. The specific package variable is set to OFF
+    # 2. The package name is not in the list of packages to install config files
+    if(DEFINED BEMAN_INSTALL_CONFIG_FILE_PACKAGES)
+        if(
+            NOT "${install_component_name}"
+                IN_LIST
+                BEMAN_INSTALL_CONFIG_FILE_PACKAGES
+        )
+            set(install_config_package OFF)
+        endif()
+    endif()
+    if(DEFINED ${project_prefix}_INSTALL_CONFIG_FILE_PACKAGE)
+        set(install_config_package
+            ${${project_prefix}_INSTALL_CONFIG_FILE_PACKAGE}
+        )
     endif()
 
     if(install_config_package)
